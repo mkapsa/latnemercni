@@ -9,13 +9,37 @@
     text-align: center; 
 }
 
-#farmSection {
+#farm {
     margin-left: 50px;
     margin-top: 100px;
 }
 
 .actionButton {
-    width: 120px;
+    width: 130px;
     height: 40px;
     padding: 10px;
+    color: wheat;
+    font-weight: bold;
+    background-color: inherit;
+    border: 1px solid wheat;
 }
+
+h2 {
+    color: lightgray;
+}
+
+#resourceBar{
+    height: 100%;
+    width: 15%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: black;
+    padding-top: 4%;
+    text-align: center;
+
+}
+
+
+
