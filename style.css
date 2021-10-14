@@ -24,6 +24,16 @@
     border: 1px solid wheat;
 }
 
+.actionButton:hover {
+    color: gray;
+    border: 1px solid gray;
+}
+
+.actionButton:active {
+    color: wheat;
+    border: 1px solid wheat;
+}
+
 h2 {
     color: lightgray;
 }
@@ -35,10 +45,18 @@ h2 {
     z-index: 1;
     top: 0;
     right: 0;
-    background-color: black;
+    background-color: inherit;
     padding-top: 4%;
     text-align: center;
 
+}
+
+#resourceBar p {
+    background-color: inherit;
+}
+
+#wheat {
+    color: wheat;
 }
 
 
