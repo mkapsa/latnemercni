@@ -11,14 +11,20 @@
     <header>
         <h1 id="heading">scuffed incremental game</h1>       
     </header>
-    <section id="farm">
+    <section id="farm" class="section">
         <h2>farm</h2>
-        <button class="actionButton"  onclick="harvestWheat(1)">harvest wheat</button>
+        <button class="actionButton" onclick="harvestWheat(1)">harvest wheat</button>
+    </section>
+
+    <section id="bakery" class="section">
+        <h2>bakery</h2>
+        <button class="actionButton" onclick="bakeBread(1)">bake bread</button>
     </section>
 
     <nav id="resourceBar">
         
         <p id="wheat" class="resource"></p>
+        <p id="bread" class="resource"></p>
     </nav>
 
 
