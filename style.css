@@ -10,7 +10,7 @@ header {
 
 #heading {
     color: lightgray;
-    text-align: center; 
+    text-align: center;
 }
 
 .section {
@@ -64,8 +64,9 @@ h2 {
 }
 
 #bread {
-    color:rgb(216, 211, 211);
+    color:	#eec07b;
 }
 
-
-
+#money {
+    color: #FFD700;
+}
