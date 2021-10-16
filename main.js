@@ -52,7 +52,7 @@ function sellBread(number) {
 
 function hire(job, number) {
 
-    if(job == 'farmers'){
+    if(job == 'farmers' && resources.money >= number * 50){
         population.farmers += number;
         resources.money -= number * 50;
 
