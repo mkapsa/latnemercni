@@ -14,8 +14,22 @@ header {
 }
 
 .section {
+    margin: 0;
     margin-left: 40px;
     margin-top: 40px;
+    width: 50%;
+
+    float: left;
+    display: inline-block;
+
+}
+
+#staffSection {
+
+
+    margin-right: 15%;
+    padding: 0;
+
 }
 
 .actionButton {
@@ -70,3 +84,5 @@ h2 {
 #money {
     color: #FFD700;
 }
+
+#
