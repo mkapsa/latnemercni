@@ -219,18 +219,22 @@ button:hover .tooltip{
 
 #woodBtn:hover {
     border: 2px solid #966F33;
+    color: #966F33;
 }
 
 #foodBtn:hover {
     border: 2px solid wheat;
+    color: wheat;
 }
 
 #stoneBtn:hover {
     border: 2px solid black;
+    color: black;
 }
 
 #reedBtn:hover {
     border: 2px solid white;
+    color: white;
 }
 
 #sectionDiv {
