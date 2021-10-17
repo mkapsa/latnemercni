@@ -22,12 +22,18 @@ population = {
     gatherers:0
 }
 
+
+
 document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
 
-function eatFood(number){
-    resources.food -= number;
 
-    document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
+
+function eatFood(number){
+
+    if (resources.food >= 1) {
+        resources.food -= number;
+        document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
+    }
 }
 
 
@@ -217,7 +223,7 @@ function fire(job, number){
 
 window.setInterval(function(){
 
-    eatFood(population.total * 0.044)
+    eatFood(population.total * 0.044);
     huntFood(population.hunters / 10);
     cutWood(population.woodcutters / 20);
     mineStone(population.miners / 30);
