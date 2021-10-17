@@ -61,7 +61,7 @@ header h1 {
 
 #buttonSection {
 
-    margin-top: 40px;
+    margin-top: 100px;
     margin-left: 10%;
     width: 20%;
 
@@ -84,11 +84,16 @@ header h1 {
 
 #populationSection h2 {
     color: powderblue;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 #populationSection h3 {
-    margin-left: 60px;
+
+    text-align: center;
+}
+
+#totalPopulation {
+    color: gold;
 }
 
 .resourceButton {
@@ -121,21 +126,26 @@ header h1 {
 }
 
 .fireButton, .hireButton{
+    padding: 0;
+    margin: 0;
     height: 30px;
-    color: powderblue;
+    color: yellow;
     font-weight: bold;
-    width: 40px;
+    width: 60px;
     border: 2px solid black;
+
+
 
 }
 
 .fireButton {
     margin-left: 8px;
+
 }
 
 .hireButton {
-    float: right;
-    margin-right: 64px;
+    margin: 0;
+
 }
 
 #woodBtn:hover {
@@ -165,7 +175,10 @@ header h1 {
 }
 
 .hireFireButtons {
-    display: inline;
+    display: inline-block;
+    width: 150px;
+    padding-bottom: 15px;
+
 }
 
 .workerNumber {

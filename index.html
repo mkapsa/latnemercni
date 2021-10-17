@@ -32,7 +32,7 @@
         </section>
 
                 <section id="buttonSection">
-                    <h2>resources</h2>
+                    <!-- <h2>resources</h2> -->
                     <button class="resourceButton" id="foodBtn" onclick="huntFood(1)">hunt for food</button>
                     <br>
                     <button class="resourceButton" id="woodBtn" onclick="cutWood(1)">cut wood</button>
@@ -43,12 +43,19 @@
                 </section>
                 <section id="populationSection">
                     <h2>population</h2>
-
+                    <h3 id="totalPopulation">40</h3>
+                    <h3>unemployed:</h3>
                     <button class="birthButton" onclick="giveBirth(1)">give birth</button>
                     <br>
-                    <button class="fireButton" onclick="fireWorker(hunter, 1)"><</button>
-                    <div class="workerNumber" id="hunters">45</div>
-                    <button class="hireButton" onclick="hireWorker(hunter, 1)">></button>
+                    <div class="hireFireButtons">
+                        <button class="fireButton" onclick="fireWorker(hunter, 1)"><</button>
+                        <button class="hireButton" onclick="hireWorker(hunter, 1)">></button>
+                    </div>
+                    <div class="hireFireButtons">
+                        <button class="fireButton" onclick="fireWorker(woodcutter, 1)"><</button>
+                        <button class="hireButton" onclick="hireWorker(woodcutter, 1)">></button>
+                    </div>
+
 
                 </section>
 
