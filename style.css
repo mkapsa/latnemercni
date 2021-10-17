@@ -21,6 +21,10 @@ header h1 {
 
 }
 
+#populationDiv {
+    display: inline;
+}
+
 .resource img {
     width: 20px;
 }
@@ -76,7 +80,7 @@ header h1 {
 
 #populationSection {
     float: left;
-    margin-top: 40px;
+    margin-top: 62px;
     margin-left: 70px;
     width: 15%;
 
@@ -225,7 +229,7 @@ header h1 {
 
 .workerNumbers {
     float: left;
-    margin-top: 269px;
+    margin-top: 105px;
     display: inline;
     width: 33px;
 
@@ -249,4 +253,18 @@ header h1 {
     width: 25px;
     margin:  0;
     padding: 0;
+}
+
+#totalPopulation, #unemployedPopulation {
+    font-weight: bold;
+}
+
+#populationHeading {
+    font-weight: bold;
+    color:gold;
+}
+
+#unemployedHeading{
+    font-weight: bold;
+    color: powderblue;
 }
