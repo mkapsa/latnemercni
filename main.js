@@ -16,6 +16,13 @@ population = {
 
 document.getElementById('food').innerHTML = Math.floor(resources.food);
 
+function eatFood(number){
+    resources.food -= number;
+
+    document.getElementById('food').innerHTML = Math.floor(resources.food);
+}
+
+
 function huntFood(number){
     resources.food += number;
 
@@ -94,19 +101,33 @@ function hire(job, number){
             }
         }
 
-        if (job == 'miner' && population.unemployed >= number){
-            population.unemployed -= number;
-            population.miners += number;
+    if (job == 'miner' && population.unemployed >= number){
+        population.unemployed -= number;
+        population.miners += number;
 
-            document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
+        document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
 
-                if (population.miners === 1){
-                    document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miner";
-                }
-                else {
-                    document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miners";
-                }
+            if (population.miners === 1){
+                document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miner";
             }
+            else {
+                document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miners";
+            }
+        }
+
+    if (job == 'gatherer' && population.unemployed >= number){
+        population.unemployed -= number;
+        population.gatherers += number;
+
+        document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
+
+            if (population.gatherers === 1){
+                document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherer";
+            }
+            else {
+                document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherers";
+            }
+        }
 }
 function fire(job, number){
 
@@ -151,6 +172,20 @@ function fire(job, number){
             document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miners";
         }
     }
+
+    if (job == 'gatherer' && population.gatherers >= number){
+        population.gatherers -= number;
+        population.unemployed += number;
+
+        document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
+
+        if (population.gatherers === 1){
+            document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherer";
+        }
+        else {
+            document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherers";
+        }
+    }
 }
 
 
@@ -162,8 +197,10 @@ function fire(job, number){
 
 window.setInterval(function(){
 
+    eatFood(population.total * 0.069)
     huntFood(population.hunters / 10);
     cutWood(population.woodcutters / 10);
-    mineStone(population.miners / 10)
+    mineStone(population.miners / 10);
+    gatherReed(population.gatherers / 50);
 
 }, 100);

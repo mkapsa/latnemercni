@@ -50,7 +50,11 @@
                 </section>
                 <section id="populationSection">
 
-                    <button class="birthButton" onclick="giveBirth(1)">give birth</button>
+                    <button class="birthButton" onclick="giveBirth(1)">give birth
+                        <div class="tooltip">
+                            costs 20 food, each worker consumes food
+                        </div>
+                    </button>
                     <br>
                     <div class="hireFireButtons">
                         <button class="fireButton" onclick="fire('hunter', 1)"><</button>
@@ -71,9 +75,11 @@
                     </div>
                 </section>
                 <div class="workerNumbers">
+
                     <p class="numberOfWorkers" id="hunters">0 hunters</p>
                     <p class="numberOfWorkers" id="woodcutters">0 woodcutters</p>
                     <p class="numberOfWorkers" id="miners">0 miners</p>
+                    <p class="numberOfWorkers" id="gatherers">0 gatherers</p>
                 </div>
 
 
