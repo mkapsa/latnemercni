@@ -2,6 +2,7 @@
     font-family: "Courier New", sans-serif;
     background-color: #28282B;
     user-select: none;
+    position: relative;
 }
 
 
@@ -76,13 +77,33 @@ header h1 {
 #populationSection {
     float: left;
     margin-top: 40px;
-    margin-left: 150px;
-    width: 20%;
+    margin-left: 70px;
+    width: 15%;
+
+    text-align: left;
+
 
 
 }
 
 #populationSection h2 {
+    padding-left: 0px;
+}
+
+#unemployedHeading {
+    padding-left: 12px;
+}
+
+
+#totalPopulation, #unemployedPopulation {
+    padding-left: 55px;
+}
+
+#unemployedPopulation {
+    color: lightgray;
+}
+
+/* #populationSection h2 {
     color: powderblue;
     margin-bottom: 10px;
 }
@@ -90,7 +111,7 @@ header h1 {
 #populationSection h3 {
 
     text-align: center;
-}
+} */
 
 #totalPopulation {
     color: gold;
@@ -102,6 +123,7 @@ header h1 {
     color: lightgray;
     border: 2px solid lightgray;
     margin: 8px;
+    font-weight: bold;
 }
 
 .resourceButton:active {
@@ -112,9 +134,10 @@ header h1 {
 .birthButton {
     height: 30px;
     width: 130px;
-    color: yellow;
-    border: 2px solid yellow;
+    color: gold;
+    border: 2px solid gold;
     margin: 8px;
+    margin-left: 8px;
 }
 
 .birthButton:hover {
@@ -135,11 +158,26 @@ header h1 {
     border: 2px solid black;
 
 
+}
+
+.fireButton:hover {
+    border: 2px solid yellow;
 
 }
 
-.fireButton {
-    margin-left: 8px;
+.fireButton:active {
+    border: 2px solid black;
+
+}
+
+.hireButton:hover {
+    border: 2px solid yellow;
+}
+
+.hireButton:active {
+    border: 2px solid black;
+
+}
 
 }
 
@@ -176,10 +214,36 @@ header h1 {
 
 .hireFireButtons {
     display: inline-block;
-    width: 150px;
+    width: 138px;
     padding-bottom: 15px;
+    padding-left: 8px;
+
+
+
 
 }
+
+.workerNumbers {
+    float: left;
+    margin-top: 269px;
+    display: inline;
+    width: 33px;
+
+}
+
+
+
+.numberOfWorkers {
+    width: 150px;
+    margin: 0;
+    color: darkgray;
+    font-weight: bold;
+    padding: 12px 0px;
+
+}
+
+
+
 
 .workerNumber {
     width: 25px;

@@ -1,9 +1,20 @@
 resources = {
-    food:0,
+    food:60,
     wood:0,
     stone:0,
     reed:0
 }
+
+population = {
+    total:0,
+    unemployed:0,
+    hunters:0,
+    woodcutters:0,
+    miners:0,
+    gatherers:0
+}
+
+document.getElementById('food').innerHTML = Math.floor(resources.food);
 
 function huntFood(number){
     resources.food += number;
@@ -36,3 +47,123 @@ function gatherReed(number){
         document.getElementById('reed').innerHTML = Math.floor(resources.reed);
     }
 }
+
+function giveBirth(number){
+
+    if (resources.food >= number * 20){
+        resources.food -= number * 20;
+        population.total += number;
+        population.unemployed += number;
+
+        if(population.total > 0){
+            document.getElementById("totalPopulation").innerHTML = Math.floor(population.total);
+            document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
+            document.getElementById("food").innerHTML = Math.floor(resources.food);
+        }
+    }
+}
+
+function hire(job, number){
+
+    if (job == 'hunter' && population.unemployed >= number){
+        population.unemployed -= number;
+        population.hunters += number;
+
+        document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
+
+            if (population.hunters === 1){
+                document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunter";
+            }
+            else {
+                document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunters";
+            }
+
+    }
+
+    if (job == 'woodcutter' && population.unemployed >= number){
+        population.unemployed -= number;
+        population.woodcutters += number;
+
+        document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
+
+            if (population.woodcutters === 1){
+                document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutter";
+            }
+            else {
+                document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutters";
+            }
+        }
+
+        if (job == 'miner' && population.unemployed >= number){
+            population.unemployed -= number;
+            population.miners += number;
+
+            document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
+
+                if (population.miners === 1){
+                    document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miner";
+                }
+                else {
+                    document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miners";
+                }
+            }
+}
+function fire(job, number){
+
+    if (job == 'hunter' && population.hunters >= number){
+        population.hunters -= number;
+        population.unemployed += number;
+
+        document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
+
+        if (population.hunters === 1){
+            document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunter";
+        }
+        else {
+            document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunters";
+        }
+    }
+
+    if (job == 'woodcutter' && population.woodcutters >= number){
+        population.woodcutters -= number;
+        population.unemployed += number;
+
+        document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
+
+        if (population.woodcutters === 1){
+            document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutter";
+        }
+        else {
+            document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutters";
+        }
+    }
+
+    if (job == 'miner' && population.miners >= number){
+        population.miners -= number;
+        population.unemployed += number;
+
+        document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
+
+        if (population.miners === 1){
+            document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miner";
+        }
+        else {
+            document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miners";
+        }
+    }
+}
+
+
+
+
+
+
+
+
+window.setInterval(function(){
+
+    huntFood(population.hunters / 10);
+    cutWood(population.woodcutters / 10);
+    mineStone(population.miners / 10)
+
+}, 100);

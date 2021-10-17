@@ -43,21 +43,34 @@
                 </section>
                 <section id="populationSection">
                     <h2>population</h2>
-                    <h3 id="totalPopulation">40</h3>
-                    <h3>unemployed:</h3>
+                    <h3 id="totalPopulation">0</h3>
+                    <h3 id="unemployedHeading">unemployed</h3>
+                    <h3 id="unemployedPopulation">0</h3>
                     <button class="birthButton" onclick="giveBirth(1)">give birth</button>
                     <br>
                     <div class="hireFireButtons">
-                        <button class="fireButton" onclick="fireWorker(hunter, 1)"><</button>
-                        <button class="hireButton" onclick="hireWorker(hunter, 1)">></button>
+                        <button class="fireButton" onclick="fire('hunter', 1)"><</button>
+                        <button class="hireButton" onclick="hire('hunter', 1)">></button>
+                    </div>
+                    <br>
+                    <div class="hireFireButtons">
+                        <button class="fireButton" onclick="fire('woodcutter', 1)"><</button>
+                        <button class="hireButton" onclick="hire('woodcutter', 1)">></button>
                     </div>
                     <div class="hireFireButtons">
-                        <button class="fireButton" onclick="fireWorker(woodcutter, 1)"><</button>
-                        <button class="hireButton" onclick="hireWorker(woodcutter, 1)">></button>
+                        <button class="fireButton" onclick="fire('miner', 1)"><</button>
+                        <button class="hireButton" onclick="hire('miner', 1)">></button>
                     </div>
-
-
+                    <div class="hireFireButtons">
+                        <button class="fireButton" onclick="fire('gatherer', 1)"><</button>
+                        <button class="hireButton" onclick="hire('gatherer', 1)">></button>
+                    </div>
                 </section>
+                <div class="workerNumbers">
+                    <p class="numberOfWorkers" id="hunters">0 hunters</p>
+                    <p class="numberOfWorkers" id="woodcutters">0 woodcutters</p>
+                    <p class="numberOfWorkers" id="miners">0 miners</p>
+                </div>
 
 
 
