@@ -1,5 +1,5 @@
 resources = {
-    food:60,
+    food:0,
     wood:0,
     stone:0,
     reed:0
@@ -24,7 +24,7 @@ population = {
 
 
 
-document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
+// document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
 
 
 
