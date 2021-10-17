@@ -13,6 +13,7 @@ storage = {
 }
 
 population = {
+    max:10,
     total:0,
     unemployed:0,
     hunters:0,
@@ -26,39 +27,51 @@ document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + s
 function eatFood(number){
     resources.food -= number;
 
-    document.getElementById('food').innerHTML = Math.floor(resources.food);
+    document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
 }
 
 
 function huntFood(number){
-    resources.food += number;
 
-    if (resources.food > 0) {
-        document.getElementById('food').innerHTML = Math.floor(resources.food);
+    if(resources.food <= storage.food){
+        resources.food += number;
+
+        if (resources.food > 0) {
+            document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
+        }
     }
 }
 
 function cutWood(number){
-    resources.wood += number;
 
-    if (resources.wood > 0) {
-        document.getElementById('wood').innerHTML = Math.floor(resources.wood);
+    if(resources.wood <= storage.wood){
+        resources.wood += number;
+
+        if (resources.wood > 0) {
+            document.getElementById('wood').innerHTML = Math.floor(resources.wood) + "/" + storage.wood;
+        }
     }
 }
 
 function mineStone(number){
-    resources.stone += number;
 
-    if (resources.stone > 0) {
-        document.getElementById('stone').innerHTML = Math.floor(resources.stone);
+    if(resources.stone <= storage.stone){
+        resources.stone += number;
+
+        if (resources.stone > 0) {
+            document.getElementById('stone').innerHTML = Math.floor(resources.stone) + "/" + storage.stone;
+        }
     }
 }
 
 function gatherReed(number){
-    resources.reed += number;
 
-    if (resources.reed > 0) {
-        document.getElementById('reed').innerHTML = Math.floor(resources.reed);
+    if(resources.reed <= storage.reed){
+        resources.reed += number;
+
+        if (resources.reed > 0) {
+            document.getElementById('reed').innerHTML = Math.floor(resources.reed) + "/" + storage.reed;
+        }
     }
 }
 
@@ -72,7 +85,7 @@ function giveBirth(number){
         if(population.total > 0){
             document.getElementById("totalPopulation").innerHTML = Math.floor(population.total);
             document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
-            document.getElementById("food").innerHTML = Math.floor(resources.food);
+            document.getElementById("food").innerHTML = Math.floor(resources.food) + "/" + storage.food;
         }
     }
 }
@@ -204,10 +217,10 @@ function fire(job, number){
 
 window.setInterval(function(){
 
-    eatFood(population.total * 0.069)
+    eatFood(population.total * 0.044)
     huntFood(population.hunters / 10);
-    cutWood(population.woodcutters / 10);
-    mineStone(population.miners / 10);
+    cutWood(population.woodcutters / 20);
+    mineStone(population.miners / 30);
     gatherReed(population.gatherers / 50);
 
 }, 100);
