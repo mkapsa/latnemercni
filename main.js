@@ -5,6 +5,13 @@ resources = {
     reed:0
 }
 
+storage = {
+    food:100,
+    wood:200,
+    stone:100,
+    reed:50
+}
+
 population = {
     total:0,
     unemployed:0,
@@ -14,7 +21,7 @@ population = {
     gatherers:0
 }
 
-document.getElementById('food').innerHTML = Math.floor(resources.food);
+document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
 
 function eatFood(number){
     resources.food -= number;
