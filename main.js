@@ -83,16 +83,18 @@ function gatherReed(number){
 
 function giveBirth(number){
 
-    if (resources.food >= number * 20){
+
+
+    if (resources.food >= number * 20 && population.total < population.max){
         resources.food -= number * 20;
         population.total += number;
         population.unemployed += number;
 
-        if(population.total > 0){
-            document.getElementById("totalPopulation").innerHTML = Math.floor(population.total);
-            document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
-            document.getElementById("food").innerHTML = Math.floor(resources.food) + "/" + storage.food;
-        }
+
+        document.getElementById("totalPopulation").innerHTML = Math.floor(population.total) + "/" + population.max;
+        document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
+        document.getElementById("food").innerHTML = Math.floor(resources.food) + "/" + storage.food;
+
     }
 }
 
