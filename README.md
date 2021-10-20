@@ -4,7 +4,6 @@
 
 https://kapsa11.github.io/latnemercni/
 
-
 ## to do list
 
 * buildings section
