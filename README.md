@@ -2,7 +2,7 @@
 
 ## scuffed alert
 
-https://kapsa11.github.io/latnemercni/
+https://mkapsa.github.io/latnemercni/
 
 ## to do list
 
