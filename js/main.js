@@ -22,13 +22,9 @@ population = {
     gatherers:0
 }
 
-
-
-
-
 // document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
 
-
+window.onload = loadGame();
 
 function eatFood(number){
 
@@ -218,6 +214,19 @@ function fire(job, number){
     }
 }
 
+function updateNumbers(){
+
+    document.getElementById("totalPopulation").innerHTML = Math.floor(population.total) + "/" + population.max;
+    document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
+    document.getElementById("food").innerHTML = Math.floor(resources.food) + "/" + storage.food;
+
+    document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunters";
+    document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutters";
+    document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miners";
+    document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherers";
+
+}
+
 // saving function (localstorage)
 
 function saveGame(){                                           
@@ -230,7 +239,10 @@ function loadGame(){
     resources = JSON.parse(localStorage.getItem('resourcesData'));
     storage = JSON.parse(localStorage.getItem('storageData'));
     population = JSON.parse(localStorage.getItem('populationData'));
+
+    updateNumbers();    
 }
+
 
 
 window.setInterval(function(){
@@ -240,6 +252,5 @@ window.setInterval(function(){
     cutWood(population.woodcutters / 20);
     mineStone(population.miners / 30);
     gatherReed(population.gatherers / 50);
-
 }, 100);
 
