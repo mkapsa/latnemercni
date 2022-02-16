@@ -216,9 +216,21 @@ function fire(job, number){
     }
 }
 
+// saving function (localstorage)
 
+function saveGame(){                                           
+    localStorage.setItem(resourcesData, resources);
+    localStorage.setItem(storageData, storage);
+    localStorage.setItem(populationData, population);
+}
 
+// loading function (localstorage), should run every time game is open
 
+function loadGame(){
+    resources = localStorage.getItem(resourceData);
+    storage = localStorage.getItem(storageData);
+    population = localStorage.getItem(populationData);
+}
 
 
 
