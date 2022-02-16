@@ -24,6 +24,8 @@ population = {
 
 
 
+
+
 // document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
 
 
@@ -219,20 +221,16 @@ function fire(job, number){
 // saving function (localstorage)
 
 function saveGame(){                                           
-    localStorage.setItem(resourcesData, resources);
-    localStorage.setItem(storageData, storage);
-    localStorage.setItem(populationData, population);
+    localStorage.setItem('resourcesData', JSON.stringify(resources));
+    localStorage.setItem('storageData', JSON.stringify(storage));
+    localStorage.setItem('populationData', JSON.stringify(population));
 }
-
-// loading function (localstorage), should run every time game is open
 
 function loadGame(){
-    resources = localStorage.getItem(resourceData);
-    storage = localStorage.getItem(storageData);
-    population = localStorage.getItem(populationData);
+    resources = JSON.parse(localStorage.getItem('resourcesData'));
+    storage = JSON.parse(localStorage.getItem('storageData'));
+    population = JSON.parse(localStorage.getItem('populationData'));
 }
-
-
 
 
 window.setInterval(function(){
@@ -244,3 +242,4 @@ window.setInterval(function(){
     gatherReed(population.gatherers / 50);
 
 }, 100);
+
