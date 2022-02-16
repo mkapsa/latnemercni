@@ -6,7 +6,10 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>scuffed pre-alpha</title>
         <link rel="stylesheet" href="style.css">
-        window.onload = "loadGame()";
+        <script>
+            window.onload = loadGame();
+        </script>
+        
     </head>
     <body>
 
@@ -84,6 +87,7 @@
                 </div>
                 <div id="technical">
                     <button class="resourceButton" onclick="saveGame()">save</button>
+                    <button class="resourceButton" onclick="loadGame()">load</button>
                 </div>
 
                  
