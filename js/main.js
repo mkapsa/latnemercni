@@ -91,7 +91,7 @@ function giveBirth(number){
         population.unemployed += number;
 
 
-        document.getElementById("totalPopulation").innerHTML = Math.floor(population.total) + "/" + population.max;
+        document.getElementById("totalPopulation").innerHTML = Math.floor(population.total);
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
         document.getElementById("food").innerHTML = Math.floor(resources.food);
 
@@ -218,7 +218,8 @@ function fire(job, number){
 
 function updateNumbers(){
 
-    document.getElementById("totalPopulation").innerHTML = Math.floor(population.total) + "/" + population.max;
+    document.getElementById("totalPopulation").innerHTML = Math.floor(population.total);
+    document.getElementById("maxPopulation").innerHTML = "/" + Math.floor(population.max);
     document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
     document.getElementById("food").innerHTML = Math.floor(resources.food);
     document.getElementById('wood').innerHTML = Math.floor(resources.wood);

@@ -13,14 +13,30 @@
         <header>
             <h1>latnemercni</h1>
         </header>
-        <section id="populationSection">
-            <span id="totalPopulation"></span>
-            <span id="unemployedPopulation"></span>
-        </section>
+        <!-- <section id="populationSection">
+            <div id="totalPopulation">population:</div>
+            <div id="unemployedPopulation"></div>
+        </section> -->
         <div id="gameContainer">
             <section id="resourceSection">
                 <table>
                     <tbody>
+                        <tr>
+                            <td>population</td>
+                            <td class="resourceCount" id="totalPopulation"></td>
+                            <td class="storageCapacity" id="maxPopulation"></td>
+                        </tr>
+                        <tr>
+                            <td>unemployed</td>
+                            <td class="resourceCount" id="unemployedPopulation"></td>
+                            <td class="storageCapacity"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br>
+                                <br>
+                            </td>
+                        </tr>
                         <tr>
                             <td>food</td>
                             <td class="resourceCount" id="food"></td>
