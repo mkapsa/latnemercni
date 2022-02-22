@@ -18,6 +18,7 @@ header h1 {
     margin-left: 15%;
     margin-right: 0px;
     margin-top: 0px;
+   
 
 }
 
@@ -85,9 +86,6 @@ header h1 {
     width: 15%;
 
     text-align: left;
-
-
-
 }
 
 #populationSection h2 {
@@ -117,6 +115,8 @@ header h1 {
     text-align: center;
 } */
 
+
+
 #totalPopulation {
     color: gold;
 }
@@ -133,6 +133,14 @@ header h1 {
 .resourceButton:active {
     color: wheat;
     border: 2px solid white;
+}
+
+.technicalButton {
+    color:whitesmoke;
+    border: 2px solid black;
+    height: 30px;
+    width: 130px;
+
 }
 
 button .tooltip {
@@ -211,7 +219,7 @@ button:hover .tooltip{
 
 }
 
-}
+
 
 .hireButton {
     margin: 0;

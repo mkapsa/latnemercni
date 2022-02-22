@@ -25,6 +25,7 @@ population = {
 // document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
 
 window.onload = loadGame();
+window.onload = updateNumbers();
 
 function eatFood(number){
 
@@ -219,6 +220,9 @@ function updateNumbers(){
     document.getElementById("totalPopulation").innerHTML = Math.floor(population.total) + "/" + population.max;
     document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
     document.getElementById("food").innerHTML = Math.floor(resources.food) + "/" + storage.food;
+    document.getElementById('wood').innerHTML = Math.floor(resources.wood) + "/" + storage.wood;
+    document.getElementById('stone').innerHTML = Math.floor(resources.stone) + "/" + storage.stone;
+    document.getElementById('reed').innerHTML = Math.floor(resources.reed) + "/" + storage.reed;
 
     document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunters";
     document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutters";
@@ -252,5 +256,10 @@ window.setInterval(function(){
     cutWood(population.woodcutters / 20);
     mineStone(population.miners / 30);
     gatherReed(population.gatherers / 50);
+    
 }, 100);
+
+window.setInterval(function(){
+    saveGame();
+}, 60 * 1000);
 
