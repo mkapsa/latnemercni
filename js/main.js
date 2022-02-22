@@ -27,11 +27,12 @@ population = {
 window.onload = loadGame();
 window.onload = updateNumbers();
 
+
 function eatFood(number){
 
     if (resources.food >= 1) {
         resources.food -= number;
-        document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
+        document.getElementById('food').innerHTML = Math.floor(resources.food);
     }
 }
 
@@ -42,7 +43,7 @@ function huntFood(number){
         resources.food += number;
 
         if (resources.food > 0) {
-            document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
+            document.getElementById('food').innerHTML = Math.floor(resources.food);
         }
     }
 }
@@ -53,7 +54,7 @@ function cutWood(number){
         resources.wood += number;
 
         if (resources.wood > 0) {
-            document.getElementById('wood').innerHTML = Math.floor(resources.wood) + "/" + storage.wood;
+            document.getElementById('wood').innerHTML = Math.floor(resources.wood);
         }
     }
 }
@@ -64,7 +65,7 @@ function mineStone(number){
         resources.stone += number;
 
         if (resources.stone > 0) {
-            document.getElementById('stone').innerHTML = Math.floor(resources.stone) + "/" + storage.stone;
+            document.getElementById('stone').innerHTML = Math.floor(resources.stone);
         }
     }
 }
@@ -75,7 +76,7 @@ function gatherReed(number){
         resources.reed += number;
 
         if (resources.reed > 0) {
-            document.getElementById('reed').innerHTML = Math.floor(resources.reed) + "/" + storage.reed;
+            document.getElementById('reed').innerHTML = Math.floor(resources.reed);
         }
     }
 }
@@ -92,7 +93,7 @@ function giveBirth(number){
 
         document.getElementById("totalPopulation").innerHTML = Math.floor(population.total) + "/" + population.max;
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
-        document.getElementById("food").innerHTML = Math.floor(resources.food) + "/" + storage.food;
+        document.getElementById("food").innerHTML = Math.floor(resources.food);
 
     }
 }
@@ -219,17 +220,22 @@ function updateNumbers(){
 
     document.getElementById("totalPopulation").innerHTML = Math.floor(population.total) + "/" + population.max;
     document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
-    document.getElementById("food").innerHTML = Math.floor(resources.food) + "/" + storage.food;
-    document.getElementById('wood').innerHTML = Math.floor(resources.wood) + "/" + storage.wood;
-    document.getElementById('stone').innerHTML = Math.floor(resources.stone) + "/" + storage.stone;
-    document.getElementById('reed').innerHTML = Math.floor(resources.reed) + "/" + storage.reed;
+    document.getElementById("food").innerHTML = Math.floor(resources.food);
+    document.getElementById('wood').innerHTML = Math.floor(resources.wood);
+    document.getElementById('stone').innerHTML = Math.floor(resources.stone);
+    document.getElementById('reed').innerHTML = Math.floor(resources.reed);
+
+    document.getElementById("foodStorage").innerHTML = "/" + Math.floor(storage.food);
+    document.getElementById("woodStorage").innerHTML = "/" + Math.floor(storage.wood);
+    document.getElementById("stoneStorage").innerHTML = "/" + Math.floor(storage.stone);
+    document.getElementById("reedStorage").innerHTML = "/" + Math.floor(storage.reed);
 
     document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunters";
     document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutters";
     document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miners";
     document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherers";
 
-}
+};
 
 // saving function (localstorage)
 
@@ -247,6 +253,34 @@ function loadGame(){
     updateNumbers();    
 }
 
+function resetGame(){
+    resources = {
+        food:0,
+        wood:0,
+        stone:0,
+        reed:0
+    };
+    
+    storage = {
+        food:100,
+        wood:200,
+        stone:100,
+        reed:50
+    };
+    
+    population = {
+        max:10,
+        total:0,
+        unemployed:0,
+        hunters:0,
+        woodcutters:0,
+        miners:0,
+        gatherers:0
+    };
+
+    saveGame();
+    loadGame();
+}
 
 
 window.setInterval(function(){

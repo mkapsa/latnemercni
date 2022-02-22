@@ -10,38 +10,42 @@
         
     </head>
     <body>
-
         <header>
             <h1>latnemercni</h1>
         </header>
-        <section id="resourceSection">
-            <div class="resource">
-                <img src="images/mnmdpc.png" alt="food">
-                <span class="storage" id="food"></span>
-            </div>
-            <div class="resource">
-                <img src="images/woodCircle.png" alt="wood" >
-                <span id="wood"></span>
-            </div>
-            <div class="resource">
-                <img src="images/stoneCircle.png" alt="stone" >
-                <span id="stone"></span>
-            </div>
-            <div class="resource">
-                <img src="images/reedCircle.png" alt="reed" >
-                <span id="reed"></span>
-            </div>
-            <div id="populationDiv">
-                <span id="populationHeading">population:</span>
-                <span id="totalPopulation">0</span>
-                <span id="unemployedHeading">unemployed:</span>
-                <span id="unemployedPopulation">0</span>
-            </div>
-
+        <section id="populationSection">
+            <span id="totalPopulation"></span>
+            <span id="unemployedPopulation"></span>
         </section>
-
-                <section id="buttonSection">
-                    <!-- <h2>resources</h2> -->
+        <div id="gameContainer">
+            <section id="resourceSection">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>food</td>
+                            <td class="resourceCount" id="food"></td>
+                            <td class="storageCapacity" id="foodStorage"></td>
+                        </tr>
+                        <tr>
+                            <td>wood</td>
+                            <td class="resourceCount" id="wood"></td>
+                            <td class="storageCapacity" id="woodStorage"></td>
+                        </tr>
+                        <tr>
+                            <td>stone</td>
+                            <td class="resourceCount" id="stone"></td>
+                            <td class="storageCapacity" id="stoneStorage"></td>
+                        </tr>
+                        <tr>
+                            <td>reed</td>
+                            <td class="resourceCount" id="reed"></td>
+                            <td class="storageCapacity" id="reedStorage"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="gameSection">
+                <div id="basicButtons">
                     <button class="resourceButton" id="foodBtn" onclick="huntFood(1)">hunt for food</button>
                     <br>
                     <button class="resourceButton" id="woodBtn" onclick="cutWood(1)">cut wood</button>
@@ -49,9 +53,8 @@
                     <button class="resourceButton" id="stoneBtn" onclick="mineStone(1)">mine for stone</button>
                     <br>
                     <button class="resourceButton" id="reedBtn" onclick="gatherReed(1)">gather reed</button>
-                </section>
-                <section id="populationSection">
-
+                </div>
+                <div id="populationButtons">
                     <button class="birthButton" onclick="giveBirth(1)">give birth
                         <div class="tooltip">
                             costs 20 food, each worker consumes food
@@ -62,7 +65,6 @@
                         <button class="fireButton" onclick="fire('hunter', 1)"><</button>
                         <button class="hireButton" onclick="hire('hunter', 1)">></button>
                     </div>
-                    <br>
                     <div class="hireFireButtons">
                         <button class="fireButton" onclick="fire('woodcutter', 1)"><</button>
                         <button class="hireButton" onclick="hire('woodcutter', 1)">></button>
@@ -75,21 +77,21 @@
                         <button class="fireButton" onclick="fire('gatherer', 1)"><</button>
                         <button class="hireButton" onclick="hire('gatherer', 1)">></button>
                     </div>
-                </section>
-                <div class="workerNumbers">
-
-                    <p class="numberOfWorkers" id="hunters">0 hunters</p>
-                    <p class="numberOfWorkers" id="woodcutters">0 woodcutters</p>
-                    <p class="numberOfWorkers" id="miners">0 miners</p>
-                    <p class="numberOfWorkers" id="gatherers">0 gatherers</p>
                 </div>
-                <section id="technicalSection">
-                    <div>
-                        <button class="resourceButton" onclick="saveGame()">save</button>
-                        <button class="resourceButton" onclick="loadGame()">load</button>
-                    </div>
-                </section>
-
+                <div class="workerNumbers">
+                    <div class="numberOfWorkers" id="hunters">0 hunters</div>
+                    <div class="numberOfWorkers" id="woodcutters">0 woodcutters</div>
+                    <div class="numberOfWorkers" id="miners">0 miners</div>
+                    <div class="numberOfWorkers" id="gatherers">0 gatherers</div>
+                </div>
+            </section>        
+        </div>
+        <section id="technicalSection">
+            <button class="resourceButton" onclick="saveGame()">save</button>
+            <button class="resourceButton" onclick="loadGame()">load</button>
+            <button class="resourceButton" id="resetButton" onclick="resetGame()">reset</button>
+        </section>
+        
                  
         <script src="js/main.js"></script>
         <script src="js/technical.js"></script>
