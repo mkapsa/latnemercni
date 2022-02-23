@@ -230,13 +230,33 @@ function updateNumbers(){
     document.getElementById("woodStorage").innerHTML = "/" + Math.floor(storage.wood);
     document.getElementById("stoneStorage").innerHTML = "/" + Math.floor(storage.stone);
     document.getElementById("reedStorage").innerHTML = "/" + Math.floor(storage.reed);
+    
+    
 
     document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunters";
     document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutters";
     document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miners";
-    document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherers";
-
+    document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherers";    
 };
+
+function displayResources(){
+
+    if(resources.food >= 1){
+        document.getElementById("foodRow").style.visibility = 'visible';
+    }
+    
+    if(resources.wood >= 1){
+        document.getElementById("woodRow").style.visibility = 'visible';
+    }
+    
+    if(resources.stone >= 1){
+        document.getElementById("stoneRow").style.visibility = 'visible';
+    }
+    
+    if(resources.reed >= 1){
+        document.getElementById("reedRow").style.visibility = 'visible';
+    }      
+}
 
 // saving function (localstorage)
 
@@ -291,6 +311,7 @@ window.setInterval(function(){
     cutWood(population.woodcutters / 20);
     mineStone(population.miners / 30);
     gatherReed(population.gatherers / 50);
+    displayResources();
     
 }, 100);
 

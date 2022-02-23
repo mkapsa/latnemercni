@@ -37,22 +37,22 @@
                                 <br>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="resource" id="foodRow">
                             <td>food</td>
                             <td class="resourceCount" id="food"></td>
                             <td class="storageCapacity" id="foodStorage"></td>
                         </tr>
-                        <tr>
+                        <tr class="resource" id="woodRow">
                             <td>wood</td>
                             <td class="resourceCount" id="wood"></td>
                             <td class="storageCapacity" id="woodStorage"></td>
                         </tr>
-                        <tr>
+                        <tr class="resource" id="stoneRow">
                             <td>stone</td>
                             <td class="resourceCount" id="stone"></td>
                             <td class="storageCapacity" id="stoneStorage"></td>
                         </tr>
-                        <tr>
+                        <tr class="resource" id="reedRow">
                             <td>reed</td>
                             <td class="resourceCount" id="reed"></td>
                             <td class="storageCapacity" id="reedStorage"></td>
@@ -61,45 +61,52 @@
                 </table>
             </section>
             <section id="gameSection">
-                <div id="basicButtons">
-                    <button class="resourceButton" id="foodBtn" onclick="huntFood(1)">hunt for food</button>
-                    <br>
-                    <button class="resourceButton" id="woodBtn" onclick="cutWood(1)">cut wood</button>
-                    <br>
-                    <button class="resourceButton" id="stoneBtn" onclick="mineStone(1)">mine for stone</button>
-                    <br>
-                    <button class="resourceButton" id="reedBtn" onclick="gatherReed(1)">gather reed</button>
-                </div>
-                <div id="populationButtons">
-                    <button class="birthButton" onclick="giveBirth(1)">give birth
-                        <div class="tooltip">
-                            costs 20 food, each worker consumes food
+                <div id="row1">
+                    <div id="basicButtons">
+                        <button class="resourceButton" id="foodBtn" onclick="huntFood(1)">hunt for food</button>
+                        <br>
+                        <button class="resourceButton" id="woodBtn" onclick="cutWood(1)">cut wood</button>
+                        <br>
+                        <button class="resourceButton" id="stoneBtn" onclick="mineStone(1)">mine for stone</button>
+                        <br>
+                        <button class="resourceButton" id="reedBtn" onclick="gatherReed(1)">gather reed</button>
+                    </div>
+                    <div id="populationButtons">
+                        <button class="birthButton" onclick="giveBirth(1)">give birth
+                            <div class="tooltip">
+                                costs 20 food, each worker consumes food
+                            </div>
+                        </button>
+                        <br>
+                        <div class="hireFireButtons">
+                            <button class="fireButton" onclick="fire('hunter', 1)"><</button>
+                            <button class="hireButton" onclick="hire('hunter', 1)">></button>
                         </div>
-                    </button>
-                    <br>
-                    <div class="hireFireButtons">
-                        <button class="fireButton" onclick="fire('hunter', 1)"><</button>
-                        <button class="hireButton" onclick="hire('hunter', 1)">></button>
+                        <div class="hireFireButtons">
+                            <button class="fireButton" onclick="fire('woodcutter', 1)"><</button>
+                            <button class="hireButton" onclick="hire('woodcutter', 1)">></button>
+                        </div>
+                        <div class="hireFireButtons">
+                            <button class="fireButton" onclick="fire('miner', 1)"><</button>
+                            <button class="hireButton" onclick="hire('miner', 1)">></button>
+                        </div>
+                        <div class="hireFireButtons">
+                            <button class="fireButton" onclick="fire('gatherer', 1)"><</button>
+                            <button class="hireButton" onclick="hire('gatherer', 1)">></button>
+                        </div>
                     </div>
-                    <div class="hireFireButtons">
-                        <button class="fireButton" onclick="fire('woodcutter', 1)"><</button>
-                        <button class="hireButton" onclick="hire('woodcutter', 1)">></button>
-                    </div>
-                    <div class="hireFireButtons">
-                        <button class="fireButton" onclick="fire('miner', 1)"><</button>
-                        <button class="hireButton" onclick="hire('miner', 1)">></button>
-                    </div>
-                    <div class="hireFireButtons">
-                        <button class="fireButton" onclick="fire('gatherer', 1)"><</button>
-                        <button class="hireButton" onclick="hire('gatherer', 1)">></button>
+                    <div class="workerNumbers">
+                        <div class="numberOfWorkers" id="hunters">0 hunters</div>
+                        <div class="numberOfWorkers" id="woodcutters">0 woodcutters</div>
+                        <div class="numberOfWorkers" id="miners">0 miners</div>
+                        <div class="numberOfWorkers" id="gatherers">0 gatherers</div>
                     </div>
                 </div>
-                <div class="workerNumbers">
-                    <div class="numberOfWorkers" id="hunters">0 hunters</div>
-                    <div class="numberOfWorkers" id="woodcutters">0 woodcutters</div>
-                    <div class="numberOfWorkers" id="miners">0 miners</div>
-                    <div class="numberOfWorkers" id="gatherers">0 gatherers</div>
-                </div>
+                <!-- <div id="row2">
+                    <div id="buildings">
+                        <h2>buildings</h2>
+                    </div>
+                </div> -->
             </section>        
         </div>
         <section id="technicalSection">

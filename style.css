@@ -24,11 +24,6 @@ header h1{
     flex-direction: row;
 }
 
-#gameSection{
-    display: flex;
-    gap: 40px;
-}
-
 #basicButtons{
     margin-top: 40px;    
 }
@@ -65,6 +60,11 @@ header h1{
 .storageCapacity{
     align-self: flex-end;
     color: gray;    
+}
+
+.resource{
+    visibility: hidden;
+    position: relative;
 }
 
 .resource span{
@@ -180,4 +180,16 @@ button .tooltip {
 button:hover .tooltip {
     visibility: visible;
 }
+
+#gameSection{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+#row1{
+    display: flex;
+    gap: 40px;
+}
+
 
