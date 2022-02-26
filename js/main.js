@@ -247,10 +247,10 @@ function updateNumbers(){
     document.getElementById("reedStorage").innerHTML = "/" + Math.floor(storage.reed); 
 
     if(resourcesPerSec.food >= 0){
-        document.getElementById("foodPerSec").innerHTML = "+" + resourcesPerSec.food + "/s";
+        document.getElementById("foodPerSec").innerHTML = "+" + resourcesPerSec.food.toFixed(2) + "/s";
     }
     else{
-        document.getElementById("foodPerSec").innerHTML = resourcesPerSec.food.toFixed(3) + "/s";
+        document.getElementById("foodPerSec").innerHTML = resourcesPerSec.food.toFixed(2) + "/s";
     }
     if(resourcesPerSec.wood >= 0){
         document.getElementById("woodPerSec").innerHTML = "+" + resourcesPerSec.wood + "/s";    
