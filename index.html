@@ -13,10 +13,6 @@
         <header>
             <h1>latnemercni</h1>
         </header>
-        <!-- <section id="populationSection">
-            <div id="totalPopulation">population:</div>
-            <div id="unemployedPopulation"></div>
-        </section> -->
         <div id="gameContainer">
             <section id="resourceSection">
                 <table>
@@ -41,21 +37,25 @@
                             <td>food</td>
                             <td class="resourceCount" id="food"></td>
                             <td class="storageCapacity" id="foodStorage"></td>
+                            <td class="perSec" id="foodPerSec"></td>
                         </tr>
                         <tr class="resource" id="woodRow">
                             <td>wood</td>
                             <td class="resourceCount" id="wood"></td>
                             <td class="storageCapacity" id="woodStorage"></td>
+                            <td class="perSec" id="woodPerSec"></td>
                         </tr>
                         <tr class="resource" id="stoneRow">
                             <td>stone</td>
                             <td class="resourceCount" id="stone"></td>
                             <td class="storageCapacity" id="stoneStorage"></td>
+                            <td class="perSec" id="stonePerSec"></td>
                         </tr>
                         <tr class="resource" id="reedRow">
                             <td>reed</td>
                             <td class="resourceCount" id="reed"></td>
                             <td class="storageCapacity" id="reedStorage"></td>
+                            <td class="perSec" id="reedPerSec"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -63,7 +63,7 @@
             <section id="gameSection">
                 <div id="row1">
                     <div id="basicButtons">
-                        <button class="resourceButton" id="foodBtn" onclick="huntFood(1)">hunt for food</button>
+                        <button class="resourceButton" id="foodBtn" onclick="updateFood(1)">hunt for food</button>
                         <br>
                         <button class="resourceButton" id="woodBtn" onclick="cutWood(1)">cut wood</button>
                         <br>
@@ -113,8 +113,7 @@
             <button class="resourceButton" onclick="saveGame()">save</button>
             <button class="resourceButton" onclick="loadGame()">load</button>
             <button class="resourceButton" id="resetButton" onclick="resetGame()">reset</button>
-        </section>
-        
+        </section>        
                  
         <script src="js/main.js"></script>
         <script src="js/technical.js"></script>

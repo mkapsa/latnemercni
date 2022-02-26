@@ -5,6 +5,13 @@ resources = {
     reed:0
 }
 
+resourcesPerSec = {
+    food:0,
+    wood:0,
+    stone:0,
+    reed:0
+}
+
 storage = {
     food:100,
     wood:200,
@@ -28,25 +35,32 @@ window.onload = loadGame();
 window.onload = updateNumbers();
 
 
-function eatFood(number){
 
-    if (resources.food >= 1) {
-        resources.food -= number;
-        document.getElementById('food').innerHTML = Math.floor(resources.food);
-    }
+
+
+function updateFood(number){
+    resources.food = Math.max(0, resources.food + number);
 }
 
 
-function huntFood(number){
+// function eatFood(number){
 
-    if(resources.food <= storage.food){
-        resources.food += number;
+//     if (resources.food >= number) {
+//         resources.food -= number;
+//         document.getElementById('food').innerHTML = Math.floor(resources.food);
+//     }    
+// }
 
-        if (resources.food > 0) {
-            document.getElementById('food').innerHTML = Math.floor(resources.food);
-        }
-    }
-}
+// function huntFood(number){
+
+//     if(resources.food <= storage.food){
+//         resources.food += number;
+
+//         if (resources.food > 0) {
+//             document.getElementById('food').innerHTML = Math.floor(resources.food);
+//         }
+//     }
+// }
 
 function cutWood(number){
 
@@ -89,7 +103,7 @@ function giveBirth(number){
         resources.food -= number * 20;
         population.total += number;
         population.unemployed += number;
-
+        resourcesPerSec.food -= number * 0.44;
 
         document.getElementById("totalPopulation").innerHTML = Math.floor(population.total);
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
@@ -103,6 +117,7 @@ function hire(job, number){
     if (job == 'hunter' && population.unemployed >= number){
         population.unemployed -= number;
         population.hunters += number;
+        resourcesPerSec.food += number;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
 
@@ -112,7 +127,6 @@ function hire(job, number){
             else {
                 document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunters";
             }
-
     }
 
     if (job == 'woodcutter' && population.unemployed >= number){
@@ -162,6 +176,7 @@ function fire(job, number){
     if (job == 'hunter' && population.hunters >= number){
         population.hunters -= number;
         population.unemployed += number;
+        resourcesPerSec.food -= number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
 
@@ -229,10 +244,33 @@ function updateNumbers(){
     document.getElementById("foodStorage").innerHTML = "/" + Math.floor(storage.food);
     document.getElementById("woodStorage").innerHTML = "/" + Math.floor(storage.wood);
     document.getElementById("stoneStorage").innerHTML = "/" + Math.floor(storage.stone);
-    document.getElementById("reedStorage").innerHTML = "/" + Math.floor(storage.reed);
-    
-    
+    document.getElementById("reedStorage").innerHTML = "/" + Math.floor(storage.reed); 
 
+    if(resourcesPerSec.food >= 0){
+        document.getElementById("foodPerSec").innerHTML = "+" + resourcesPerSec.food + "/s";
+    }
+    else{
+        document.getElementById("foodPerSec").innerHTML = resourcesPerSec.food.toFixed(3) + "/s";
+    }
+    if(resourcesPerSec.wood >= 0){
+        document.getElementById("woodPerSec").innerHTML = "+" + resourcesPerSec.wood + "/s";    
+    }
+    else{
+        document.getElementById("woodPerSec").innerHTML = resourcesPerSec.wood + "/s";
+    }
+    if(resourcesPerSec.stone >= 0){
+        document.getElementById("stonePerSec").innerHTML = "+" + resourcesPerSec.stone + "/s";    
+    }
+    else{
+        document.getElementById("stonePerSec").innerHTML = resourcesPerSec.stone + "/s";
+    }
+    if(resources.reed >= 0){
+        document.getElementById("reedPerSec").innerHTML = "+" + resourcesPerSec.reed + "/s";
+    }
+    else{
+        document.getElementById("reedPerSec").innerHTML = resourcesPerSec.reed + "/s";
+    } 
+        
     document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunters";
     document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutters";
     document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miners";
@@ -242,7 +280,7 @@ function updateNumbers(){
 function displayResources(){
 
     if(resources.food >= 1){
-        document.getElementById("foodRow").style.visibility = 'visible';
+        document.getElementById("foodRow").style.visibility = 'visible'; 
     }
     
     if(resources.wood >= 1){
@@ -281,6 +319,13 @@ function resetGame(){
         stone:0,
         reed:0
     };
+
+    resourcesPerSec = {
+        food:0,
+        wood:0,
+        stone:0,
+        reed:0
+    };
     
     storage = {
         food:100,
@@ -306,14 +351,19 @@ function resetGame(){
 
 window.setInterval(function(){
 
-    eatFood(population.total * 0.044);
-    huntFood(population.hunters / 10);
+    updateFood(resourcesPerSec.food / 10)
     cutWood(population.woodcutters / 20);
     mineStone(population.miners / 30);
     gatherReed(population.gatherers / 50);
+
     displayResources();
+    updateNumbers();
     
 }, 100);
+
+
+
+
 
 window.setInterval(function(){
     saveGame();

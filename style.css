@@ -64,7 +64,7 @@ header h1{
 
 .resource{
     visibility: hidden;
-    position: relative;
+    position: -webkit-sticky;
 }
 
 .resource span{
@@ -191,5 +191,6 @@ button:hover .tooltip {
     display: flex;
     gap: 40px;
 }
+
 
 
