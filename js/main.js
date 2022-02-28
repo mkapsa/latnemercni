@@ -216,22 +216,22 @@ function updateNumbers(){
         document.getElementById("foodPerSec").innerHTML = resourcesPerSec.food.toFixed(2) + "/s";
     }
     if(resourcesPerSec.wood >= 0){
-        document.getElementById("woodPerSec").innerHTML = "+" + resourcesPerSec.wood + "/s";    
+        document.getElementById("woodPerSec").innerHTML = "+" + resourcesPerSec.wood.toFixed(2) + "/s";    
     }
     else{
-        document.getElementById("woodPerSec").innerHTML = resourcesPerSec.wood + "/s";
+        document.getElementById("woodPerSec").innerHTML = resourcesPerSec.wood.toFixed(2) + "/s";
     }
     if(resourcesPerSec.stone >= 0){
-        document.getElementById("stonePerSec").innerHTML = "+" + resourcesPerSec.stone + "/s";    
+        document.getElementById("stonePerSec").innerHTML = "+" + resourcesPerSec.stone.toFixed(2) + "/s";    
     }
     else{
-        document.getElementById("stonePerSec").innerHTML = resourcesPerSec.stone + "/s";
+        document.getElementById("stonePerSec").innerHTML = resourcesPerSec.stone.toFixed(2) + "/s";
     }
     if(resources.reed >= 0){
-        document.getElementById("reedPerSec").innerHTML = "+" + resourcesPerSec.reed + "/s";
+        document.getElementById("reedPerSec").innerHTML = "+" + resourcesPerSec.reed.toFixed(2) + "/s";
     }
     else{
-        document.getElementById("reedPerSec").innerHTML = resourcesPerSec.reed + "/s";
+        document.getElementById("reedPerSec").innerHTML = resourcesPerSec.reed.toFixed(2) + "/s";
     } 
         
     document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunters";
