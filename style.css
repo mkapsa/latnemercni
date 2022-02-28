@@ -63,14 +63,6 @@ header h1{
     color: gray;    
 }
 
-.resource{
-    visibility: hidden;
-}
-
-.perSec{
-    visibility: hidden;
-}
-
 .resource span{
     margin-left: 10px;
     margin-right: 10px;

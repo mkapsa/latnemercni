@@ -33,6 +33,10 @@ const byId = function(id){
     return document.getElementById(id);
 }
 
+const byClass = function(className){
+    return document.getElementsByClassName(className);
+}
+
 // document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
 
 window.onload = loadGame();
@@ -247,37 +251,61 @@ function updateNumbers(){
 function displayResources(){
 
     if(resources.food > 0){
-        document.getElementById("foodRow").style.visibility = 'visible'; 
+        document.getElementById("foodRow").hidden = false;
+    }
+    else{
+        document.getElementById("foodRow").hidden = true;
     }
     
     if(resources.wood > 0){
-        document.getElementById("woodRow").style.visibility = 'visible';
+        document.getElementById("woodRow").hidden = false;
+    }
+    else{
+        document.getElementById("woodRow").hidden = true;
     }
     
     if(resources.stone > 0){
-        document.getElementById("stoneRow").style.visibility = 'visible';
+        document.getElementById("stoneRow").hidden = false;
     }
-    
+    else{
+        document.getElementById("stoneRow").hidden = true;
+    }
+
     if(resources.reed > 0){
-        document.getElementById("reedRow").style.visibility = 'visible';
+        document.getElementById("reedRow").hidden = false;
+    }
+    else{
+        document.getElementById("reedRow").hidden = true;
     }
 }
 
 function displayResourcesPerSec(){
     if(resourcesPerSec.food != 0){
-        document.getElementById('foodPerSec').style.visibility = 'visible';
+        document.getElementById('foodPerSec').hidden = false;
+    }
+    else{
+        document.getElementById('foodPerSec').hidden = true;
     }
 
     if(resourcesPerSec.wood != 0){
-        document.getElementById('woodPerSec').style.visibility = 'visible';
+        document.getElementById('woodPerSec').hidden = false;
+    }
+    else{
+        document.getElementById('woodPerSec').hidden = true;
     }
 
     if(resourcesPerSec.stone != 0){
-        document.getElementById('stonePerSec').style.visibility = 'visible';
+        document.getElementById('stonePerSec').hidden = false;
+    }
+    else{
+        document.getElementById('stonePerSec').hidden = true;
     }
     
     if(resourcesPerSec.reed != 0){
-        document.getElementById('reedPerSec').style.visibility = 'visible';
+        document.getElementById('reedPerSec').hidden = false;
+    }
+    else{
+        document.getElementById('reedPerSec').hidden = true;
     }
 }
 
