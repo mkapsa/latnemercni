@@ -14,9 +14,9 @@ resourcesPerSec = {
 
 storage = {
     food:100,
-    wood:200,
-    stone:100,
-    reed:50
+    wood:1000,
+    stone:300,
+    reed:200
 }
 
 population = {
@@ -27,6 +27,10 @@ population = {
     woodcutters:0,
     miners:0,
     gatherers:0
+}
+
+const byId = function(id){
+    return document.getElementById(id);
 }
 
 // document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
@@ -314,10 +318,10 @@ function resetGame(){
     
     storage = {
         food:100,
-        wood:200,
-        stone:100,
-        reed:50
-    };
+        wood:1000,
+        stone:300,
+        reed:200
+    }
     
     population = {
         max:10,

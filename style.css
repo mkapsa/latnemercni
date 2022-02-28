@@ -196,5 +196,6 @@ button:hover .tooltip {
     gap: 40px;
 }
 
-
-
+#resetButton:hover{
+    background-color: red;
+}
