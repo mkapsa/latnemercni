@@ -211,6 +211,10 @@ button:hover .tooltip {
     background-color: inherit;
 }
 
+.buildingsButton:active{
+    color: gray;
+}
+
 .price{
     display: flex;
     flex-direction: column;
@@ -221,7 +225,7 @@ button:hover .tooltip {
     margin: 0;
     padding: 0;
     margin-left: 10px;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .description{
