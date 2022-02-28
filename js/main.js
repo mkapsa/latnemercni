@@ -265,12 +265,14 @@ function saveGame(){
     localStorage.setItem('resourcesData', JSON.stringify(resources));
     localStorage.setItem('storageData', JSON.stringify(storage));
     localStorage.setItem('populationData', JSON.stringify(population));
+    localStorage.setItem('resourcesPerSecData', JSON.stringify(resourcesPerSec));
 }
 
 function loadGame(){
     resources = JSON.parse(localStorage.getItem('resourcesData'));
     storage = JSON.parse(localStorage.getItem('storageData'));
     population = JSON.parse(localStorage.getItem('populationData'));
+    resourcesPerSec = JSON.parse(localStorage.getItem('resourcesPerSecData'));
 
     updateNumbers();    
 }
