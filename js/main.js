@@ -36,63 +36,20 @@ window.onload = updateNumbers();
 
 
 
-
-
 function updateFood(number){
     resources.food = Math.max(0, resources.food + number);
 }
 
-
-// function eatFood(number){
-
-//     if (resources.food >= number) {
-//         resources.food -= number;
-//         document.getElementById('food').innerHTML = Math.floor(resources.food);
-//     }    
-// }
-
-// function huntFood(number){
-
-//     if(resources.food <= storage.food){
-//         resources.food += number;
-
-//         if (resources.food > 0) {
-//             document.getElementById('food').innerHTML = Math.floor(resources.food);
-//         }
-//     }
-// }
-
-function cutWood(number){
-
-    if(resources.wood <= storage.wood){
-        resources.wood += number;
-
-        if (resources.wood > 0) {
-            document.getElementById('wood').innerHTML = Math.floor(resources.wood);
-        }
-    }
+function updateWood(number){
+    resources.wood = Math.max(0, resources.wood + number);
 }
 
-function mineStone(number){
-
-    if(resources.stone <= storage.stone){
-        resources.stone += number;
-
-        if (resources.stone > 0) {
-            document.getElementById('stone').innerHTML = Math.floor(resources.stone);
-        }
-    }
+function updateStone(number){
+    resources.stone = Math.max(0, resources.stone + number);
 }
 
-function gatherReed(number){
-
-    if(resources.reed <= storage.reed){
-        resources.reed += number;
-
-        if (resources.reed > 0) {
-            document.getElementById('reed').innerHTML = Math.floor(resources.reed);
-        }
-    }
+function updateReed(number){
+    resources.reed = Math.max(0, resources.reed + number);
 }
 
 function giveBirth(number){
@@ -132,6 +89,7 @@ function hire(job, number){
     if (job == 'woodcutter' && population.unemployed >= number){
         population.unemployed -= number;
         population.woodcutters += number;
+        resourcesPerSec.wood += 0.5 * number;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
 
@@ -146,6 +104,7 @@ function hire(job, number){
     if (job == 'miner' && population.unemployed >= number){
         population.unemployed -= number;
         population.miners += number;
+        resourcesPerSec.stone += 0.3 * number;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
 
@@ -160,6 +119,7 @@ function hire(job, number){
     if (job == 'gatherer' && population.unemployed >= number){
         population.unemployed -= number;
         population.gatherers += number;
+        resourcesPerSec.reed += 0.2 * number;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
 
@@ -190,7 +150,8 @@ function fire(job, number){
 
     if (job == 'woodcutter' && population.woodcutters >= number){
         population.woodcutters -= number;
-        population.unemployed += number;
+        population.unemployed += 0.5 * number;
+        resourcesPerSec.wood -= number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
 
@@ -205,6 +166,7 @@ function fire(job, number){
     if (job == 'miner' && population.miners >= number){
         population.miners -= number;
         population.unemployed += number;
+        resourcesPerSec.stone -= 0.3 * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
 
@@ -219,6 +181,7 @@ function fire(job, number){
     if (job == 'gatherer' && population.gatherers >= number){
         population.gatherers -= number;
         population.unemployed += number;
+        resourcesPerSec.reed -= 0.2 * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
 
@@ -351,10 +314,10 @@ function resetGame(){
 
 window.setInterval(function(){
 
-    updateFood(resourcesPerSec.food / 10)
-    cutWood(population.woodcutters / 20);
-    mineStone(population.miners / 30);
-    gatherReed(population.gatherers / 50);
+    updateFood(resourcesPerSec.food / 10);
+    updateWood(resourcesPerSec.wood / 10);
+    updateStone(resourcesPerSec.stone / 10);
+    updateReed(resourcesPerSec.reed / 10);
 
     displayResources();
     updateNumbers();
