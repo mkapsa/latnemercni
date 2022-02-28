@@ -166,8 +166,8 @@ function fire(job, number){
 
     if (job == 'woodcutter' && population.woodcutters >= number){
         population.woodcutters -= number;
-        population.unemployed += 0.5 * number;
-        resourcesPerSec.wood -= number;
+        population.unemployed += number;
+        resourcesPerSec.wood -= 0.5 * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
 
@@ -385,7 +385,7 @@ window.setInterval(function(){
     updateStone(resourcesPerSec.stone / 10);
     updateReed(resourcesPerSec.reed / 10);
 
-    displayResources();
+    // displayResources();
     displayResourcesPerSec();
     updateNumbers();
     
