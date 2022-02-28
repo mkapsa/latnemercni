@@ -45,19 +45,27 @@ window.onload = updateNumbers();
 
 
 function updateFood(number){
-    resources.food = Math.max(0, resources.food + number);
+    if(resources.food < storage.food){
+        resources.food = Math.max(0, resources.food + number);
+    }
 }
 
 function updateWood(number){
-    resources.wood = Math.max(0, resources.wood + number);
+    if(resources.wood < storage.wood){
+        resources.wood = Math.max(0, resources.wood + number);
+    }
 }
 
 function updateStone(number){
-    resources.stone = Math.max(0, resources.stone + number);
+    if(resources.stone < storage.stone){
+        resources.stone = Math.max(0, resources.stone + number);
+    }  
 }
 
 function updateReed(number){
-    resources.reed = Math.max(0, resources.reed + number);
+    if(resources.reed < storage.reed){
+        resources.reed = Math.max(0, resources.reed + number);
+    }  
 }
 
 function giveBirth(number){

@@ -74,7 +74,12 @@
                     <div id="populationButtons">
                         <button class="birthButton" onclick="giveBirth(1)">give birth
                             <div class="tooltip">
-                                costs 20 food, each worker consumes food
+                                <div class="description">
+                                    Each worker consumes 0.44 food per second.
+                                </div>
+                                <div class="price">
+                                    <span>20 food</span>
+                                </div>
                             </div>
                         </button>
                         <br>
@@ -102,11 +107,23 @@
                         <div class="numberOfWorkers" id="gatherers">0 gatherers</div>
                     </div>
                 </div>
-                <!-- <div id="row2">
+                <div id="row2">
                     <div id="buildings">
-                        <h2>buildings</h2>
+                        <h2 class="sectionHeading">buildings</h2>
+                        <button class="buildingsButton">food storage
+                            <div class="tooltip">
+                                <div class="description">
+                                    Increases food storage by 25.
+                                </div>
+                                <div class="price">
+                                    <span>200 wood</span>
+                                    <span>100 stone</span>
+                                    <span>50 reed</span>
+                                </div>                              
+                            </div>
+                        </button>
                     </div>
-                </div> -->
+                </div>
             </section>        
         </div>
         <section id="technicalSection">
