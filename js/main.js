@@ -338,39 +338,43 @@ function loadGame(){
 }
 
 function resetGame(){
-    resources = {
-        food:0,
-        wood:0,
-        stone:0,
-        reed:0
-    };
 
-    resourcesPerSec = {
-        food:0,
-        wood:0,
-        stone:0,
-        reed:0
-    };
-    
-    storage = {
-        food:100,
-        wood:1000,
-        stone:300,
-        reed:200
+    if(window.confirm("Do you really want to reset the game? Your progress will be lost.")){
+        
+        resources = {
+            food:0,
+            wood:0,
+            stone:0,
+            reed:0
+        }
+
+        resourcesPerSec = {
+            food:0,
+            wood:0,
+            stone:0,
+            reed:0
+        }
+        
+        storage = {
+            food:100,
+            wood:1000,
+            stone:300,
+            reed:200
+        }
+        
+        population = {
+            max:10,
+            total:0,
+            unemployed:0,
+            hunters:0,
+            woodcutters:0,
+            miners:0,
+            gatherers:0
+        }
+
+        saveGame();
+        loadGame();
     }
-    
-    population = {
-        max:10,
-        total:0,
-        unemployed:0,
-        hunters:0,
-        woodcutters:0,
-        miners:0,
-        gatherers:0
-    };
-
-    saveGame();
-    loadGame();
 }
 
 
