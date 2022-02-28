@@ -225,6 +225,8 @@ function updateNumbers(){
     document.getElementById("stoneStorage").innerHTML = "/" + Math.floor(storage.stone);
     document.getElementById("reedStorage").innerHTML = "/" + Math.floor(storage.reed); 
 
+    // update resources per second (2 decimals)
+
     if(resourcesPerSec.food >= 0){
         document.getElementById("foodPerSec").innerHTML = "+" + resourcesPerSec.food.toFixed(2) + "/s";
     }
@@ -249,11 +251,36 @@ function updateNumbers(){
     else{
         document.getElementById("reedPerSec").innerHTML = resourcesPerSec.reed.toFixed(2) + "/s";
     } 
-        
-    document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunters";
-    document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutters";
-    document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miners";
-    document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherers";    
+
+    // update population numbers - singular and plural forms
+
+    if (population.hunters === 1){
+        document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunter";
+    }
+    else {
+        document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunters";
+    }
+
+    if (population.woodcutters === 1){
+        document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutter";
+    }
+    else {
+        document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutters";
+    }
+
+    if (population.miners === 1){
+        document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miner";
+    }
+    else {
+        document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miners";
+    }
+
+    if (population.gatherers === 1){
+        document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherer";
+    }
+    else {
+        document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherers";
+    } 
 };
 
 function displayResources(){
