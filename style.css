@@ -65,7 +65,10 @@ header h1{
 
 .resource{
     visibility: hidden;
-    position: -webkit-sticky;
+}
+
+.perSec{
+    visibility: hidden;
 }
 
 .resource span{

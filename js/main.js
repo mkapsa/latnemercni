@@ -242,22 +242,42 @@ function updateNumbers(){
 
 function displayResources(){
 
-    if(resources.food >= 1){
+    if(resources.food > 0){
         document.getElementById("foodRow").style.visibility = 'visible'; 
     }
     
-    if(resources.wood >= 1){
+    if(resources.wood > 0){
         document.getElementById("woodRow").style.visibility = 'visible';
     }
     
-    if(resources.stone >= 1){
+    if(resources.stone > 0){
         document.getElementById("stoneRow").style.visibility = 'visible';
     }
     
-    if(resources.reed >= 1){
+    if(resources.reed > 0){
         document.getElementById("reedRow").style.visibility = 'visible';
-    }      
+    }
 }
+
+function displayResourcesPerSec(){
+    if(resourcesPerSec.food != 0){
+        document.getElementById('foodPerSec').style.visibility = 'visible';
+    }
+
+    if(resourcesPerSec.wood != 0){
+        document.getElementById('woodPerSec').style.visibility = 'visible';
+    }
+
+    if(resourcesPerSec.stone != 0){
+        document.getElementById('stonePerSec').style.visibility = 'visible';
+    }
+    
+    if(resourcesPerSec.reed != 0){
+        document.getElementById('reedPerSec').style.visibility = 'visible';
+    }
+}
+
+
 
 // saving function (localstorage)
 
@@ -322,6 +342,7 @@ window.setInterval(function(){
     updateReed(resourcesPerSec.reed / 10);
 
     displayResources();
+    displayResourcesPerSec();
     updateNumbers();
     
 }, 100);
