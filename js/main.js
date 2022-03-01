@@ -369,10 +369,6 @@ window.setInterval(function(){
     
 }, 100);
 
-
-
-
-
 window.setInterval(function(){
     saveGame();
 }, 60 * 1000);

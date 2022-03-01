@@ -215,17 +215,15 @@ button:hover .tooltip {
     color: gray;
 }
 
-.price{
+.prices{
     display: flex;
     flex-direction: column;
     text-align: left;
 }
 
-.price span{
-    margin: 0;
-    padding: 0;
-    margin-left: 10px;
-    font-weight: bold;
+.priceRow{
+    display: flex;
+    flex-direction: row;
 }
 
 .description{
@@ -235,5 +233,10 @@ button:hover .tooltip {
     margin-bottom: 10px;
 }
 
+.price{
+   margin-left: 10px;
+   margin-right: 10px;
+   font-weight: bold;
+}
 
 
