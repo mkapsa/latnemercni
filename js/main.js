@@ -70,8 +70,6 @@ function updateReed(number){
 
 function giveBirth(number){
 
-
-
     if (resources.food >= number * 20 && population.total < population.max){
         resources.food -= number * 20;
         population.total += number;
@@ -285,66 +283,19 @@ function updateNumbers(){
 
 function displayResources(){
 
-    if(resources.food > 0){
-        document.getElementById("foodRow").hidden = false;
-    }
-    else{
-        document.getElementById("foodRow").hidden = true;
-    }
-    
-    if(resources.wood > 0){
-        document.getElementById("woodRow").hidden = false;
-    }
-    else{
-        document.getElementById("woodRow").hidden = true;
-    }
-    
-    if(resources.stone > 0){
-        document.getElementById("stoneRow").hidden = false;
-    }
-    else{
-        document.getElementById("stoneRow").hidden = true;
-    }
-
-    if(resources.reed > 0){
-        document.getElementById("reedRow").hidden = false;
-    }
-    else{
-        document.getElementById("reedRow").hidden = true;
-    }
+    byId('foodRow').hidden = resources.food === 0;
+    byId('woodRow').hidden = resources.wood === 0;
+    byId('stoneRow').hidden = resources.stone === 0;
+    byId('reedRow').hidden = resources.reed === 0;
 }
 
 function displayResourcesPerSec(){
-    if(resourcesPerSec.food != 0){
-        document.getElementById('foodPerSec').hidden = false;
-    }
-    else{
-        document.getElementById('foodPerSec').hidden = true;
-    }
 
-    if(resourcesPerSec.wood != 0){
-        document.getElementById('woodPerSec').hidden = false;
-    }
-    else{
-        document.getElementById('woodPerSec').hidden = true;
-    }
-
-    if(resourcesPerSec.stone != 0){
-        document.getElementById('stonePerSec').hidden = false;
-    }
-    else{
-        document.getElementById('stonePerSec').hidden = true;
-    }
-    
-    if(resourcesPerSec.reed != 0){
-        document.getElementById('reedPerSec').hidden = false;
-    }
-    else{
-        document.getElementById('reedPerSec').hidden = true;
-    }
+    byId('foodPerSec').hidden = resourcesPerSec.food == 0;
+    byId('woodPerSec').hidden = resourcesPerSec.wood == 0;
+    byId('stonePerSec').hidden = resourcesPerSec.stone == 0;
+    byId('reedPerSec').hidden = resourcesPerSec.reed == 0;
 }
-
-
 
 // saving function (localstorage)
 
@@ -412,7 +363,7 @@ window.setInterval(function(){
     updateStone(resourcesPerSec.stone / 10);
     updateReed(resourcesPerSec.reed / 10);
 
-    // displayResources();
+    displayResources();
     displayResourcesPerSec();
     updateNumbers();
     
