@@ -14,7 +14,7 @@ resourcesPerSec = {
 
 storage = {
     food:100,
-    wood:1000,
+    wood:600,
     stone:300,
     reed:200
 }
@@ -37,7 +37,7 @@ prices = {
     foodstorage: {
         wood:300,
         stone:100,
-        reed:60
+        reed:50
     }
 }
 
@@ -234,24 +234,48 @@ function fire(job, number){
     }
 }
 
+
+
 function canAfford(building, count){
     
     return resources.wood * count >= prices[building].wood * count && resources.stone * count >= prices[building].stone * count && resources.reed * count >= prices[building].reed * count
 }
 
+// function updateBuildingPrice(building){
+//     // byId(building + "-price-food").innerHTML = prices[building].food;
+//     byId(building + "-price-wood").innerHTML = prices[building].wood;    
+//     byId(building + "-price-stone").innerHTML = prices[building].stone;
+//     byId(building + "-price-reed").innerHTML = prices[building].reed;
+// }
+
 function build(building, count){
 if(canAfford(building, count) === true){
     buildings[building] += count;
 
-    resources.wood -= prices[building].wood;
-    resources.stone -= prices[building].stone;
-    resources.reed -= prices[building].reed;
+    resources.wood -= Math.floor(prices[building].wood) * count;
+    resources.stone -= Math.floor(prices[building].stone) * count;
+    resources.reed -= Math.floor(prices[building].reed) * count;
+
+    let buildingPrices = Object.keys(prices[building]).map(key => prices[building][key]);
+
+    for(let i = 0; i < count; i++){
+        Object.keys(prices[building]).map(function(key, index){
+            prices[building][key] = Math.floor(prices[building][key] * 1.14);
+        });
+    }
+    // updateBuildingPrice(building);    
     
     if(building === 'foodstorage'){
-        storage.food += 25;
+        storage.food += 30;
+
+        byId('foodstorage-price-wood').innerHTML = prices['foodstorage'].wood;
+        byId('foodstorage-price-stone').innerHTML = prices['foodstorage'].stone;
+        byId('foodstorage-price-reed').innerHTML = prices['foodstorage'].reed;
+
         }
     }
 }
+
 
 
 
@@ -372,6 +396,14 @@ function buttonDisabled(){
     else{
         byId('reedBtn').style.backgroundColor = null;
     }
+
+
+    if(canAfford('foodstorage', 1) === false){
+        byId('foodstorage-button').style.backgroundColor = "rgb(200, 200, 200)";
+    }
+    else{
+        byId('foodstorage-button').style.backgroundColor = null;
+    }
 }
 
 // saving function (localstorage)
@@ -417,7 +449,7 @@ function resetGame(){
         
         storage = {
             food:100,
-            wood:1000,
+            wood:600,
             stone:300,
             reed:200
         }
@@ -440,7 +472,7 @@ function resetGame(){
             foodstorage: {
                 wood:300,
                 stone:100,
-                reed:60
+                reed:50
             }
         }
 
