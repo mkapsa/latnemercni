@@ -29,6 +29,20 @@ population = {
     gatherers:0
 }
 
+buildings = {
+    foodstorage:0
+}
+
+prices = {
+    foodstorage: {
+        wood:300,
+        stone:100,
+        reed:60
+    }
+}
+
+
+
 const byId = function(id){
     return document.getElementById(id);
 }
@@ -220,6 +234,27 @@ function fire(job, number){
     }
 }
 
+function canAfford(building, count){
+    
+    return resources.wood * count >= prices[building].wood * count && resources.stone * count >= prices[building].stone * count && resources.reed * count >= prices[building].reed * count
+}
+
+function build(building, count){
+if(canAfford(building, count) === true){
+    buildings[building] += count;
+
+    resources.wood -= prices[building].wood;
+    resources.stone -= prices[building].stone;
+    resources.reed -= prices[building].reed;
+    
+    if(building === 'foodstorage'){
+        storage.food += 25;
+        }
+    }
+}
+
+
+
 function updateNumbers(){
 
     document.getElementById("totalPopulation").innerHTML = Math.floor(population.total);
@@ -346,6 +381,8 @@ function saveGame(){
     localStorage.setItem('storageData', JSON.stringify(storage));
     localStorage.setItem('populationData', JSON.stringify(population));
     localStorage.setItem('resourcesPerSecData', JSON.stringify(resourcesPerSec));
+    localStorage.setItem('buildingsData', JSON.stringify(buildings));
+    localStorage.setItem('pricesData', JSON.stringify(prices));
 }
 
 function loadGame(){
@@ -353,6 +390,9 @@ function loadGame(){
     storage = JSON.parse(localStorage.getItem('storageData'));
     population = JSON.parse(localStorage.getItem('populationData'));
     resourcesPerSec = JSON.parse(localStorage.getItem('resourcesPerSecData'));
+    buildings = JSON.parse(localStorage.getItem('buildingsData'));
+    prices = JSON.parse(localStorage.getItem('pricesData'));
+    
 
     updateNumbers();    
 }
@@ -392,6 +432,18 @@ function resetGame(){
             gatherers:0
         }
 
+        buildings = {
+            foodstorage:0
+        }
+
+        prices = {
+            foodstorage: {
+                wood:300,
+                stone:100,
+                reed:60
+            }
+        }
+
         saveGame();
         loadGame();
     }
@@ -416,4 +468,5 @@ window.setInterval(function(){
 window.setInterval(function(){
     saveGame();
 }, 60 * 1000);
+
 
