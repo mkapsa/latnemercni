@@ -48,11 +48,17 @@ function updateFood(number){
     if(resources.food < storage.food){
         resources.food = Math.max(0, resources.food + number);
     }
+    if(resources.food >= storage.food){
+        resources.food = Math.min(storage.food, resources.food + number);
+    }
 }
 
 function updateWood(number){
     if(resources.wood < storage.wood){
         resources.wood = Math.max(0, resources.wood + number);
+    }
+    if(resources.wood >= storage.food){
+        resources.wood = Math.min(storage.wood, resources.wood + number);
     }
 }
 
@@ -60,12 +66,18 @@ function updateStone(number){
     if(resources.stone < storage.stone){
         resources.stone = Math.max(0, resources.stone + number);
     }  
+    if(resources.stone >= storage.stone){
+        resources.stone = Math.min(storage.stone, resources.stone + number);
+    }
 }
 
 function updateReed(number){
     if(resources.reed < storage.reed){
         resources.reed = Math.max(0, resources.reed + number);
     }  
+    if(resources.reed >= storage.reed){
+        resources.reed = Math.min(storage.reed, resources.reed + number);
+    }
 }
 
 function giveBirth(number){
@@ -297,6 +309,36 @@ function displayResourcesPerSec(){
     byId('reedPerSec').hidden = resourcesPerSec.reed == 0;
 }
 
+function buttonDisabled(){
+    if(resources.food >= storage.food){
+        byId('foodBtn').style.backgroundColor = "rgb(200, 200, 200)";        
+    }
+    else{
+        byId('foodBtn').style.backgroundColor = null;
+    }
+
+    if(resources.wood >= storage.wood){
+        byId('woodBtn').style.backgroundColor = "rgb(200, 200, 200)";        
+    }
+    else{
+        byId('woodBtn').style.backgroundColor = null;
+    }
+
+    if(resources.stone >= storage.stone){
+        byId('stoneBtn').style.backgroundColor = "rgb(200, 200, 200)";        
+    }
+    else{
+        byId('stoneBtn').style.backgroundColor = null;
+    }
+
+    if(resources.reed >= storage.reed){
+        byId('reedBtn').style.backgroundColor = "rgb(200, 200, 200)";        
+    }
+    else{
+        byId('reedBtn').style.backgroundColor = null;
+    }
+}
+
 // saving function (localstorage)
 
 function saveGame(){                                           
@@ -363,9 +405,11 @@ window.setInterval(function(){
     updateStone(resourcesPerSec.stone / 10);
     updateReed(resourcesPerSec.reed / 10);
 
+    
     displayResources();
     displayResourcesPerSec();
     updateNumbers();
+    buttonDisabled();
     
 }, 100);
 
