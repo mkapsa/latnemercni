@@ -35,10 +35,24 @@ buildings = {
 
 prices = {
     foodstorage: {
+        food:0,
         wood:300,
         stone:100,
         reed:50
+    },
+    woodenhut: {
+        food:0,
+        wood:400,
+        stone:50,
+        reed:100,
+    },
+    stonehut: {
+        food:0,
+        wood:100,
+        stone:300,
+        reed:100
     }
+    
 }
 
 
@@ -473,13 +487,26 @@ function resetGame(){
                 wood:300,
                 stone:100,
                 reed:50
+            },
+            woodenhut: {
+                food:0,
+                wood:400,
+                stone:50,
+                reed:100,
+            },
+            stonehut: {
+                food:0,
+                wood:100,
+                stone:300,
+                reed:100
             }
-        }
+        } 
 
         saveGame();
         loadGame();
-    }
+    }          
 }
+
 
 
 window.setInterval(function(){
