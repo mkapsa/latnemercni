@@ -30,7 +30,10 @@ population = {
 }
 
 buildings = {
-    foodstorage:0
+    foodstorage:0,
+    storehouse:0,
+    woodenhut:0,
+    stonehut:0
 }
 
 prices = {
@@ -39,6 +42,12 @@ prices = {
         wood:300,
         stone:100,
         reed:50
+    },
+    storehouse: {
+        food:0,
+        wood:400,
+        stone:250,
+        reed:110
     },
     woodenhut: {
         food:0,
@@ -55,7 +64,10 @@ prices = {
     
 }
 
-
+let foodrowHidden = true;
+let woodrowHidden = true;
+let stonerowHidden = true;
+let reedrowHidden = true;
 
 const byId = function(id){
     return document.getElementById(id);
@@ -293,7 +305,7 @@ function build(building, count){
         updateBuildingPrice(building);    
         
         if(building === 'foodstorage'){
-            storage.food += 30;
+            storage.food += 30 * count;
         }
         
         if(building === 'woodenhut'){
@@ -303,12 +315,15 @@ function build(building, count){
         if(building === 'stonehut'){
             population.max += count * 3;
         }
+        
+        if(building === 'storehouse'){
+            storage.wood += 250 * count;
+            storage.stone += 150 * count;
+            storage.reed += 150 * count;
+        }
 
     }
 }
-
-
-
 
 function updateNumbers(){
 
@@ -387,18 +402,33 @@ function updateNumbers(){
 
 function displayResources(){
 
-    byId('foodRow').hidden = resources.food === 0;
-    byId('woodRow').hidden = resources.wood === 0;
-    byId('stoneRow').hidden = resources.stone === 0;
-    byId('reedRow').hidden = resources.reed === 0;
+    byId('foodRow').hidden = foodrowHidden;
+    byId('woodRow').hidden = woodrowHidden;
+    byId('stoneRow').hidden = stonerowHidden;
+    byId('reedRow').hidden = reedrowHidden;
+
+    if(resources.food > 0){
+        foodrowHidden = false;
+    }
+    if(resources.wood > 0){
+        woodrowHidden = false;
+    }
+    if(resources.stone > 0){
+        stonerowHidden = false;
+    }
+    if(resources.reed > 0){
+        reedrowHidden = false;
+    }
 }
+
+
 
 function displayResourcesPerSec(){
 
-    byId('foodPerSec').hidden = resourcesPerSec.food == 0;
-    byId('woodPerSec').hidden = resourcesPerSec.wood == 0;
-    byId('stonePerSec').hidden = resourcesPerSec.stone == 0;
-    byId('reedPerSec').hidden = resourcesPerSec.reed == 0;
+    byId('foodPerSec').hidden = resourcesPerSec.food === 0;
+    byId('woodPerSec').hidden = resourcesPerSec.wood === 0;
+    byId('stonePerSec').hidden = resourcesPerSec.stone === 0;
+    byId('reedPerSec').hidden = resourcesPerSec.reed === 0;
 }
 
 function buttonDisabled(){
@@ -450,6 +480,13 @@ function buttonDisabled(){
     }
     else{
         byId('stonehut-button').style.backgroundColor = null;
+    }
+
+    if(canAfford('storehouse', 1) === false){
+        byId('storehouse-button').style.backgroundColor = "rgb(200, 200, 200)";
+    }
+    else{
+        byId('storehouse-button').style.backgroundColor = null;
     }
 }
 
@@ -523,6 +560,12 @@ function resetGame(){
                 stone:100,
                 reed:50
             },
+            storehouse: {
+                food:0,
+                wood:400,
+                stone:250,
+                reed:110
+            },
             woodenhut: {
                 food:0,
                 wood:400,
@@ -536,6 +579,11 @@ function resetGame(){
                 reed:100
             }
         } 
+
+        foodrowHidden = true;
+        woodrowHidden = true;
+        stonerowHidden = true;
+        reedrowHidden = true;
 
         saveGame();
         loadGame();
