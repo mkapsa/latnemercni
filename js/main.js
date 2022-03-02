@@ -79,9 +79,9 @@ const byClass = function(className){
 
 // document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
 
+window.onload = saveGame();
 window.onload = loadGame();
 window.onload = updateNumbers();
-
 
 function updateFood(number){
     if(resources.food < storage.food){
@@ -591,7 +591,7 @@ function resetGame(){
 }
 
 
-
+``
 window.setInterval(function(){
 
     updateFood(resourcesPerSec.food / 10);
@@ -610,5 +610,7 @@ window.setInterval(function(){
 window.setInterval(function(){
     saveGame();
 }, 60 * 1000);
+
+
 
 
