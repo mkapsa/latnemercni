@@ -113,21 +113,21 @@ header h1{
     flex-direction: column;
 }
 
-.birthButton{
+#birthButton{
     height: 30px;
     width: 130px;
-    background-color: gold;
+    background-color: yellow;
     color: black;
     margin: 5px;
     border: 2px solid black;
 }
 
-.birthButton:hover{
-    background-color: yellow;
+#birthButton:hover{
+    background-color: gold;
 }
 
-.birthButton:active{
-    background-color: gold;
+#birthButton:active{
+    background-color: yellow;
 }
 
 .hireFireButtons{

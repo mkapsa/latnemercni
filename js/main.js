@@ -460,6 +460,13 @@ function buttonDisabled(){
         byId('reedBtn').style.backgroundColor = null;
     }
 
+    if(resources.food < 20){
+        byId("birthButton").style.backgroundColor = 'gold';
+    }
+    else{
+        byId("birthButton").style.backgroundColor = null;
+    }
+
 
     if(canAfford('foodstorage', 1) === false){
         byId('foodstorage-button').style.backgroundColor = "rgb(200, 200, 200)";
