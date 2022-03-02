@@ -71,7 +71,6 @@ window.onload = loadGame();
 window.onload = updateNumbers();
 
 
-
 function updateFood(number){
     if(resources.food < storage.food){
         resources.food = Math.max(0, resources.food + number);
@@ -85,7 +84,7 @@ function updateWood(number){
     if(resources.wood < storage.wood){
         resources.wood = Math.max(0, resources.wood + number);
     }
-    if(resources.wood >= storage.food){
+    if(resources.wood >= storage.wood){
         resources.wood = Math.min(storage.wood, resources.wood + number);
     }
 }
@@ -125,7 +124,7 @@ function giveBirth(number){
 
 function hire(job, number){
 
-    if (job == 'hunter' && population.unemployed >= number){
+    if (job === 'hunter' && population.unemployed >= number){
         population.unemployed -= number;
         population.hunters += number;
         resourcesPerSec.food += number;
@@ -140,7 +139,7 @@ function hire(job, number){
             }
     }
 
-    if (job == 'woodcutter' && population.unemployed >= number){
+    if (job === 'woodcutter' && population.unemployed >= number){
         population.unemployed -= number;
         population.woodcutters += number;
         resourcesPerSec.wood += 0.5 * number;
@@ -155,7 +154,7 @@ function hire(job, number){
             }
         }
 
-    if (job == 'miner' && population.unemployed >= number){
+    if (job === 'miner' && population.unemployed >= number){
         population.unemployed -= number;
         population.miners += number;
         resourcesPerSec.stone += 0.3 * number;
@@ -170,7 +169,7 @@ function hire(job, number){
             }
         }
 
-    if (job == 'gatherer' && population.unemployed >= number){
+    if (job === 'gatherer' && population.unemployed >= number){
         population.unemployed -= number;
         population.gatherers += number;
         resourcesPerSec.reed += 0.2 * number;
@@ -202,7 +201,7 @@ function fire(job, number){
         }
     }
 
-    if (job == 'woodcutter' && population.woodcutters >= number){
+    if (job === 'woodcutter' && population.woodcutters >= number){
         population.woodcutters -= number;
         population.unemployed += number;
         resourcesPerSec.wood -= 0.5 * number;
@@ -217,7 +216,7 @@ function fire(job, number){
         }
     }
 
-    if (job == 'miner' && population.miners >= number){
+    if (job === 'miner' && population.miners >= number){
         population.miners -= number;
         population.unemployed += number;
         resourcesPerSec.stone -= 0.3 * number;
@@ -232,7 +231,7 @@ function fire(job, number){
         }
     }
 
-    if (job == 'gatherer' && population.gatherers >= number){
+    if (job === 'gatherer' && population.gatherers >= number){
         population.gatherers -= number;
         population.unemployed += number;
         resourcesPerSec.reed -= 0.2 * number;
@@ -287,7 +286,7 @@ function build(building, count){
         // buildingPrices = Object.keys(prices[building]).map(key => prices[building][key]);
 
         for(let i = 0; i < count; i++){
-            Object.keys(prices[building]).map(function(key, index){
+            Object.keys(prices[building]).map(function(key){
                 prices[building][key] = Math.floor(prices[building][key] * 1.14);
             });
         }
