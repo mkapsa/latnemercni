@@ -1,8 +1,8 @@
 resources = {
-    food:90,
-    wood:500,
-    stone:300,
-    reed:100
+    food:0,
+    wood:0,
+    stone:0,
+    reed:0
 }
 
 resourcesPerSec = {
@@ -483,10 +483,10 @@ function resetGame(){
     if(window.confirm("Do you really want to reset the game? Your progress will be lost.")){
         
         resources = {
-            food:90,
-            wood:500,
-            stone:300,
-            reed:100
+            food:0,
+            wood:0,
+            stone:0,
+            reed:0
         }
 
         resourcesPerSec = {
