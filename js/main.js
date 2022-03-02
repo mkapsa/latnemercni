@@ -1,8 +1,8 @@
 resources = {
-    food:0,
-    wood:0,
-    stone:0,
-    reed:0
+    food:90,
+    wood:500,
+    stone:300,
+    reed:100
 }
 
 resourcesPerSec = {
@@ -48,7 +48,7 @@ prices = {
     },
     stonehut: {
         food:0,
-        wood:100,
+        wood:200,
         stone:300,
         reed:100
     }
@@ -255,17 +255,28 @@ function canAfford(building, count){
     return resources.wood * count >= prices[building].wood * count && resources.stone * count >= prices[building].stone * count && resources.reed * count >= prices[building].reed * count
 }
 
-// function updateBuildingPrice(building){
-//     // byId(building + "-price-food").innerHTML = prices[building].food;
-//     byId(building + "-price-wood").innerHTML = prices[building].wood;    
-//     byId(building + "-price-stone").innerHTML = prices[building].stone;
-//     byId(building + "-price-reed").innerHTML = prices[building].reed;
-// }
+function updateBuildingPrice(building){
+    byId(building + "-price-food").innerHTML = prices[building].food;
+    byId(building + "-price-wood").innerHTML = prices[building].wood;    
+    byId(building + "-price-stone").innerHTML = prices[building].stone;
+    byId(building + "-price-reed").innerHTML = prices[building].reed;
+
+    byId(building + "-price-food").hidden = prices[building].food < 1 || prices[building].food === undefined; 
+    byId(building + "-price-wood").hidden = prices[building].wood < 1 || prices[building].wood === undefined; 
+    byId(building + "-price-stone").hidden = prices[building].stone < 1 || prices[building].stone === undefined;
+    byId(building + "-price-reed").hidden = prices[building].reed < 1 || prices[building].reed === undefined; 
+}
+
+function updatePrices(){
+    updateBuildingPrice('foodstorage');
+}
 
 function build(building, count){
 if(canAfford(building, count) === true){
     buildings[building] += count;
 
+
+    resources.food -= Math.floor(prices[building].food) * count;
     resources.wood -= Math.floor(prices[building].wood) * count;
     resources.stone -= Math.floor(prices[building].stone) * count;
     resources.reed -= Math.floor(prices[building].reed) * count;
@@ -277,16 +288,16 @@ if(canAfford(building, count) === true){
             prices[building][key] = Math.floor(prices[building][key] * 1.14);
         });
     }
-    // updateBuildingPrice(building);    
+    updateBuildingPrice(building);    
     
     if(building === 'foodstorage'){
         storage.food += 30;
+    }
+    
+    if(building === 'woodenhut'){
+        population.max += count;
+    }
 
-        byId('foodstorage-price-wood').innerHTML = prices['foodstorage'].wood;
-        byId('foodstorage-price-stone').innerHTML = prices['foodstorage'].stone;
-        byId('foodstorage-price-reed').innerHTML = prices['foodstorage'].reed;
-
-        }
     }
 }
 
@@ -364,7 +375,9 @@ function updateNumbers(){
     else {
         document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherers";
     } 
+
 };
+
 
 function displayResources(){
 
@@ -418,6 +431,13 @@ function buttonDisabled(){
     else{
         byId('foodstorage-button').style.backgroundColor = null;
     }
+
+    if(canAfford('woodenhut', 1) === false){
+        byId('woodenhut-button').style.backgroundColor = "rgb(200, 200, 200)";
+    }
+    else{
+        byId('woodenhut-button').style.backgroundColor = null;
+    }
 }
 
 // saving function (localstorage)
@@ -441,6 +461,7 @@ function loadGame(){
     
 
     updateNumbers();    
+    updatePrices();
 }
 
 function resetGame(){
@@ -448,10 +469,10 @@ function resetGame(){
     if(window.confirm("Do you really want to reset the game? Your progress will be lost.")){
         
         resources = {
-            food:0,
-            wood:0,
-            stone:0,
-            reed:0
+            food:90,
+            wood:500,
+            stone:300,
+            reed:100
         }
 
         resourcesPerSec = {
@@ -496,7 +517,7 @@ function resetGame(){
             },
             stonehut: {
                 food:0,
-                wood:100,
+                wood:200,
                 stone:300,
                 reed:100
             }
