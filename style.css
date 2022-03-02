@@ -122,6 +122,14 @@ header h1{
     border: 2px solid black;
 }
 
+.birthButton:hover{
+    background-color: yellow;
+}
+
+.birthButton:active{
+    background-color: gold;
+}
+
 .hireFireButtons{
     display: flex;
     justify-content: space-between;
