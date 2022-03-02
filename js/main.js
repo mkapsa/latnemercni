@@ -252,7 +252,10 @@ function fire(job, number){
 
 function canAfford(building, count){
     
-    return resources.wood * count >= prices[building].wood * count && resources.stone * count >= prices[building].stone * count && resources.reed * count >= prices[building].reed * count
+    return resources.food * count >= prices[building].food * count && 
+    resources.wood * count >= prices[building].wood * count && 
+    resources.stone * count >= prices[building].stone * count && 
+    resources.reed * count >= prices[building].reed * count
 }
 
 function updateBuildingPrice(building){
@@ -272,31 +275,35 @@ function updatePrices(){
 }
 
 function build(building, count){
-if(canAfford(building, count) === true){
-    buildings[building] += count;
+    if(canAfford(building, count) === true){
+        buildings[building] += count;
 
 
-    resources.food -= Math.floor(prices[building].food) * count;
-    resources.wood -= Math.floor(prices[building].wood) * count;
-    resources.stone -= Math.floor(prices[building].stone) * count;
-    resources.reed -= Math.floor(prices[building].reed) * count;
+        resources.food -= Math.floor(prices[building].food) * count;
+        resources.wood -= Math.floor(prices[building].wood) * count;
+        resources.stone -= Math.floor(prices[building].stone) * count;
+        resources.reed -= Math.floor(prices[building].reed) * count;
 
-    let buildingPrices = Object.keys(prices[building]).map(key => prices[building][key]);
+        // buildingPrices = Object.keys(prices[building]).map(key => prices[building][key]);
 
-    for(let i = 0; i < count; i++){
-        Object.keys(prices[building]).map(function(key, index){
-            prices[building][key] = Math.floor(prices[building][key] * 1.14);
-        });
-    }
-    updateBuildingPrice(building);    
-    
-    if(building === 'foodstorage'){
-        storage.food += 30;
-    }
-    
-    if(building === 'woodenhut'){
-        population.max += count;
-    }
+        for(let i = 0; i < count; i++){
+            Object.keys(prices[building]).map(function(key, index){
+                prices[building][key] = Math.floor(prices[building][key] * 1.14);
+            });
+        }
+        updateBuildingPrice(building);    
+        
+        if(building === 'foodstorage'){
+            storage.food += 30;
+        }
+        
+        if(building === 'woodenhut'){
+            population.max += count;
+        }
+
+        if(building === 'stonehut'){
+            population.max += count * 3;
+        }
 
     }
 }
@@ -438,6 +445,13 @@ function buttonDisabled(){
     else{
         byId('woodenhut-button').style.backgroundColor = null;
     }
+
+    if(canAfford('stonehut', 1) === false){
+        byId('stonehut-button').style.backgroundColor = "rgb(200, 200, 200)";
+    }
+    else{
+        byId('stonehut-button').style.backgroundColor = null;
+    }
 }
 
 // saving function (localstorage)
@@ -505,6 +519,7 @@ function resetGame(){
 
         prices = {
             foodstorage: {
+                food:0,
                 wood:300,
                 stone:100,
                 reed:50
