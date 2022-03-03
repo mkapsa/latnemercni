@@ -79,7 +79,7 @@ const byClass = function(className){
 
 // document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
 
-window.onload = saveGame();
+// window.onload = saveGame();
 window.onload = loadGame();
 window.onload = updateNumbers();
 
@@ -487,7 +487,7 @@ function buttonDisabled(){
         byId('reedBtn').style.backgroundColor = null;
     }
 
-    if(resources.food < 20){
+    if(resources.food < 20 || population.total === population.max){
         byId("birthButton").style.backgroundColor = 'gold';
     }
     else{
