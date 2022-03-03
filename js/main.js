@@ -83,6 +83,33 @@ window.onload = saveGame();
 window.onload = loadGame();
 window.onload = updateNumbers();
 
+function checkFood(){
+    if(resourcesPerSec.food < 0 && resources.food === 0 && population.total >= 1){
+        population.total -= 1;
+        resourcesPerSec.food += 0.44;
+
+        if(population.unemployed >= 1){
+            population.unemployed -= 1;
+        }
+        else if(population.gatherers >= 1){
+            population.gatherers -= 1;
+            resourcesPerSec.reed -= 0.2;
+        }
+        else if(population.miners >= 1){
+            population.miners -= 1;
+            resourcesPerSec.stone -= 0.3;
+        }
+        else if(population.woodcutters >= 1){
+            population.woodcutters -= 1
+            resourcesPerSec.wood -= 0.5;
+        }
+        else if(population.hunters >= 1){
+            population.hunters -= 1;
+            resourcesPerSec.food -= 1;
+        }        
+    }
+}
+
 function updateFood(number){
     if(resources.food < storage.food){
         resources.food = Math.max(0, resources.food + number);
@@ -617,6 +644,10 @@ window.setInterval(function(){
 window.setInterval(function(){
     saveGame();
 }, 60 * 1000);
+
+window.setInterval(function(){
+    checkFood();
+}, 2000);
 
 
 
