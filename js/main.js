@@ -568,14 +568,78 @@ function resetGame(){
 
     if(window.confirm("Do you really want to reset the game? Your progress will be lost.")){
         
-        localStorage.clear
-        checkLocalStorage()
-        hideResources()
-    }          
+        resources = {
+            food:0,
+            wood:0,
+            stone:0,
+            reed:0
+        }
+        
+        resourcesPerSec = {
+            food:0,
+            wood:0,
+            stone:0,
+            reed:0
+        }
+        
+        storage = {
+            food:100,
+            wood:600,
+            stone:300,
+            reed:200
+        }
+        
+        population = {
+            max:10,
+            total:0,
+            unemployed:0,
+            hunters:0,
+            woodcutters:0,
+            miners:0,
+            gatherers:0
+        }
+        
+        buildings = {
+            foodstorage:0,
+            storehouse:0,
+            woodenhut:0,
+            stonehut:0
+        }
+        
+        prices = {
+            foodstorage: {
+                food:0,
+                wood:300,
+                stone:100,
+                reed:50
+            },
+            storehouse: {
+                food:0,
+                wood:400,
+                stone:250,
+                reed:110
+            },
+            woodenhut: {
+                food:0,
+                wood:400,
+                stone:50,
+                reed:100,
+            },
+            stonehut: {
+                food:0,
+                wood:200,
+                stone:300,
+                reed:100
+            }
+            
+        }
+
+        saveGame();
+        hideResources();
+
+    }           
 }
 
-
-``
 window.setInterval(function(){
 
     updateFood(resourcesPerSec.food / 10);
