@@ -79,8 +79,16 @@ const byClass = function(className){
 
 // document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
 
-// window.onload = saveGame();
-window.onload = loadGame();
+function checkLocalStorage(){
+    if(localStorage.length > 0){
+        loadGame();
+    }
+    else{
+        saveGame();
+    }
+}
+
+window.onload = checkLocalStorage();
 window.onload = updateNumbers();
 
 function checkFood(){
@@ -524,6 +532,14 @@ function buttonDisabled(){
     }
 }
 
+function hideResources(){
+    
+    foodrowHidden = true;
+    woodrowHidden = true;
+    stonerowHidden = true;
+    reedrowHidden = true; 
+}
+
 // saving function (localstorage)
 
 function saveGame(){                                           
@@ -552,75 +568,9 @@ function resetGame(){
 
     if(window.confirm("Do you really want to reset the game? Your progress will be lost.")){
         
-        resources = {
-            food:0,
-            wood:0,
-            stone:0,
-            reed:0
-        }
-
-        resourcesPerSec = {
-            food:0,
-            wood:0,
-            stone:0,
-            reed:0
-        }
-        
-        storage = {
-            food:100,
-            wood:600,
-            stone:300,
-            reed:200
-        }
-        
-        population = {
-            max:10,
-            total:0,
-            unemployed:0,
-            hunters:0,
-            woodcutters:0,
-            miners:0,
-            gatherers:0
-        }
-
-        buildings = {
-            foodstorage:0
-        }
-
-        prices = {
-            foodstorage: {
-                food:0,
-                wood:300,
-                stone:100,
-                reed:50
-            },
-            storehouse: {
-                food:0,
-                wood:400,
-                stone:250,
-                reed:110
-            },
-            woodenhut: {
-                food:0,
-                wood:400,
-                stone:50,
-                reed:100,
-            },
-            stonehut: {
-                food:0,
-                wood:200,
-                stone:300,
-                reed:100
-            }
-        } 
-
-        foodrowHidden = true;
-        woodrowHidden = true;
-        stonerowHidden = true;
-        reedrowHidden = true;
-
-        saveGame();
-        loadGame();
+        localStorage.clear
+        checkLocalStorage()
+        hideResources()
     }          
 }
 
