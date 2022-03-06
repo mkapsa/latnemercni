@@ -61,16 +61,16 @@
                 </table>
             </section>
             <section id="gameSection">
-                <div id="row1">
-                    <div id="basicButtons">
-                        <button class="resourceButton" id="foodBtn" onclick="updateFood(1)">hunt for food</button>
-                        <br>
-                        <button class="resourceButton" id="woodBtn" onclick="updateWood(1)">cut wood</button>
-                        <br>
-                        <button class="resourceButton" id="stoneBtn" onclick="updateStone(1)">mine for stone</button>
-                        <br>
-                        <button class="resourceButton" id="reedBtn" onclick="updateReed(1)">gather reed</button>
-                    </div>
+                <div id="basicButtons">
+                    <button class="resourceButton" id="foodBtn" onclick="updateFood(1)">hunt for food</button>
+                    <br>
+                    <button class="resourceButton" id="woodBtn" onclick="updateWood(1)">cut wood</button>
+                    <br>
+                    <button class="resourceButton" id="stoneBtn" onclick="updateStone(1)">mine for stone</button>
+                    <br>
+                    <button class="resourceButton" id="reedBtn" onclick="updateReed(1)">gather reed</button>
+                </div>
+                <div id="workers">
                     <div id="populationButtons">
                         <button id="birthButton" onclick="giveBirth(1)">give birth
                             <div class="tooltip">
@@ -110,9 +110,9 @@
                         <div class="numberOfWorkers" id="gatherers">0 gatherers</div>
                     </div>
                 </div>
-                <div id="row2">
+                <div id="buildings">
                     <h2 class="sectionHeading">buildings</h2>
-                    <div id="buildings">
+                    <div id="buildings-columns">
                         <div id="buildings-column-1">
                             <button id="pantry-button" class="buildingsButton" onclick="build('pantry', 1)">pantry
                                 <div class="tooltip">
@@ -167,6 +167,7 @@
                                 </div>
                             </button>
                         </div>
+                    
                         <div id="buildings-column-2">
                             <button id="woodenhut-button" class="buildingsButton" onclick="build('woodenhut', 1)">wooden hut
                                 <div class="tooltip">
@@ -216,8 +217,11 @@
                                     </div>
                                 </div>
                             </button>
-                        </div>
-                    </div>
+                        </div>  
+                    </div> 
+                    <div id="property">
+
+                    </div>                 
                 </div>
             </section>        
         </div>

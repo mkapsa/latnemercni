@@ -80,7 +80,7 @@ header h1{
 }
 
 #technicalSection{
-    position: absolute;
+    position: fixed;
     bottom: 10px;
     display: flex;
     width: 100%;
@@ -191,11 +191,11 @@ button:hover .tooltip {
 
 #gameSection{
     display: flex;
-    flex-direction: column;
-    gap: 40px;
+    gap: 50px;
+    flex-wrap: wrap;
 }
 
-#row1{
+#workers{
     display: flex;
     gap: 40px;
 }
@@ -249,7 +249,7 @@ button:hover .tooltip {
    
 }
 
-#buildings{
+#buildings-columns{
     display: flex;
     flex-direction: row;
     gap: 40px;
