@@ -30,14 +30,14 @@ population = {
 }
 
 buildings = {
-    foodstorage:0,
+    pantry:0,
     barn:0,
     woodenhut:0,
     stonehut:0
 }
 
 prices = {
-    foodstorage: {
+    pantry: {
         food:0,
         wood:300,
         stone:100,
@@ -51,9 +51,9 @@ prices = {
     },
     woodenhut: {
         food:0,
-        wood:400,
+        wood:200,
         stone:50,
-        reed:100,
+        reed:70,
     },
     stonehut: {
         food:0,
@@ -317,7 +317,7 @@ function updateBuildingPrice(building){
 }
 
 function updatePrices(){
-    updateBuildingPrice('foodstorage');
+    updateBuildingPrice('pantry');
 }
 
 function build(building, count){
@@ -339,7 +339,7 @@ function build(building, count){
         }
         updateBuildingPrice(building);    
         
-        if(building === 'foodstorage'){
+        if(building === 'pantry'){
             storage.food += 30 * count;
         }
         
@@ -352,9 +352,9 @@ function build(building, count){
         }
         
         if(building === 'barn'){
-            storage.wood += 250 * count;
-            storage.stone += 150 * count;
-            storage.reed += 150 * count;
+            storage.wood += 200 * count;
+            storage.stone += 100 * count;
+            storage.reed += 80 * count;
         }
 
     }
@@ -503,11 +503,11 @@ function buttonDisabled(){
     }
 
 
-    if(canAfford('foodstorage', 1) === false){
-        byId('foodstorage-button').style.backgroundColor = "rgb(200, 200, 200)";
+    if(canAfford('pantry', 1) === false){
+        byId('pantry-button').style.backgroundColor = "rgb(200, 200, 200)";
     }
     else{
-        byId('foodstorage-button').style.backgroundColor = null;
+        byId('pantry-button').style.backgroundColor = null;
     }
 
     if(canAfford('woodenhut', 1) === false){
@@ -600,14 +600,14 @@ function resetGame(){
         }
         
         buildings = {
-            foodstorage:0,
+            pantry:0,
             barn:0,
             woodenhut:0,
             stonehut:0
         }
         
         prices = {
-            foodstorage: {
+            pantry: {
                 food:0,
                 wood:300,
                 stone:100,
@@ -621,9 +621,9 @@ function resetGame(){
             },
             woodenhut: {
                 food:0,
-                wood:400,
+                wood:200,
                 stone:50,
-                reed:100,
+                reed:70,
             },
             stonehut: {
                 food:0,
