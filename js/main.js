@@ -31,7 +31,7 @@ population = {
 
 buildings = {
     foodstorage:0,
-    storehouse:0,
+    barn:0,
     woodenhut:0,
     stonehut:0
 }
@@ -43,7 +43,7 @@ prices = {
         stone:100,
         reed:50
     },
-    storehouse: {
+    barn: {
         food:0,
         wood:400,
         stone:250,
@@ -351,7 +351,7 @@ function build(building, count){
             population.max += count * 3;
         }
         
-        if(building === 'storehouse'){
+        if(building === 'barn'){
             storage.wood += 250 * count;
             storage.stone += 150 * count;
             storage.reed += 150 * count;
@@ -524,11 +524,11 @@ function buttonDisabled(){
         byId('stonehut-button').style.backgroundColor = null;
     }
 
-    if(canAfford('storehouse', 1) === false){
-        byId('storehouse-button').style.backgroundColor = "rgb(200, 200, 200)";
+    if(canAfford('barn', 1) === false){
+        byId('barn-button').style.backgroundColor = "rgb(200, 200, 200)";
     }
     else{
-        byId('storehouse-button').style.backgroundColor = null;
+        byId('barn-button').style.backgroundColor = null;
     }
 }
 
@@ -601,7 +601,7 @@ function resetGame(){
         
         buildings = {
             foodstorage:0,
-            storehouse:0,
+            barn:0,
             woodenhut:0,
             stonehut:0
         }
@@ -613,7 +613,7 @@ function resetGame(){
                 stone:100,
                 reed:50
             },
-            storehouse: {
+            barn: {
                 food:0,
                 wood:400,
                 stone:250,
