@@ -69,6 +69,11 @@ let woodrowHidden = true;
 let stonerowHidden = true;
 let reedrowHidden = true;
 
+// price coefficients
+
+const buildingCoefficient = 1.09;
+
+
 const byId = function(id){
     return document.getElementById(id);
 }
@@ -334,7 +339,7 @@ function build(building, count){
 
         for(let i = 0; i < count; i++){
             Object.keys(prices[building]).map(function(key){
-                prices[building][key] = Math.floor(prices[building][key] * 1.14);
+                prices[building][key] = Math.floor(prices[building][key] * buildingCoefficient);
             });
         }
         updateBuildingPrice(building);    

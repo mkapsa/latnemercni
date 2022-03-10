@@ -1,8 +1,8 @@
-*{
-    font-family: "Courier New", sans-serif;
+*{  
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 400;
     background-color: lightgray;
     user-select: none;
-    font-weight: 300;
     margin: 0;
     padding: 0;   
 }
@@ -41,11 +41,11 @@ header h1{
 }
 
 #resourceSection{
-    width: 400px;
     display: flex;
     flex-direction: column;
     margin-left: 5px;    
     margin-right: 30px;
+    width: 4f00px;
 
 }
 
@@ -176,7 +176,6 @@ button .tooltip {
     background-color: rgba(211, 211, 211, 0.924);
     border: 2px solid black;
     font-size: 12px;
-    font-weight: bold;
     text-align: center;
     line-height: 25px;
 }
@@ -244,9 +243,7 @@ button:hover .tooltip {
 
 .price{
    margin-left: 10px;
-   margin-right: 10px;
-   font-weight: bold;
-   
+   margin-right: 10px;   
 }
 
 #buildings-columns{
@@ -260,7 +257,10 @@ button:hover .tooltip {
     flex-direction: column;
 }
 
-
+table {
+    table-layout: auto;
+    width: 20em;
+}
 
 
 
