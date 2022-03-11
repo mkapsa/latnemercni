@@ -19,6 +19,8 @@ header h1{
     margin-bottom: 70px;
 }
 
+
+
 #gameContainer{
     display: flex;
     flex-direction: row;
@@ -192,6 +194,7 @@ button:hover .tooltip {
     display: flex;
     gap: 50px;
     flex-wrap: wrap;
+    margin-right: 10em;
 }
 
 #workers{
@@ -220,6 +223,22 @@ button:hover .tooltip {
 }
 
 .buildingsButton:active{
+    color: gray;
+}
+
+.upgradesButton{
+    height: 30px;
+    width: 130px;
+    background-color: lightsteelblue;
+    border: 2px solid black;
+    margin: 5px;
+}
+
+.upgradesButton:hover{
+    background-color: inherit;
+}
+
+.upgradesButton:active{
     color: gray;
 }
 

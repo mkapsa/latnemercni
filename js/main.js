@@ -36,7 +36,14 @@ buildings = {
     stonehut:0
 }
 
+upgrades = {
+    stoneaxe:false,
+}
+
 prices = {
+
+    // building prices
+
     pantry: {
         food:0,
         wood:300,
@@ -60,6 +67,15 @@ prices = {
         wood:200,
         stone:300,
         reed:100
+    },
+
+    // upgrade prices
+
+    stoneaxe: {
+        food:0,
+        wood:300,
+        stone:300,
+        reed:0
     }
     
 }
@@ -299,9 +315,14 @@ function fire(job, number){
     }
 }
 
+function canAffordUpgrade(upgrade){
+    return resources.food >= prices[upgrade].food &&
+    resources.wood >= prices[upgrade].wood &&
+    resources.stone >= prices[upgrade].stone &&
+    resources.reed >= prices[upgrade].reed
+}
 
-
-function canAfford(building, count){
+function canAffordBuilding(building, count){
     
     return resources.food * count >= prices[building].food * count && 
     resources.wood * count >= prices[building].wood * count && 
@@ -326,7 +347,7 @@ function updatePrices(){
 }
 
 function build(building, count){
-    if(canAfford(building, count) === true){
+    if(canAffordBuilding(building, count) === true){
         buildings[building] += count;
 
 
@@ -364,6 +385,29 @@ function build(building, count){
 
     }
 }
+
+// UPGRADES AND EQUIPMENT FUNCTIONS
+
+function subtract(obj1, obj2) {
+    return Object.keys(obj1).reduce((a, k) => {
+        a[k] = obj1[k] - obj2[k];
+        return a;
+    }, {});
+  }
+
+function upgrade(upgrade){
+    if(canAffordUpgrade(upgrade)){
+        upgrades[upgrade] = true;
+
+        resources = subtract(resources, prices[upgrade])
+
+        if(upgrade === 'stoneaxe'){
+            resourcesPerSec.wood *= 2;
+        }
+    }
+}
+
+
 
 function updateNumbers(){
 
@@ -508,32 +552,41 @@ function buttonDisabled(){
     }
 
 
-    if(canAfford('pantry', 1) === false){
+    if(canAffordBuilding('pantry', 1) === false){
         byId('pantry-button').style.backgroundColor = "rgb(200, 200, 200)";
     }
     else{
         byId('pantry-button').style.backgroundColor = null;
     }
 
-    if(canAfford('woodenhut', 1) === false){
+    if(canAffordBuilding('woodenhut', 1) === false){
         byId('woodenhut-button').style.backgroundColor = "rgb(200, 200, 200)";
     }
     else{
         byId('woodenhut-button').style.backgroundColor = null;
     }
 
-    if(canAfford('stonehut', 1) === false){
+    if(canAffordBuilding('stonehut', 1) === false){
         byId('stonehut-button').style.backgroundColor = "rgb(200, 200, 200)";
     }
     else{
         byId('stonehut-button').style.backgroundColor = null;
     }
 
-    if(canAfford('barn', 1) === false){
+    if(canAffordBuilding('barn', 1) === false){
         byId('barn-button').style.backgroundColor = "rgb(200, 200, 200)";
     }
     else{
         byId('barn-button').style.backgroundColor = null;
+    }
+
+
+
+    if(canAffordUpgrade('stoneaxe') === false){
+        byId('stoneaxe-button').style.backgroundColor = "rgb(200, 200, 200)";
+    }
+    else{
+        byId('stoneaxe-button').style.backgroundColor = 'lightsteelblue';
     }
 }
 
@@ -610,8 +663,15 @@ function resetGame(){
             woodenhut:0,
             stonehut:0
         }
+
+        upgrades = {
+            stoneaxe:false
+        }
         
         prices = {
+        
+            // building prices
+        
             pantry: {
                 food:0,
                 wood:300,
@@ -635,6 +695,15 @@ function resetGame(){
                 wood:200,
                 stone:300,
                 reed:100
+            },
+        
+            // upgrade prices
+        
+            stoneaxe: {
+                food:0,
+                wood:300,
+                stone:300,
+                reed:0
             }
             
         }
