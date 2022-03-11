@@ -45,17 +45,23 @@
                             <td class="storageCapacity" id="woodStorage"></td>
                             <td class="perSec" id="woodPerSec"></td>
                         </tr>
-                        <tr class="resource" id="stoneRow">
-                            <td>stone</td>
-                            <td class="resourceCount" id="stone"></td>
-                            <td class="storageCapacity" id="stoneStorage"></td>
-                            <td class="perSec" id="stonePerSec"></td>
+                        <tr class="resource" id="oreRow">
+                            <td>ore</td>
+                            <td class="resourceCount" id="ore"></td>
+                            <td class="storageCapacity" id="oreStorage"></td>
+                            <td class="perSec" id="orePerSec"></td>
                         </tr>
-                        <tr class="resource" id="reedRow">
-                            <td>reed</td>
-                            <td class="resourceCount" id="reed"></td>
-                            <td class="storageCapacity" id="reedStorage"></td>
-                            <td class="perSec" id="reedPerSec"></td>
+                        <tr>
+                            <td>
+                                <br>
+                                <br>
+                            </td>
+                        </tr>
+                        <tr class="resource" id="knowledgeRow">
+                            <td>knowledge</td>
+                            <td class="resourceCount" id="knowledge"></td>
+                            <td class="storageCapacity" id="knowledgeStorage"></td>
+                            <td class="perSec" id="knowledgePerSec"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -66,9 +72,9 @@
                     <br>
                     <button class="resourceButton" id="woodBtn" onclick="updateWood(1)">cut wood</button>
                     <br>
-                    <button class="resourceButton" id="stoneBtn" onclick="updateStone(1)">mine for stone</button>
+                    <button class="resourceButton" id="oreBtn" onclick="updateOre(1)">mine for ore</button>
                     <br>
-                    <button class="resourceButton" id="reedBtn" onclick="updateReed(1)">gather reed</button>
+                    <button class="resourceButton" id="knowledgeBtn" onclick="updateKnowledge(1)">learn</button>
                 </div>
                 <div id="workers">
                     <div id="populationButtons">
@@ -99,15 +105,15 @@
                             <button class="hireButton" onclick="hire('miner', 1)">></button>
                         </div>
                         <div class="hireFireButtons">
-                            <button class="fireButton" onclick="fire('gatherer', 1)"><</button>
-                            <button class="hireButton" onclick="hire('gatherer', 1)">></button>
+                            <button class="fireButton" onclick="fire('scientist', 1)"><</button>
+                            <button class="hireButton" onclick="hire('scientist', 1)">></button>
                         </div>
                     </div>
                     <div class="workerNumbers">
                         <div class="numberOfWorkers" id="hunters">0 hunters</div>
                         <div class="numberOfWorkers" id="woodcutters">0 woodcutters</div>
                         <div class="numberOfWorkers" id="miners">0 miners</div>
-                        <div class="numberOfWorkers" id="gatherers">0 gatherers</div>
+                        <div class="numberOfWorkers" id="scientists">0 scientists</div>
                     </div>
                 </div>
                 <div id="buildings">
@@ -119,9 +125,9 @@
                                     <div class="description">
                                         Wood storage +200
                                         <br>
-                                        Stone storage +100
+                                        Ore storage +100
                                         <br>
-                                        Reed storage +80
+                                        Knowledge storage +80
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
@@ -129,12 +135,12 @@
                                             <div>wood</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="barn-price-stone">250</div>
-                                            <div>stone</div>
+                                            <div class="price" id="barn-price-ore">250</div>
+                                            <div>ore</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="barn-price-reed">110</div>
-                                            <div>reed</div>
+                                            <div class="price" id="barn-price-knowledge"></div>
+                                            <div></div>
                                         </div>
                                         <div class="priceRow otherPrices">
                                             <div id="barn-price-food"></div>
@@ -145,7 +151,7 @@
                             <button id="pantry-button" class="buildingsButton" onclick="build('pantry', 1)">pantry
                                 <div class="tooltip">
                                     <div class="description">
-                                        Increases food storage by 30.
+                                        Food storage +100.
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
@@ -153,12 +159,11 @@
                                             <div>wood</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="pantry-price-stone">100</div>
-                                            <div>stone</div>
+                                            <div class="price" id="pantry-price-ore">100</div>
+                                            <div>ore</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="pantry-price-reed">50</div>
-                                            <div>reed</div>
+                                            <div class="price" id="pantry-price-knowledge"></div>
                                         </div>
                                         <div class="priceRow otherPrices">
                                             <div class="price" id="pantry-price-food"></div>
@@ -179,12 +184,12 @@
                                             <div>wood</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="woodenhut-price-stone">50</div>
-                                            <div>stone</div>
+                                            <div class="price" id="woodenhut-price-ore">50</div>
+                                            <div>ore</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="woodenhut-price-reed">70</div>
-                                            <div>reed</div>
+                                            <div class="price" id="woodenhut-price-knowledge"></div>
+                                            <div></div>
                                         </div>
                                         <div class="priceRow otherPrices">
                                             <div id="woodenhut-price-food"></div>
@@ -203,12 +208,12 @@
                                             <div>wood</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="stonehut-price-stone">300</div>
-                                            <div>stone</div>
+                                            <div class="price" id="stonehut-price-ore">300</div>
+                                            <div>ore</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="stonehut-price-reed">100</div>
-                                            <div>reed</div>
+                                            <div class="price" id="stonehut-price-knowledge"></div>
+                                            <div></div>
                                         </div>
                                         <div class="priceRow otherPrices">
                                             <div class="price" id="stonehut-price-food"></div>
@@ -221,28 +226,82 @@
                 </div>
                 <div id="upgrades">
                     <h2 class="sectionHeading">upgrades</h2>
-                    <button id="stoneaxe-button" class="upgradesButton" onclick="upgrade('stoneaxe')">stone axe
+                    <div id="upgradesColumns" >
+                        <div id="upgrades-column-1">
+                            <button id="stoneaxe-button" class="upgradesButton" onclick="upgrade('stoneaxe')">stone axe
+                                <div class="tooltip">
+                                    <div class="description">
+                                        Woodcutters are twice as effective.
+                                    </div>
+                                    <div class="prices">
+                                        <div class="priceRow">
+                                            <div class="price" id="stoneaxe-price-ore">300</div>
+                                            <div>ore</div>
+                                        </div>
+                                        <div class="priceRow">
+                                            <div class="price" id="stoneaxe-price-wood">300</div>
+                                            <div>wood</div>
+                                        </div>
+                                        <div class="priceRow">
+                                            <div class="price" id="stoneaxe-price-knowledge">100</div>
+                                            <div>knowledge</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </button>
+                            <button id="ironaxe-button" class="upgradesButton" onclick="upgrade('ironaxe')">iron axe
+                                <div class="tooltip">
+                                    <div class="description">
+                                        Woodcutters are 1.75x more effective.
+                                    </div>
+                                    <div class="prices">
+                                        <div class="priceRow">
+                                            <div class="price" id="ironaxe-price-wood">400</div>
+                                            <div>wood</div>                                            
+                                        </div>
+                                        <div class="priceRow">
+                                            <div class="price" id="ironaxe-price-iron">300</div>
+                                            <div>iron</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div id="upgrades">
+                    <h2 class="sectionHeading">upgrades</h2>
+                    <button class="upgradesButton">cold blast furnace
                         <div class="tooltip">
                             <div class="description">
-                                Wood production x2.
+                                Smelts ore into iron.
+                                <span></span>
                             </div>
                             <div class="prices">
                                 <div class="priceRow">
-                                    <div class="price" id="stoneaxe-price-stone">300</div>
-                                    <div>stone</div>
+                                    <div class="price" id="coldblastfurnace-price-ore"></div>
+                                    <div>ore</div>
                                 </div>
                                 <div class="priceRow">
-                                    <div class="price" id="stoneaxe-price-wood">300</div>
-                                    <div>wood</div>
+                                    <div class="price" id="coldblastfurnace-price-"></div>
                                 </div>
-
                             </div>
-                        </div>
+                            <div class="netResources">
+                                <div class="netRow">
+                                    <div class="netResourceName">ore:</div>
+                                    <div id="coldblastfurnace-net-ore">-1</div>
+                                    <div>/s</div>
+                                </div>
+                                <div class="netRow">
+                                    <div class="netResourceName">iron:</div>
+                                    <div id="coldblastfurnace-net-iron">0.25</div>
+                                    <div>/s</div>
+                                </div>
+                            </div>
+                        </div> -->
                     </button>
                 </div>
-                <!-- <div id="equipment">
-                    <h2 class="sectionHeading">equipment</h2>
-                </div> -->
             </section>        
         </div>
         <section id="technicalSection">

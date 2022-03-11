@@ -1,22 +1,22 @@
 resources = {
     food:0,
     wood:0,
-    stone:0,
-    reed:0
+    ore:0,
+    knowledge:0
 }
 
 resourcesPerSec = {
     food:0,
     wood:0,
-    stone:0,
-    reed:0
+    ore:0,
+    knowledge:0
 }
 
 storage = {
     food:100,
     wood:600,
-    stone:300,
-    reed:200
+    ore:300,
+    knowledge:200
 }
 
 population = {
@@ -26,7 +26,7 @@ population = {
     hunters:0,
     woodcutters:0,
     miners:0,
-    gatherers:0
+    scientists:0
 }
 
 buildings = {
@@ -38,6 +38,7 @@ buildings = {
 
 upgrades = {
     stoneaxe:false,
+    ironaxe:true
 }
 
 prices = {
@@ -47,26 +48,26 @@ prices = {
     pantry: {
         food:0,
         wood:300,
-        stone:100,
-        reed:50
+        ore:100,
+        knowledge:0
     },
     barn: {
         food:0,
         wood:400,
-        stone:250,
-        reed:110
+        ore:250,
+        knowledge:0
     },
     woodenhut: {
         food:0,
         wood:150,
-        stone:50,
-        reed:70,
+        ore:50,
+        knowledge:0,
     },
     stonehut: {
         food:0,
         wood:200,
-        stone:300,
-        reed:100
+        ore:300,
+        knowledge:0
     },
 
     // upgrade prices
@@ -74,21 +75,36 @@ prices = {
     stoneaxe: {
         food:0,
         wood:300,
-        stone:300,
-        reed:0
+        ore:300,
+        knowledge:100
     }
     
 }
 
-let foodrowHidden = true;
-let woodrowHidden = true;
-let stonerowHidden = true;
-let reedrowHidden = true;
+//worker rate coefficients
+
+let hunterRate = 1
+let woodcutterRate = 0.5
+let minerRate = 0.3
+let scientistRate = 0.2
+
+
 
 // price coefficients
 
 const buildingCoefficient = 1.09;
 
+
+// show / hide booleans
+
+let foodrowHidden = true;
+let woodrowHidden = true;
+let orerowHidden = true;
+let knowledgerowHidden = true;
+
+
+
+// document.id & document.class shortcuts so i don't have to type it over and over
 
 const byId = function(id){
     return document.getElementById(id);
@@ -97,6 +113,7 @@ const byId = function(id){
 const byClass = function(className){
     return document.getElementsByClassName(className);
 }
+
 
 // document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
 
@@ -120,13 +137,13 @@ function checkFood(){
         if(population.unemployed >= 1){
             population.unemployed -= 1;
         }
-        else if(population.gatherers >= 1){
-            population.gatherers -= 1;
-            resourcesPerSec.reed -= 0.2;
+        else if(population.scientists >= 1){
+            population.scientists -= 1;
+            resourcesPerSec.knowledge -= 0.2;
         }
         else if(population.miners >= 1){
             population.miners -= 1;
-            resourcesPerSec.stone -= 0.3;
+            resourcesPerSec.ore -= 0.3;
         }
         else if(population.woodcutters >= 1){
             population.woodcutters -= 1
@@ -157,21 +174,21 @@ function updateWood(number){
     }
 }
 
-function updateStone(number){
-    if(resources.stone < storage.stone){
-        resources.stone = Math.max(0, resources.stone + number);
+function updateOre(number){
+    if(resources.ore < storage.ore){
+        resources.ore = Math.max(0, resources.ore + number);
     }  
-    if(resources.stone >= storage.stone){
-        resources.stone = Math.min(storage.stone, resources.stone + number);
+    if(resources.ore >= storage.ore){
+        resources.ore = Math.min(storage.ore, resources.ore + number);
     }
 }
 
-function updateReed(number){
-    if(resources.reed < storage.reed){
-        resources.reed = Math.max(0, resources.reed + number);
+function updateKnowledge(number){
+    if(resources.knowledge < storage.knowledge){
+        resources.knowledge = Math.max(0, resources.knowledge + number);
     }  
-    if(resources.reed >= storage.reed){
-        resources.reed = Math.min(storage.reed, resources.reed + number);
+    if(resources.knowledge >= storage.knowledge){
+        resources.knowledge = Math.min(storage.knowledge, resources.knowledge + number);
     }
 }
 
@@ -195,7 +212,7 @@ function hire(job, number){
     if (job === 'hunter' && population.unemployed >= number){
         population.unemployed -= number;
         population.hunters += number;
-        resourcesPerSec.food += number;
+        resourcesPerSec.food += number * hunterRate;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
 
@@ -210,7 +227,7 @@ function hire(job, number){
     if (job === 'woodcutter' && population.unemployed >= number){
         population.unemployed -= number;
         population.woodcutters += number;
-        resourcesPerSec.wood += 0.5 * number;
+        resourcesPerSec.wood += woodcutterRate * number;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
 
@@ -225,7 +242,7 @@ function hire(job, number){
     if (job === 'miner' && population.unemployed >= number){
         population.unemployed -= number;
         population.miners += number;
-        resourcesPerSec.stone += 0.3 * number;
+        resourcesPerSec.ore += minerRate * number;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
 
@@ -237,18 +254,18 @@ function hire(job, number){
             }
         }
 
-    if (job === 'gatherer' && population.unemployed >= number){
+    if (job === 'scientist' && population.unemployed >= number){
         population.unemployed -= number;
-        population.gatherers += number;
-        resourcesPerSec.reed += 0.2 * number;
+        population.scientists += number;
+        resourcesPerSec.knowledge += scientistRate * number;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
 
-            if (population.gatherers === 1){
-                document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherer";
+            if (population.scientists === 1){
+                document.getElementById("scientists").innerHTML = Math.floor(population.scientists) + " scientist";
             }
             else {
-                document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherers";
+                document.getElementById("scientists").innerHTML = Math.floor(population.scientists) + " scientists";
             }
         }
 }
@@ -257,7 +274,7 @@ function fire(job, number){
     if (job == 'hunter' && population.hunters >= number){
         population.hunters -= number;
         population.unemployed += number;
-        resourcesPerSec.food -= number;
+        resourcesPerSec.food -= hunterRate * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
 
@@ -272,7 +289,7 @@ function fire(job, number){
     if (job === 'woodcutter' && population.woodcutters >= number){
         population.woodcutters -= number;
         population.unemployed += number;
-        resourcesPerSec.wood -= 0.5 * number;
+        resourcesPerSec.wood -= woodcutterRate * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
 
@@ -287,7 +304,7 @@ function fire(job, number){
     if (job === 'miner' && population.miners >= number){
         population.miners -= number;
         population.unemployed += number;
-        resourcesPerSec.stone -= 0.3 * number;
+        resourcesPerSec.ore -= minerRate * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
 
@@ -299,18 +316,18 @@ function fire(job, number){
         }
     }
 
-    if (job === 'gatherer' && population.gatherers >= number){
-        population.gatherers -= number;
+    if (job === 'scientist' && population.scientists >= number){
+        population.scientists -= number;
         population.unemployed += number;
-        resourcesPerSec.reed -= 0.2 * number;
+        resourcesPerSec.knowledge -= scientistRate * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
 
-        if (population.gatherers === 1){
-            document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherer";
+        if (population.scientists === 1){
+            document.getElementById("scientists").innerHTML = Math.floor(population.scientists) + " scientist";
         }
         else {
-            document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherers";
+            document.getElementById("scientists").innerHTML = Math.floor(population.scientists) + " scientists";
         }
     }
 }
@@ -318,28 +335,28 @@ function fire(job, number){
 function canAffordUpgrade(upgrade){
     return resources.food >= prices[upgrade].food &&
     resources.wood >= prices[upgrade].wood &&
-    resources.stone >= prices[upgrade].stone &&
-    resources.reed >= prices[upgrade].reed
+    resources.ore >= prices[upgrade].ore &&
+    resources.knowledge >= prices[upgrade].knowledge
 }
 
 function canAffordBuilding(building, count){
     
     return resources.food * count >= prices[building].food * count && 
     resources.wood * count >= prices[building].wood * count && 
-    resources.stone * count >= prices[building].stone * count && 
-    resources.reed * count >= prices[building].reed * count
+    resources.ore * count >= prices[building].ore * count && 
+    resources.knowledge * count >= prices[building].knowledge * count
 }
 
 function updateBuildingPrice(building){
     byId(building + "-price-food").innerHTML = prices[building].food;
     byId(building + "-price-wood").innerHTML = prices[building].wood;    
-    byId(building + "-price-stone").innerHTML = prices[building].stone;
-    byId(building + "-price-reed").innerHTML = prices[building].reed;
+    byId(building + "-price-ore").innerHTML = prices[building].ore;
+    byId(building + "-price-knowledge").innerHTML = prices[building].knowledge;
 
     byId(building + "-price-food").hidden = prices[building].food < 1 || prices[building].food === undefined; 
     byId(building + "-price-wood").hidden = prices[building].wood < 1 || prices[building].wood === undefined; 
-    byId(building + "-price-stone").hidden = prices[building].stone < 1 || prices[building].stone === undefined;
-    byId(building + "-price-reed").hidden = prices[building].reed < 1 || prices[building].reed === undefined; 
+    byId(building + "-price-ore").hidden = prices[building].ore < 1 || prices[building].ore === undefined;
+    byId(building + "-price-knowledge").hidden = prices[building].knowledge < 1 || prices[building].knowledge === undefined; 
 }
 
 function updatePrices(){
@@ -353,8 +370,8 @@ function build(building, count){
 
         resources.food -= Math.floor(prices[building].food) * count;
         resources.wood -= Math.floor(prices[building].wood) * count;
-        resources.stone -= Math.floor(prices[building].stone) * count;
-        resources.reed -= Math.floor(prices[building].reed) * count;
+        resources.ore -= Math.floor(prices[building].ore) * count;
+        resources.knowledge -= Math.floor(prices[building].knowledge) * count;
 
         // buildingPrices = Object.keys(prices[building]).map(key => prices[building][key]);
 
@@ -366,7 +383,7 @@ function build(building, count){
         updateBuildingPrice(building);    
         
         if(building === 'pantry'){
-            storage.food += 30 * count;
+            storage.food += 100 * count;
         }
         
         if(building === 'woodenhut'){
@@ -379,8 +396,8 @@ function build(building, count){
         
         if(building === 'barn'){
             storage.wood += 200 * count;
-            storage.stone += 100 * count;
-            storage.reed += 80 * count;
+            storage.ore += 100 * count;
+            storage.knowledge += 80 * count;
         }
 
     }
@@ -402,7 +419,12 @@ function upgrade(upgrade){
         resources = subtract(resources, prices[upgrade])
 
         if(upgrade === 'stoneaxe'){
-            resourcesPerSec.wood *= 2;
+            woodcutterRate *= 2
+            resourcesPerSec.wood = woodcutterRate * population.woodcutters;
+
+            // unlock next possible upgrade (iron axe in this case)
+
+            upgrades.ironaxe = false;
         }
     }
 }
@@ -416,13 +438,13 @@ function updateNumbers(){
     document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
     document.getElementById("food").innerHTML = Math.floor(resources.food);
     document.getElementById('wood').innerHTML = Math.floor(resources.wood);
-    document.getElementById('stone').innerHTML = Math.floor(resources.stone);
-    document.getElementById('reed').innerHTML = Math.floor(resources.reed);
+    document.getElementById('ore').innerHTML = Math.floor(resources.ore);
+    document.getElementById('knowledge').innerHTML = Math.floor(resources.knowledge);
 
     document.getElementById("foodStorage").innerHTML = "/" + Math.floor(storage.food);
     document.getElementById("woodStorage").innerHTML = "/" + Math.floor(storage.wood);
-    document.getElementById("stoneStorage").innerHTML = "/" + Math.floor(storage.stone);
-    document.getElementById("reedStorage").innerHTML = "/" + Math.floor(storage.reed); 
+    document.getElementById("oreStorage").innerHTML = "/" + Math.floor(storage.ore);
+    document.getElementById("knowledgeStorage").innerHTML = "/" + Math.floor(storage.knowledge); 
 
     // update resources per second (2 decimals)
 
@@ -438,17 +460,17 @@ function updateNumbers(){
     else{
         document.getElementById("woodPerSec").innerHTML = resourcesPerSec.wood.toFixed(2) + "/s";
     }
-    if(resourcesPerSec.stone >= 0){
-        document.getElementById("stonePerSec").innerHTML = "+" + resourcesPerSec.stone.toFixed(2) + "/s";    
+    if(resourcesPerSec.ore >= 0){
+        document.getElementById("orePerSec").innerHTML = "+" + resourcesPerSec.ore.toFixed(2) + "/s";    
     }
     else{
-        document.getElementById("stonePerSec").innerHTML = resourcesPerSec.stone.toFixed(2) + "/s";
+        document.getElementById("orePerSec").innerHTML = resourcesPerSec.ore.toFixed(2) + "/s";
     }
-    if(resources.reed >= 0){
-        document.getElementById("reedPerSec").innerHTML = "+" + resourcesPerSec.reed.toFixed(2) + "/s";
+    if(resources.knowledge >= 0){
+        document.getElementById("knowledgePerSec").innerHTML = "+" + resourcesPerSec.knowledge.toFixed(2) + "/s";
     }
     else{
-        document.getElementById("reedPerSec").innerHTML = resourcesPerSec.reed.toFixed(2) + "/s";
+        document.getElementById("knowledgePerSec").innerHTML = resourcesPerSec.knowledge.toFixed(2) + "/s";
     } 
 
     // update population numbers - singular and plural forms
@@ -474,11 +496,11 @@ function updateNumbers(){
         document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miners";
     }
 
-    if (population.gatherers === 1){
-        document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherer";
+    if (population.scientists === 1){
+        document.getElementById("scientists").innerHTML = Math.floor(population.scientists) + " scientist";
     }
     else {
-        document.getElementById("gatherers").innerHTML = Math.floor(population.gatherers) + " gatherers";
+        document.getElementById("scientists").innerHTML = Math.floor(population.scientists) + " scientists";
     } 
 
 };
@@ -488,8 +510,8 @@ function displayResources(){
 
     byId('foodRow').hidden = foodrowHidden;
     byId('woodRow').hidden = woodrowHidden;
-    byId('stoneRow').hidden = stonerowHidden;
-    byId('reedRow').hidden = reedrowHidden;
+    byId('oreRow').hidden = orerowHidden;
+    byId('knowledgeRow').hidden = knowledgerowHidden;
 
     if(resources.food > 0){
         foodrowHidden = false;
@@ -497,11 +519,11 @@ function displayResources(){
     if(resources.wood > 0){
         woodrowHidden = false;
     }
-    if(resources.stone > 0){
-        stonerowHidden = false;
+    if(resources.ore > 0){
+        orerowHidden = false;
     }
-    if(resources.reed > 0){
-        reedrowHidden = false;
+    if(resources.knowledge > 0){
+        knowledgerowHidden = false;
     }
 }
 
@@ -511,8 +533,8 @@ function displayResourcesPerSec(){
 
     byId('foodPerSec').hidden = resourcesPerSec.food === 0;
     byId('woodPerSec').hidden = resourcesPerSec.wood === 0;
-    byId('stonePerSec').hidden = resourcesPerSec.stone === 0;
-    byId('reedPerSec').hidden = resourcesPerSec.reed === 0;
+    byId('orePerSec').hidden = resourcesPerSec.ore === 0;
+    byId('knowledgePerSec').hidden = resourcesPerSec.knowledge === 0;
 }
 
 function buttonDisabled(){
@@ -530,18 +552,18 @@ function buttonDisabled(){
         byId('woodBtn').style.backgroundColor = null;
     }
 
-    if(resources.stone >= storage.stone){
-        byId('stoneBtn').style.backgroundColor = "rgb(200, 200, 200)";        
+    if(resources.ore >= storage.ore){
+        byId('oreBtn').style.backgroundColor = "rgb(200, 200, 200)";        
     }
     else{
-        byId('stoneBtn').style.backgroundColor = null;
+        byId('oreBtn').style.backgroundColor = null;
     }
 
-    if(resources.reed >= storage.reed){
-        byId('reedBtn').style.backgroundColor = "rgb(200, 200, 200)";        
+    if(resources.knowledge >= storage.knowledge){
+        byId('knowledgeBtn').style.backgroundColor = "rgb(200, 200, 200)";        
     }
     else{
-        byId('reedBtn').style.backgroundColor = null;
+        byId('knowledgeBtn').style.backgroundColor = null;
     }
 
     if(resources.food < 20 || population.total === population.max){
@@ -586,16 +608,27 @@ function buttonDisabled(){
         byId('stoneaxe-button').style.backgroundColor = "rgb(200, 200, 200)";
     }
     else{
-        byId('stoneaxe-button').style.backgroundColor = 'lightsteelblue';
+        byId('stoneaxe-button').style.backgroundColor = null;
     }
 }
 
 function hideResources(){
     
-    foodrowHidden = true;
-    woodrowHidden = true;
-    stonerowHidden = true;
-    reedrowHidden = true; 
+    foodrowHidden = true
+    woodrowHidden = true
+    orerowHidden = true
+    knowledgerowHidden = true
+}
+
+function displayUpgrades(){
+
+    let upgradeKeys = Object.keys(upgrades)
+    let upgradeValues = Object.values(upgrades)
+
+    for(let i = 0; i < upgradeKeys.length; i++){
+        byId(upgradeKeys[i] + "-button").hidden = upgradeValues[i]
+    }
+    
 }
 
 // saving function (localstorage)
@@ -606,7 +639,9 @@ function saveGame(){
     localStorage.setItem('populationData', JSON.stringify(population));
     localStorage.setItem('resourcesPerSecData', JSON.stringify(resourcesPerSec));
     localStorage.setItem('buildingsData', JSON.stringify(buildings));
+    localStorage.setItem('upgradesData', JSON.stringify(upgrades));
     localStorage.setItem('pricesData', JSON.stringify(prices));
+    
 }
 
 function loadGame(){
@@ -615,6 +650,7 @@ function loadGame(){
     population = JSON.parse(localStorage.getItem('populationData'));
     resourcesPerSec = JSON.parse(localStorage.getItem('resourcesPerSecData'));
     buildings = JSON.parse(localStorage.getItem('buildingsData'));
+    upgrades = JSON.parse(localStorage.getItem('upgradesData'));
     prices = JSON.parse(localStorage.getItem('pricesData'));
     
 
@@ -629,22 +665,22 @@ function resetGame(){
         resources = {
             food:0,
             wood:0,
-            stone:0,
-            reed:0
+            ore:0,
+            knowledge:0
         }
         
         resourcesPerSec = {
             food:0,
             wood:0,
-            stone:0,
-            reed:0
+            ore:0,
+            knowledge:0
         }
         
         storage = {
             food:100,
             wood:600,
-            stone:300,
-            reed:200
+            ore:300,
+            knowledge:200
         }
         
         population = {
@@ -654,7 +690,7 @@ function resetGame(){
             hunters:0,
             woodcutters:0,
             miners:0,
-            gatherers:0
+            scientists:0
         }
         
         buildings = {
@@ -665,7 +701,8 @@ function resetGame(){
         }
 
         upgrades = {
-            stoneaxe:false
+            stoneaxe:false,
+            ironaxe:true
         }
         
         prices = {
@@ -675,26 +712,26 @@ function resetGame(){
             pantry: {
                 food:0,
                 wood:300,
-                stone:100,
-                reed:50
+                ore:100,
+                knowledge:0
             },
             barn: {
                 food:0,
                 wood:400,
-                stone:250,
-                reed:110
+                ore:250,
+                knowledge:0
             },
             woodenhut: {
                 food:0,
                 wood:150,
-                stone:50,
-                reed:70,
+                ore:50,
+                knowledge:0,
             },
             stonehut: {
                 food:0,
                 wood:200,
-                stone:300,
-                reed:100
+                ore:300,
+                knowledge:0
             },
         
             // upgrade prices
@@ -702,8 +739,8 @@ function resetGame(){
             stoneaxe: {
                 food:0,
                 wood:300,
-                stone:300,
-                reed:0
+                ore:300,
+                knowledge:100
             }
             
         }
@@ -718,12 +755,13 @@ window.setInterval(function(){
 
     updateFood(resourcesPerSec.food / 10);
     updateWood(resourcesPerSec.wood / 10);
-    updateStone(resourcesPerSec.stone / 10);
-    updateReed(resourcesPerSec.reed / 10);
+    updateOre(resourcesPerSec.ore / 10);
+    updateKnowledge(resourcesPerSec.knowledge / 10);
 
     
     displayResources();
     displayResourcesPerSec();
+    displayUpgrades();
     updateNumbers();
     buttonDisabled();
     
