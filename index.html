@@ -118,7 +118,7 @@
                 </div>
                 <div id="buildings">
                     <h2 class="sectionHeading">buildings</h2>
-                    <div id="buildings-columns">
+                    <div class="columns">
                         <div id="buildings-column-1">                            
                             <button id="barn-button" class="buildingsButton" onclick="build('barn', 1)">barn
                                 <div class="tooltip">
@@ -226,7 +226,7 @@
                 </div>
                 <div id="upgrades">
                     <h2 class="sectionHeading">upgrades</h2>
-                    <div id="upgradesColumns" >
+                    <div class="columns" >
                         <div id="upgrades-column-1">
                             <button id="stoneaxe-button" class="upgradesButton" onclick="upgrade('stoneaxe')">stone axe
                                 <div class="tooltip">
@@ -268,39 +268,57 @@
                                 </div>
                             </button>
                         </div>
+                        <div id="upgrades-column-2">
+                            <button class="upgradesButton" id="metallurgy-button" onclick="upgrade('metallurgy')">metallurgy
+                                <div class="tooltip">
+                                    <div class="description">
+                                        Enables you to smelt ore into metals.
+                                    </div>
+                                    <div class="prices">
+                                        <div class="priceRow">
+                                            <div class="price" id="metallurgy-price-knowledge">200</div>
+                                            <div>knowledge</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <!-- <div id="upgrades">
-                    <h2 class="sectionHeading">upgrades</h2>
-                    <button class="upgradesButton">cold blast furnace
-                        <div class="tooltip">
-                            <div class="description">
-                                Smelts ore into iron.
-                                <span></span>
-                            </div>
-                            <div class="prices">
-                                <div class="priceRow">
-                                    <div class="price" id="coldblastfurnace-price-ore"></div>
-                                    <div>ore</div>
+                <div id="equipment">
+                    <h2 class="sectionHeading">equipment</h2>
+                    <div class="columns">
+                        <div id="equipment-column-1">
+                            <button class="equipmentButton" id="coldblastfurnace-button">cold blast furnace
+                                <div class="tooltip">
+                                    <div class="description">
+                                        Smelts ore into iron.
+                                    </div>
+                                    <div class="prices">
+                                        <div class="priceRow">
+                                            <div class="price" id="coldblastfurnace-price-ore"></div>
+                                            <div>ore</div>
+                                        </div>
+                                        <div class="priceRow">
+                                            <div class="price" id="coldblastfurnace-price-iron"></div>
+                                        </div>
+                                    </div>
+                                    <div class="netResources">
+                                        <div class="netRow">
+                                            <div class="netResourceName">ore:</div>
+                                            <div id="coldblastfurnace-net-ore">-1</div>
+                                            <div>/s</div>
+                                        </div>
+                                        <div class="netRow">
+                                            <div class="netResourceName">iron:</div>
+                                            <div id="coldblastfurnace-net-iron">0.25</div>
+                                            <div>/s</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="priceRow">
-                                    <div class="price" id="coldblastfurnace-price-"></div>
-                                </div>
-                            </div>
-                            <div class="netResources">
-                                <div class="netRow">
-                                    <div class="netResourceName">ore:</div>
-                                    <div id="coldblastfurnace-net-ore">-1</div>
-                                    <div>/s</div>
-                                </div>
-                                <div class="netRow">
-                                    <div class="netResourceName">iron:</div>
-                                    <div id="coldblastfurnace-net-iron">0.25</div>
-                                    <div>/s</div>
-                                </div>
-                            </div>
-                        </div> -->
-                    </button>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </section>        
         </div>

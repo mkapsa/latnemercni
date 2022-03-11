@@ -175,7 +175,7 @@ button .tooltip {
     z-index: 2;    
     
     color: darkslategray;
-    background-color: rgba(211, 211, 211, 0.924);
+    background-color: rgb(211, 211, 211);
     border: 2px solid black;
     font-size: 12px;
     text-align: center;
@@ -311,10 +311,10 @@ button:hover .tooltip {
     margin-right: 10px;
 } */
 
-#buildings-columns, #equipment-columns{
+.columns{
     display: flex;
     flex-direction: row;
-    gap: 40px;
+    gap: 30px;
 }
 
 #buildings-column-1, #buildings-column-2, #equipment-column-1{

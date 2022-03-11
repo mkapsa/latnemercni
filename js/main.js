@@ -36,9 +36,8 @@ buildings = {
     stonehut:0
 }
 
-upgrades = {
-    stoneaxe:false,
-    ironaxe:true
+equipment = {
+    coldblastfurnace:0
 }
 
 prices = {
@@ -77,8 +76,27 @@ prices = {
         wood:300,
         ore:300,
         knowledge:100
+    },
+
+    metallurgy: {
+        food:0,
+        wood:0,
+        ore:0,
+        knowledge:200
     }
-    
+}
+
+hidden = {
+    tiles:{
+        equipment:true
+    },
+    upgrades: {
+        stoneaxe:false,
+        ironaxe:true
+    },
+    equipment: {
+        coldblastfurnace: true
+    }
 }
 
 //worker rate coefficients
@@ -101,6 +119,8 @@ let foodrowHidden = true;
 let woodrowHidden = true;
 let orerowHidden = true;
 let knowledgerowHidden = true;
+
+
 
 
 
@@ -424,7 +444,12 @@ function upgrade(upgrade){
 
             // unlock next possible upgrade (iron axe in this case)
 
-            upgrades.ironaxe = false;
+            hidden.upgrades.ironaxe = false;
+        }
+
+        if(upgrade === 'metallurgy'){
+            hidden.tiles.equipment = false
+            hidden.equipment.coldblastfurnace = false
         }
     }
 }
@@ -589,14 +614,14 @@ function buttonDisabled(){
     }
 
     if(canAffordBuilding('stonehut', 1) === false){
-        byId('stonehut-button').style.backgroundColor = "rgb(200, 200, 200)";
+        byId('stonehut-button').style.backgroundColor = "rgb(200, 200, 200)"
     }
     else{
         byId('stonehut-button').style.backgroundColor = null;
     }
 
     if(canAffordBuilding('barn', 1) === false){
-        byId('barn-button').style.backgroundColor = "rgb(200, 200, 200)";
+        byId('barn-button').style.backgroundColor = "rgb(200, 200, 200)"
     }
     else{
         byId('barn-button').style.backgroundColor = null;
@@ -605,10 +630,17 @@ function buttonDisabled(){
 
 
     if(canAffordUpgrade('stoneaxe') === false){
-        byId('stoneaxe-button').style.backgroundColor = "rgb(200, 200, 200)";
+        byId('stoneaxe-button').style.backgroundColor = "rgb(200, 200, 200)"
     }
     else{
         byId('stoneaxe-button').style.backgroundColor = null;
+    }
+
+    if(canAffordUpgrade('metallurgy') === false){
+        byId('metallurgy-button').style.backgroundColor = "rgb(200, 200, 200)"
+    }
+    else{
+        byId('metallurgy-button').style.backgroundColor = null;
     }
 }
 
@@ -620,39 +652,63 @@ function hideResources(){
     knowledgerowHidden = true
 }
 
-function displayUpgrades(){
+function showContent(){
 
-    let upgradeKeys = Object.keys(upgrades)
-    let upgradeValues = Object.values(upgrades)
+    // game tiles
+
+    let hiddenKeys = Object.keys(hidden.tiles)
+    let hiddenValues = Object.values(hidden.tiles)
+
+    for(let i = 0; i < hiddenKeys.length; i++){
+        byId(hiddenKeys[i]).hidden = hiddenValues[i]
+    }
+
+    // upgrades
+
+    let upgradeKeys = Object.keys(hidden.upgrades)
+    let upgradeValues = Object.values(hidden.upgrades)
 
     for(let i = 0; i < upgradeKeys.length; i++){
         byId(upgradeKeys[i] + "-button").hidden = upgradeValues[i]
     }
-    
+
+    // equipment
+
+    let equipmentKeys = Object.keys(hidden.equipment)
+    let equipmentValues = Object.values(hidden.equipment)
+
+    for(let i = 0; i < equipmentKeys; i++){
+        byId(equipmentKeys[i] + "-button").hidden = equipmentValues[i]
+    }
+
+
 }
 
-// saving function (localstorage)
+// saving function (localstorage), fires every minute + can be fired manually (button)
 
 function saveGame(){                                           
-    localStorage.setItem('resourcesData', JSON.stringify(resources));
-    localStorage.setItem('storageData', JSON.stringify(storage));
-    localStorage.setItem('populationData', JSON.stringify(population));
-    localStorage.setItem('resourcesPerSecData', JSON.stringify(resourcesPerSec));
-    localStorage.setItem('buildingsData', JSON.stringify(buildings));
-    localStorage.setItem('upgradesData', JSON.stringify(upgrades));
-    localStorage.setItem('pricesData', JSON.stringify(prices));
-    
+    localStorage.setItem('resourcesData', JSON.stringify(resources))
+    localStorage.setItem('storageData', JSON.stringify(storage))
+    localStorage.setItem('populationData', JSON.stringify(population))
+    localStorage.setItem('resourcesPerSecData', JSON.stringify(resourcesPerSec))
+    localStorage.setItem('buildingsData', JSON.stringify(buildings))
+    localStorage.setItem('equipmentData', JSON.stringify(equipment))
+    localStorage.setItem('pricesData', JSON.stringify(prices))
+    localStorage.setItem('hiddenData', JSON.stringify(hidden))
 }
 
+// loading function - fires at window.onload
+
 function loadGame(){
-    resources = JSON.parse(localStorage.getItem('resourcesData'));
-    storage = JSON.parse(localStorage.getItem('storageData'));
-    population = JSON.parse(localStorage.getItem('populationData'));
-    resourcesPerSec = JSON.parse(localStorage.getItem('resourcesPerSecData'));
-    buildings = JSON.parse(localStorage.getItem('buildingsData'));
-    upgrades = JSON.parse(localStorage.getItem('upgradesData'));
-    prices = JSON.parse(localStorage.getItem('pricesData'));
-    
+    resources = JSON.parse(localStorage.getItem('resourcesData'))
+    storage = JSON.parse(localStorage.getItem('storageData'))
+    population = JSON.parse(localStorage.getItem('populationData'))
+    resourcesPerSec = JSON.parse(localStorage.getItem('resourcesPerSecData'))
+    buildings = JSON.parse(localStorage.getItem('buildingsData'))
+    equipment = JSON.parse(localStorage.getItem('equipmentData'))
+    prices = JSON.parse(localStorage.getItem('pricesData'))
+    hidden = JSON.parse(localStorage.getItem('hiddenData'))
+
 
     updateNumbers();    
     updatePrices();
@@ -699,10 +755,9 @@ function resetGame(){
             woodenhut:0,
             stonehut:0
         }
-
-        upgrades = {
-            stoneaxe:false,
-            ironaxe:true
+        
+        equipment = {
+            coldblastfurnace:0
         }
         
         prices = {
@@ -741,8 +796,27 @@ function resetGame(){
                 wood:300,
                 ore:300,
                 knowledge:100
+            },
+
+            metallurgy: {
+                food:0,
+                wood:0,
+                ore:0,
+                knowledge:200
             }
-            
+        }
+        
+        hidden = {
+            tiles:{
+                equipment:true
+            },
+            upgrades: {
+                stoneaxe:false,
+                ironaxe:true
+            },
+            equipment: {
+                coldblastfurnace: true
+            }
         }
 
         saveGame();
@@ -759,11 +833,11 @@ window.setInterval(function(){
     updateKnowledge(resourcesPerSec.knowledge / 10);
 
     
-    displayResources();
-    displayResourcesPerSec();
-    displayUpgrades();
-    updateNumbers();
-    buttonDisabled();
+    displayResources()
+    displayResourcesPerSec()
+    showContent()
+    updateNumbers()
+    buttonDisabled()
     
 }, 100);
 
