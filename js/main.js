@@ -58,7 +58,7 @@ prices = {
     },
     woodenhut: {
         food:0,
-        wood:200,
+        wood:150,
         stone:50,
         reed:70,
     },
@@ -686,7 +686,7 @@ function resetGame(){
             },
             woodenhut: {
                 food:0,
-                wood:200,
+                wood:150,
                 stone:50,
                 reed:70,
             },
