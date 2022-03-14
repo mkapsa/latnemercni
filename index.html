@@ -51,6 +51,12 @@
                             <td class="storageCapacity" id="oreStorage"></td>
                             <td class="perSec" id="orePerSec"></td>
                         </tr>
+                        <tr class="resource" id="ironRow">
+                            <td>iron</td>
+                            <td class="resourceCount" id="iron"></td>
+                            <td class="storageCapacity" id="ironStorage"></td>
+                            <td class="perSec" id="ironPerSec"></td>
+                        </tr>
                         <tr>
                             <td>
                                 <br>
@@ -123,11 +129,9 @@
                             <button id="barn-button" class="buildingsButton" onclick="build('barn', 1)">barn
                                 <div class="tooltip">
                                     <div class="description">
-                                        Wood storage +200
+                                        Wood storage +300
                                         <br>
-                                        Ore storage +100
-                                        <br>
-                                        Knowledge storage +80
+                                        Ore storage +200
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
@@ -272,7 +276,7 @@
                             <button class="upgradesButton" id="metallurgy-button" onclick="upgrade('metallurgy')">metallurgy
                                 <div class="tooltip">
                                     <div class="description">
-                                        Enables you to smelt ore into metals.
+                                        Enables basic metal processing.
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
@@ -288,28 +292,34 @@
                 <div id="equipment">
                     <h2 class="sectionHeading">equipment</h2>
                     <div class="columns">
-                        <div id="equipment-column-1">
-                            <button class="equipmentButton" id="coldblastfurnace-button">cold blast furnace
+                        <div id="equipment-row-1">
+                            <button class="equipmentButton" id="coldblastfurnace-button" onclick="buyEquipment('coldblastfurnace')">cold blast furnace
                                 <div class="tooltip">
                                     <div class="description">
-                                        Smelts ore into iron.
+                                        Smelts ore into iron.<br>Consumes wood as fuel.
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
-                                            <div class="price" id="coldblastfurnace-price-ore"></div>
+                                            <div class="price" id="coldblastfurnace-price-ore">100</div>
                                             <div>ore</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="coldblastfurnace-price-iron"></div>
+                                            <div class="price" id="coldblastfurnace-price-knowledge">50</div>
+                                            <div>knowledge</div>
                                         </div>
                                     </div>
                                     <div class="netResources">
-                                        <div class="netRow">
+                                        <div class="netRow netNegative">
                                             <div class="netResourceName">ore:</div>
                                             <div id="coldblastfurnace-net-ore">-1</div>
                                             <div>/s</div>
                                         </div>
-                                        <div class="netRow">
+                                        <div class="netRow netNegative">
+                                            <div class="netResourceName">wood:</div>
+                                            <div id="coldblastfurnace-net-wood">-1.5</div>
+                                            <div>/s</div>
+                                        </div>
+                                        <div class="netRow netPositive">
                                             <div class="netResourceName">iron:</div>
                                             <div id="coldblastfurnace-net-iron">0.25</div>
                                             <div>/s</div>
@@ -317,6 +327,12 @@
                                     </div>
                                 </div>
                             </button>
+                            <div class="runningRow">
+                                <span class="running">Running: </span>
+                                <span id="coldblastfurnace-running">0</span>
+                                <span class="forwardSlash">/</span>
+                                <span id="coldblastfurnace-total">0</span>
+                            </div>
                         </div>
                     </div>
                 </div>

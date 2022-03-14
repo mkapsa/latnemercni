@@ -278,10 +278,6 @@ button:hover .tooltip {
     flex-direction: row;
 }
 
-.netRow div{
-    font-weight: bold;
-}
-
 .netResources{
     border-top: 1px solid black;
     margin-left: 10px;
@@ -304,6 +300,7 @@ button:hover .tooltip {
 .netResourceName{
     margin-left: 10px;
     margin-right: 10px;
+    font-weight: bolder;
 }
 /* 
 .net{
@@ -317,7 +314,7 @@ button:hover .tooltip {
     gap: 30px;
 }
 
-#buildings-column-1, #buildings-column-2, #equipment-column-1{
+#buildings-column-1, #buildings-column-2{
     display: flex;
     flex-direction: column;
 }
@@ -329,6 +326,25 @@ table {
 
 #knowledge{
     color: purple;
+}
+
+#equipment-row-1{
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.running {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    padding-left: 10px;
+}
+
+.runningRow span{
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 

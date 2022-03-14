@@ -1,7 +1,9 @@
+
 resources = {
     food:0,
     wood:0,
     ore:0,
+    iron:0,
     knowledge:0
 }
 
@@ -9,6 +11,7 @@ resourcesPerSec = {
     food:0,
     wood:0,
     ore:0,
+    iron:0,
     knowledge:0
 }
 
@@ -16,6 +19,7 @@ storage = {
     food:100,
     wood:600,
     ore:300,
+    iron:200,
     knowledge:200
 }
 
@@ -37,7 +41,10 @@ buildings = {
 }
 
 equipment = {
-    coldblastfurnace:0
+    coldblastfurnace: {
+        total:0,
+        running:0
+    }
 }
 
 prices = {
@@ -48,24 +55,28 @@ prices = {
         food:0,
         wood:300,
         ore:100,
+        iron:0,
         knowledge:0
     },
     barn: {
         food:0,
         wood:400,
         ore:250,
+        iron:0,
         knowledge:0
     },
     woodenhut: {
         food:0,
         wood:150,
         ore:50,
+        iron:0,
         knowledge:0,
     },
     stonehut: {
         food:0,
         wood:200,
         ore:300,
+        iron:0,
         knowledge:0
     },
 
@@ -75,6 +86,7 @@ prices = {
         food:0,
         wood:300,
         ore:300,
+        iron:0,
         knowledge:100
     },
 
@@ -82,7 +94,18 @@ prices = {
         food:0,
         wood:0,
         ore:0,
+        iron:0,
         knowledge:200
+    },
+
+    // equipment prices
+
+    coldblastfurnace: {
+        food:0,
+        wood:0,
+        ore:100,
+        iron:0,
+        knowledge:50
     }
 }
 
@@ -99,29 +122,35 @@ hidden = {
     }
 }
 
+rates = {
+    hunterRate: 1,
+    woodcutterRate: 0.5,
+    minerRate: 0.3,
+    scientistRate: 0.2,
+
+    // equipment net rates
+
+    coldblastfurnace: {
+        wood:-1.5,
+        ore:-1,
+        iron:0.25
+    }
+}
+
+
+
 //worker rate coefficients
 
-let hunterRate = 1
-let woodcutterRate = 0.5
-let minerRate = 0.3
-let scientistRate = 0.2
+hunterRate = 1
+woodcutterRate = 0.5
+minerRate = 0.3
+scientistRate = 0.2
 
 
 
 // price coefficients
 
 const buildingCoefficient = 1.09;
-
-
-// show / hide booleans
-
-let foodrowHidden = true;
-let woodrowHidden = true;
-let orerowHidden = true;
-let knowledgerowHidden = true;
-
-
-
 
 
 // document.id & document.class shortcuts so i don't have to type it over and over
@@ -134,9 +163,6 @@ const byClass = function(className){
     return document.getElementsByClassName(className);
 }
 
-
-// document.getElementById('food').innerHTML = Math.floor(resources.food) + "/" + storage.food;
-
 function checkLocalStorage(){
     if(localStorage.length > 0){
         loadGame();
@@ -148,6 +174,15 @@ function checkLocalStorage(){
 
 window.onload = checkLocalStorage();
 window.onload = updateNumbers();
+
+function turnOffEquipment(){
+    if((resourcesPerSec.wood < 0 && resources.wood === 0 ) || (resourcesPerSec.ore < 0 && resources.ore === 0) && equipment.coldblastfurnace.running > 0){
+        equipment.coldblastfurnace.running -= 1;
+        resourcesPerSec.wood -= rates.coldblastfurnace.wood
+        resourcesPerSec.ore -= rates.coldblastfurnace.ore
+        resourcesPerSec.iron -= rates.coldblastfurnace.iron
+    }
+}
 
 function checkFood(){
     if(resourcesPerSec.food < 0 && resources.food === 0 && population.total >= 1){
@@ -203,6 +238,15 @@ function updateOre(number){
     }
 }
 
+function updateIron(number){
+    if(resources.iron < storage.iron){
+        resources.iron = Math.max(0, resources.iron + number)
+    }
+    if(resources.iron >= storage.iron ){
+        resources.iron = Math.min(storage.iron, resources.iron + number)
+    }
+}
+
 function updateKnowledge(number){
     if(resources.knowledge < storage.knowledge){
         resources.knowledge = Math.max(0, resources.knowledge + number);
@@ -232,7 +276,7 @@ function hire(job, number){
     if (job === 'hunter' && population.unemployed >= number){
         population.unemployed -= number;
         population.hunters += number;
-        resourcesPerSec.food += number * hunterRate;
+        resourcesPerSec.food += number * rates.hunterRate;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
 
@@ -247,7 +291,7 @@ function hire(job, number){
     if (job === 'woodcutter' && population.unemployed >= number){
         population.unemployed -= number;
         population.woodcutters += number;
-        resourcesPerSec.wood += woodcutterRate * number;
+        resourcesPerSec.wood += rates.woodcutterRate * number;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
 
@@ -262,7 +306,7 @@ function hire(job, number){
     if (job === 'miner' && population.unemployed >= number){
         population.unemployed -= number;
         population.miners += number;
-        resourcesPerSec.ore += minerRate * number;
+        resourcesPerSec.ore += rates.minerRate * number;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
 
@@ -277,7 +321,7 @@ function hire(job, number){
     if (job === 'scientist' && population.unemployed >= number){
         population.unemployed -= number;
         population.scientists += number;
-        resourcesPerSec.knowledge += scientistRate * number;
+        resourcesPerSec.knowledge += rates.scientistRate * number;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
 
@@ -294,7 +338,7 @@ function fire(job, number){
     if (job == 'hunter' && population.hunters >= number){
         population.hunters -= number;
         population.unemployed += number;
-        resourcesPerSec.food -= hunterRate * number;
+        resourcesPerSec.food -= rates.hunterRate * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
 
@@ -309,7 +353,7 @@ function fire(job, number){
     if (job === 'woodcutter' && population.woodcutters >= number){
         population.woodcutters -= number;
         population.unemployed += number;
-        resourcesPerSec.wood -= woodcutterRate * number;
+        resourcesPerSec.wood -= rates.woodcutterRate * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
 
@@ -324,7 +368,7 @@ function fire(job, number){
     if (job === 'miner' && population.miners >= number){
         population.miners -= number;
         population.unemployed += number;
-        resourcesPerSec.ore -= minerRate * number;
+        resourcesPerSec.ore -= rates.minerRate * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
 
@@ -339,7 +383,7 @@ function fire(job, number){
     if (job === 'scientist' && population.scientists >= number){
         population.scientists -= number;
         population.unemployed += number;
-        resourcesPerSec.knowledge -= scientistRate * number;
+        resourcesPerSec.knowledge -= rates.scientistRate * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
 
@@ -356,7 +400,16 @@ function canAffordUpgrade(upgrade){
     return resources.food >= prices[upgrade].food &&
     resources.wood >= prices[upgrade].wood &&
     resources.ore >= prices[upgrade].ore &&
-    resources.knowledge >= prices[upgrade].knowledge
+    resources.knowledge >= prices[upgrade].knowledge &&
+    resources.iron >= prices[upgrade].iron
+}
+
+function canAffordEquipment(equipment){
+    return resources.food >= prices[equipment].food &&
+    resources.wood >= prices[equipment].wood &&
+    resources.ore >= prices[equipment].ore &&
+    resources.knowledge >= prices[equipment].knowledge &&
+    resources.iron >= prices[equipment].iron
 }
 
 function canAffordBuilding(building, count){
@@ -364,7 +417,8 @@ function canAffordBuilding(building, count){
     return resources.food * count >= prices[building].food * count && 
     resources.wood * count >= prices[building].wood * count && 
     resources.ore * count >= prices[building].ore * count && 
-    resources.knowledge * count >= prices[building].knowledge * count
+    resources.knowledge * count >= prices[building].knowledge * count &&
+    resources.iron >= prices[building].iron * count
 }
 
 function updateBuildingPrice(building){
@@ -415,13 +469,14 @@ function build(building, count){
         }
         
         if(building === 'barn'){
-            storage.wood += 200 * count;
-            storage.ore += 100 * count;
-            storage.knowledge += 80 * count;
+            storage.wood += 300 * count;
+            storage.ore += 200 * count;
         }
 
     }
 }
+
+
 
 // UPGRADES AND EQUIPMENT FUNCTIONS
 
@@ -434,13 +489,14 @@ function subtract(obj1, obj2) {
 
 function upgrade(upgrade){
     if(canAffordUpgrade(upgrade)){
-        upgrades[upgrade] = true;
+        hidden.upgrades[upgrade] = true;
 
         resources = subtract(resources, prices[upgrade])
 
         if(upgrade === 'stoneaxe'){
-            woodcutterRate *= 2
-            resourcesPerSec.wood = woodcutterRate * population.woodcutters;
+
+            resourcesPerSec.wood += population.woodcutters * rates.woodcutterRate
+            rates.woodcutterRate *= 2
 
             // unlock next possible upgrade (iron axe in this case)
 
@@ -454,22 +510,39 @@ function upgrade(upgrade){
     }
 }
 
+function buyEquipment(desiredEquipment){
+    if(canAffordEquipment(desiredEquipment)){
+        equipment[desiredEquipment].total += 1
+        equipment[desiredEquipment].running += 1
+       
+        resources = subtract(resources, prices[desiredEquipment])
+
+        if(desiredEquipment === 'coldblastfurnace'){
+            resourcesPerSec.ore -= 1
+            resourcesPerSec.wood -= 1.5
+            resourcesPerSec.iron += 0.25
+        }
+    }
+}
+
 
 
 function updateNumbers(){
 
-    document.getElementById("totalPopulation").innerHTML = Math.floor(population.total);
-    document.getElementById("maxPopulation").innerHTML = "/" + Math.floor(population.max);
-    document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
-    document.getElementById("food").innerHTML = Math.floor(resources.food);
-    document.getElementById('wood').innerHTML = Math.floor(resources.wood);
-    document.getElementById('ore').innerHTML = Math.floor(resources.ore);
-    document.getElementById('knowledge').innerHTML = Math.floor(resources.knowledge);
+    byId("totalPopulation").innerHTML = Math.floor(population.total);
+    byId("maxPopulation").innerHTML = "/" + Math.floor(population.max);
+    byId("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
+    byId("food").innerHTML = Math.floor(resources.food);
+    byId('wood').innerHTML = Math.floor(resources.wood);
+    byId('ore').innerHTML = Math.floor(resources.ore);
+    byId('knowledge').innerHTML = Math.floor(resources.knowledge);
+    byId('iron').innerHTML = Math.floor(resources.iron)
 
-    document.getElementById("foodStorage").innerHTML = "/" + Math.floor(storage.food);
-    document.getElementById("woodStorage").innerHTML = "/" + Math.floor(storage.wood);
-    document.getElementById("oreStorage").innerHTML = "/" + Math.floor(storage.ore);
-    document.getElementById("knowledgeStorage").innerHTML = "/" + Math.floor(storage.knowledge); 
+    byId("foodStorage").innerHTML = "/" + Math.floor(storage.food);
+    byId("woodStorage").innerHTML = "/" + Math.floor(storage.wood);
+    byId("oreStorage").innerHTML = "/" + Math.floor(storage.ore);
+    byId("knowledgeStorage").innerHTML = "/" + Math.floor(storage.knowledge); 
+    byId("ironStorage").innerHTML = "/" + Math.floor(storage.iron)
 
     // update resources per second (2 decimals)
 
@@ -491,12 +564,20 @@ function updateNumbers(){
     else{
         document.getElementById("orePerSec").innerHTML = resourcesPerSec.ore.toFixed(2) + "/s";
     }
+    if(resources.iron >= 0){
+        byId("ironPerSec").innerHTML = "+" + resourcesPerSec.iron.toFixed(2) + "/s";
+    }
+    else{
+        byId("ironPerSec").innerHTML = resourcesPerSec.iron.toFixed(2) + "/s";
+    }
     if(resources.knowledge >= 0){
         document.getElementById("knowledgePerSec").innerHTML = "+" + resourcesPerSec.knowledge.toFixed(2) + "/s";
     }
     else{
         document.getElementById("knowledgePerSec").innerHTML = resourcesPerSec.knowledge.toFixed(2) + "/s";
     } 
+
+
 
     // update population numbers - singular and plural forms
 
@@ -528,37 +609,38 @@ function updateNumbers(){
         document.getElementById("scientists").innerHTML = Math.floor(population.scientists) + " scientists";
     } 
 
-};
 
+    // equipment - total and running
+
+    let equipmentKeys = Object.keys(equipment)
+
+    for(let i = 0; i < equipmentKeys.length; i++){
+        byId(equipmentKeys[i] + "-total").innerHTML = equipment[equipmentKeys[i]].total
+        byId(equipmentKeys[i] + "-running").innerHTML = equipment[equipmentKeys[i]].running
+    }
+
+};
 
 function displayResources(){
 
-    byId('foodRow').hidden = foodrowHidden;
-    byId('woodRow').hidden = woodrowHidden;
-    byId('oreRow').hidden = orerowHidden;
-    byId('knowledgeRow').hidden = knowledgerowHidden;
+    let resourcesKeys = Object.keys(resources)
+    let resourcesValues = Object.values(resources)
 
-    if(resources.food > 0){
-        foodrowHidden = false;
-    }
-    if(resources.wood > 0){
-        woodrowHidden = false;
-    }
-    if(resources.ore > 0){
-        orerowHidden = false;
-    }
-    if(resources.knowledge > 0){
-        knowledgerowHidden = false;
+    for(i = 0; i < resourcesKeys.length; i++){
+        byId(resourcesKeys[i] + "Row").hidden = true;
+
+        if(resourcesValues[i] > 0){
+            byId(resourcesKeys[i] + "Row").hidden = false;
+        }
     }
 }
-
-
 
 function displayResourcesPerSec(){
 
     byId('foodPerSec').hidden = resourcesPerSec.food === 0;
     byId('woodPerSec').hidden = resourcesPerSec.wood === 0;
     byId('orePerSec').hidden = resourcesPerSec.ore === 0;
+    byId('ironPerSec').hidden = resourcesPerSec.iron === 0;
     byId('knowledgePerSec').hidden = resourcesPerSec.knowledge === 0;
 }
 
@@ -642,14 +724,13 @@ function buttonDisabled(){
     else{
         byId('metallurgy-button').style.backgroundColor = null;
     }
-}
 
-function hideResources(){
-    
-    foodrowHidden = true
-    woodrowHidden = true
-    orerowHidden = true
-    knowledgerowHidden = true
+    if(canAffordEquipment('coldblastfurnace') === false){
+        byId('coldblastfurnace-button').style.backgroundColor = "rgb(200, 200, 200)"
+    }
+    else{
+        byId('coldblastfurnace-button').style.backgroundColor = null;
+    }
 }
 
 function showContent(){
@@ -695,6 +776,7 @@ function saveGame(){
     localStorage.setItem('equipmentData', JSON.stringify(equipment))
     localStorage.setItem('pricesData', JSON.stringify(prices))
     localStorage.setItem('hiddenData', JSON.stringify(hidden))
+    localStorage.setItem('ratesData', JSON.stringify(rates))
 }
 
 // loading function - fires at window.onload
@@ -708,6 +790,7 @@ function loadGame(){
     equipment = JSON.parse(localStorage.getItem('equipmentData'))
     prices = JSON.parse(localStorage.getItem('pricesData'))
     hidden = JSON.parse(localStorage.getItem('hiddenData'))
+    rates = JSON.parse(localStorage.getItem('ratesData'))
 
 
     updateNumbers();    
@@ -722,6 +805,7 @@ function resetGame(){
             food:0,
             wood:0,
             ore:0,
+            iron:0,
             knowledge:0
         }
         
@@ -729,6 +813,7 @@ function resetGame(){
             food:0,
             wood:0,
             ore:0,
+            iron:0,
             knowledge:0
         }
         
@@ -736,6 +821,7 @@ function resetGame(){
             food:100,
             wood:600,
             ore:300,
+            iron:200,
             knowledge:200
         }
         
@@ -757,7 +843,10 @@ function resetGame(){
         }
         
         equipment = {
-            coldblastfurnace:0
+            coldblastfurnace: {
+                total:0,
+                running:0
+            }
         }
         
         prices = {
@@ -768,24 +857,28 @@ function resetGame(){
                 food:0,
                 wood:300,
                 ore:100,
+                iron:0,
                 knowledge:0
             },
             barn: {
                 food:0,
                 wood:400,
                 ore:250,
+                iron:0,
                 knowledge:0
             },
             woodenhut: {
                 food:0,
                 wood:150,
                 ore:50,
+                iron:0,
                 knowledge:0,
             },
             stonehut: {
                 food:0,
                 wood:200,
                 ore:300,
+                iron:0,
                 knowledge:0
             },
         
@@ -795,14 +888,26 @@ function resetGame(){
                 food:0,
                 wood:300,
                 ore:300,
+                iron:0,
                 knowledge:100
             },
-
+        
             metallurgy: {
                 food:0,
                 wood:0,
                 ore:0,
+                iron:0,
                 knowledge:200
+            },
+        
+            // equipment prices
+        
+            coldblastfurnace: {
+                food:0,
+                wood:0,
+                ore:100,
+                iron:0,
+                knowledge:50
             }
         }
         
@@ -818,23 +923,38 @@ function resetGame(){
                 coldblastfurnace: true
             }
         }
+        
+        rates = {
+            hunterRate: 1,
+            woodcutterRate: 0.5,
+            minerRate: 0.3,
+            scientistRate: 0.2,
+        
+            // equipment net rates
+        
+            coldblastfurnace: {
+                wood:-1.5,
+                ore:-1,
+                iron:0.25
+            }
+        }
 
         saveGame();
-        hideResources();
-
+        location.reload()
     }           
 }
 
 window.setInterval(function(){
 
-    updateFood(resourcesPerSec.food / 10);
-    updateWood(resourcesPerSec.wood / 10);
-    updateOre(resourcesPerSec.ore / 10);
-    updateKnowledge(resourcesPerSec.knowledge / 10);
+    updateFood(resourcesPerSec.food / 10)
+    updateWood(resourcesPerSec.wood / 10)
+    updateOre(resourcesPerSec.ore / 10)
+    updateIron(resourcesPerSec.iron / 10)
+    updateKnowledge(resourcesPerSec.knowledge / 10)
 
     
     displayResources()
-    displayResourcesPerSec()
+    // displayResourcesPerSec()
     showContent()
     updateNumbers()
     buttonDisabled()
@@ -847,6 +967,7 @@ window.setInterval(function(){
 
 window.setInterval(function(){
     checkFood();
+    turnOffEquipment()
 }, 2000);
 
 
