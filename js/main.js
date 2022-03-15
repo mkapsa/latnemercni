@@ -111,7 +111,7 @@ prices = {
 
 hidden = {
     tiles:{
-        equipment:true
+        equipment:false
     },
     upgrades: {
         stoneaxe:false,
@@ -767,179 +767,52 @@ function showContent(){
 
 // saving function (localstorage), fires every minute + can be fired manually (button)
 
-function saveGame(){                                           
-    localStorage.setItem('resourcesData', JSON.stringify(resources))
-    localStorage.setItem('storageData', JSON.stringify(storage))
-    localStorage.setItem('populationData', JSON.stringify(population))
-    localStorage.setItem('resourcesPerSecData', JSON.stringify(resourcesPerSec))
-    localStorage.setItem('buildingsData', JSON.stringify(buildings))
-    localStorage.setItem('equipmentData', JSON.stringify(equipment))
-    localStorage.setItem('pricesData', JSON.stringify(prices))
-    localStorage.setItem('hiddenData', JSON.stringify(hidden))
-    localStorage.setItem('ratesData', JSON.stringify(rates))
+function saveGame(){
+    
+    let gameSave = {
+        resources: resources,
+        resourcesPerSec: resourcesPerSec,
+        storage: storage,
+        population: population,
+        buildings: buildings,
+        equipment: equipment,
+        prices: prices,
+        hidden: hidden,
+        rates: rates
+    }
+
+    localStorage.setItem('gameSaveData', JSON.stringify(gameSave))
 }
 
 // loading function - fires at window.onload
 
 function loadGame(){
-    resources = JSON.parse(localStorage.getItem('resourcesData'))
-    storage = JSON.parse(localStorage.getItem('storageData'))
-    population = JSON.parse(localStorage.getItem('populationData'))
-    resourcesPerSec = JSON.parse(localStorage.getItem('resourcesPerSecData'))
-    buildings = JSON.parse(localStorage.getItem('buildingsData'))
-    equipment = JSON.parse(localStorage.getItem('equipmentData'))
-    prices = JSON.parse(localStorage.getItem('pricesData'))
-    hidden = JSON.parse(localStorage.getItem('hiddenData'))
-    rates = JSON.parse(localStorage.getItem('ratesData'))
+    
+    let savedGame = JSON.parse(localStorage.getItem('gameSaveData'))
 
+    if(typeof savedGame.resources !== undefined) resources = savedGame.resources
+    if(typeof savedGame.storage !== undefined) storage = savedGame.storage
+    if(typeof savedGame.population !== undefined) population = savedGame.population
+    if(typeof savedGame.resourcesPerSec !== undefined) resourcesPerSec = savedGame.resourcesPerSec
+    if(typeof savedGame.buildings !== undefined) buildings = savedGame.buildings
+    if(typeof savedGame.equipment !== undefined) equipment = savedGame.equipment
+    if(typeof savedGame.prices !== undefined) prices = savedGame.prices
+    if(typeof savedGame.hidden !== undefined) hidden = savedGame.hidden
+    if(typeof savedGame.rates !== undefined) rates = savedGame.rates
 
     updateNumbers();    
     updatePrices();
 }
 
+
 function resetGame(){
 
     if(window.confirm("Do you really want to reset the game? Your progress will be lost.")){
         
-        resources = {
-            food:0,
-            wood:0,
-            ore:0,
-            iron:0,
-            knowledge:0
-        }
-        
-        resourcesPerSec = {
-            food:0,
-            wood:0,
-            ore:0,
-            iron:0,
-            knowledge:0
-        }
-        
-        storage = {
-            food:100,
-            wood:600,
-            ore:300,
-            iron:200,
-            knowledge:200
-        }
-        
-        population = {
-            max:10,
-            total:0,
-            unemployed:0,
-            hunters:0,
-            woodcutters:0,
-            miners:0,
-            scientists:0
-        }
-        
-        buildings = {
-            pantry:0,
-            barn:0,
-            woodenhut:0,
-            stonehut:0
-        }
-        
-        equipment = {
-            coldblastfurnace: {
-                total:0,
-                running:0
-            }
-        }
-        
-        prices = {
-        
-            // building prices
-        
-            pantry: {
-                food:0,
-                wood:300,
-                ore:100,
-                iron:0,
-                knowledge:0
-            },
-            barn: {
-                food:0,
-                wood:400,
-                ore:250,
-                iron:0,
-                knowledge:0
-            },
-            woodenhut: {
-                food:0,
-                wood:150,
-                ore:50,
-                iron:0,
-                knowledge:0,
-            },
-            stonehut: {
-                food:0,
-                wood:200,
-                ore:300,
-                iron:0,
-                knowledge:0
-            },
-        
-            // upgrade prices
-        
-            stoneaxe: {
-                food:0,
-                wood:300,
-                ore:300,
-                iron:0,
-                knowledge:100
-            },
-        
-            metallurgy: {
-                food:0,
-                wood:0,
-                ore:0,
-                iron:0,
-                knowledge:200
-            },
-        
-            // equipment prices
-        
-            coldblastfurnace: {
-                food:0,
-                wood:0,
-                ore:100,
-                iron:0,
-                knowledge:50
-            }
-        }
-        
-        hidden = {
-            tiles:{
-                equipment:true
-            },
-            upgrades: {
-                stoneaxe:false,
-                ironaxe:true
-            },
-            equipment: {
-                coldblastfurnace: true
-            }
-        }
-        
-        rates = {
-            hunterRate: 1,
-            woodcutterRate: 0.5,
-            minerRate: 0.3,
-            scientistRate: 0.2,
-        
-            // equipment net rates
-        
-            coldblastfurnace: {
-                wood:-1.5,
-                ore:-1,
-                iron:0.25
-            }
-        }
+        let gameSave = {}
+        localStorage.setItem("gameSaveData", JSON.stringify(gameSave))
 
-        saveGame();
+        saveGame()
         location.reload()
     }           
 }
