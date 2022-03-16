@@ -347,6 +347,21 @@ table {
     margin-right: 5px;
 }
 
+.onButton, .offButton{
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+    border: 2px solid black;
+    font-weight: bolder;
+}
+
+.offButton{
+    margin-left: 10px;
+}
+
+
+
+
 
 
 

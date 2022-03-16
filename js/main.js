@@ -90,6 +90,14 @@ prices = {
         knowledge:100
     },
 
+    ironaxe: {
+        food:0,
+        wood:400,
+        ore:0,
+        iron:200,
+        knowledge:150
+    },
+
     metallurgy: {
         food:0,
         wood:0,
@@ -115,7 +123,8 @@ hidden = {
     },
     upgrades: {
         stoneaxe:false,
-        ironaxe:true
+        ironaxe:true,
+        metallurgy: false 
     },
     equipment: {
         coldblastfurnace: true
@@ -167,12 +176,8 @@ function checkLocalStorage(){
     if(localStorage.length > 0){
         loadGame();
     }
-    else{
-        saveGame();
-    }
 }
-
-window.onload = checkLocalStorage();
+window.onload = checkLocalStorage()
 window.onload = updateNumbers();
 
 function turnOffEquipment(){
@@ -503,6 +508,12 @@ function upgrade(upgrade){
             hidden.upgrades.ironaxe = false;
         }
 
+        if(upgrade === 'ironaxe'){
+            resourcesPerSec.wood -= population.woodcutters * rates.woodcutterRate
+            rates.woodcutterRate *= 1.75
+            resourcesPerSec.wood += population.woodcutters * rates.woodcutterRate
+        }
+
         if(upgrade === 'metallurgy'){
             hidden.tiles.equipment = false
             hidden.equipment.coldblastfurnace = false
@@ -645,85 +656,59 @@ function displayResourcesPerSec(){
 }
 
 function buttonDisabled(){
-    if(resources.food >= storage.food){
-        byId('foodBtn').style.backgroundColor = "rgb(200, 200, 200)";        
-    }
-    else{
-        byId('foodBtn').style.backgroundColor = null;
-    }
 
-    if(resources.wood >= storage.wood){
-        byId('woodBtn').style.backgroundColor = "rgb(200, 200, 200)";        
-    }
-    else{
-        byId('woodBtn').style.backgroundColor = null;
-    }
+    // basic manual buttons - disabled if storage is full
+        
+    let basicButtonValues = ['food', 'wood', 'ore', 'knowledge']
 
-    if(resources.ore >= storage.ore){
-        byId('oreBtn').style.backgroundColor = "rgb(200, 200, 200)";        
+    for(i = 0; i < basicButtonValues.length; i++){
+        
+        if(resources[basicButtonValues[i]] >= storage[basicButtonValues[i]]){
+            byId(basicButtonValues[i] + "Btn").style.backgroundColor = "rgb(200, 200, 200)"
+        }
+        else{
+            byId(basicButtonValues[i] + "Btn").style.backgroundColor = null;
+        }
     }
-    else{
-        byId('oreBtn').style.backgroundColor = null;
-    }
+    
+    // birth button - disabled if you have < 20 food or if population cap is reached
 
-    if(resources.knowledge >= storage.knowledge){
-        byId('knowledgeBtn').style.backgroundColor = "rgb(200, 200, 200)";        
-    }
-    else{
-        byId('knowledgeBtn').style.backgroundColor = null;
-    }
-
-    if(resources.food < 20 || population.total === population.max){
+        if(resources.food < 20 || population.total === population.max){
         byId("birthButton").style.backgroundColor = 'gold';
     }
     else{
         byId("birthButton").style.backgroundColor = null;
     }
 
+    // buildings - disabled if you don't have enough resources
 
-    if(canAffordBuilding('pantry', 1) === false){
-        byId('pantry-button').style.backgroundColor = "rgb(200, 200, 200)";
-    }
-    else{
-        byId('pantry-button').style.backgroundColor = null;
-    }
+    let buildingsKeys = Object.keys(buildings)
 
-    if(canAffordBuilding('woodenhut', 1) === false){
-        byId('woodenhut-button').style.backgroundColor = "rgb(200, 200, 200)";
-    }
-    else{
-        byId('woodenhut-button').style.backgroundColor = null;
-    }
+    for(let i = 0; i < buildingsKeys.length; i++){
 
-    if(canAffordBuilding('stonehut', 1) === false){
-        byId('stonehut-button').style.backgroundColor = "rgb(200, 200, 200)"
-    }
-    else{
-        byId('stonehut-button').style.backgroundColor = null;
+        if(canAffordBuilding(buildingsKeys[i], 1)){
+            byId(buildingsKeys[i] + "-button").style.backgroundColor = null
+        } 
+        else{  
+            byId(buildingsKeys[i] + "-button").style.backgroundColor = "rgb(200, 200, 200)"
+        }
     }
 
-    if(canAffordBuilding('barn', 1) === false){
-        byId('barn-button').style.backgroundColor = "rgb(200, 200, 200)"
-    }
-    else{
-        byId('barn-button').style.backgroundColor = null;
-    }
+    // upgrades - disabled if you don't have enough resources
 
+    let upgradesKeys = Object.keys(hidden.upgrades)
 
-
-    if(canAffordUpgrade('stoneaxe') === false){
-        byId('stoneaxe-button').style.backgroundColor = "rgb(200, 200, 200)"
-    }
-    else{
-        byId('stoneaxe-button').style.backgroundColor = null;
-    }
-
-    if(canAffordUpgrade('metallurgy') === false){
-        byId('metallurgy-button').style.backgroundColor = "rgb(200, 200, 200)"
-    }
-    else{
-        byId('metallurgy-button').style.backgroundColor = null;
-    }
+    for(i = 0; i < upgradesKeys.length; i++){
+        if(canAffordUpgrade(upgradesKeys[i])){
+            byId(upgradesKeys[i] + '-button').style.backgroundColor = null
+        }
+        else{
+            byId(upgradesKeys[i] + '-button').style.backgroundColor = "rgb(200, 200, 200)"
+        }
+    }   
+    
+    
+    // equipment - disbaled if you don't have enough resources
 
     if(canAffordEquipment('coldblastfurnace') === false){
         byId('coldblastfurnace-button').style.backgroundColor = "rgb(200, 200, 200)"
@@ -809,9 +794,152 @@ function resetGame(){
 
     if(window.confirm("Do you really want to reset the game? Your progress will be lost.")){
         
-        let gameSave = {}
-        localStorage.setItem("gameSaveData", JSON.stringify(gameSave))
-
+        resources = {
+            food:0,
+            wood:0,
+            ore:0,
+            iron:0,
+            knowledge:0
+        }
+        
+        resourcesPerSec = {
+            food:0,
+            wood:0,
+            ore:0,
+            iron:0,
+            knowledge:0
+        }
+        
+        storage = {
+            food:100,
+            wood:600,
+            ore:300,
+            iron:200,
+            knowledge:200
+        }
+        
+        population = {
+            max:10,
+            total:0,
+            unemployed:0,
+            hunters:0,
+            woodcutters:0,
+            miners:0,
+            scientists:0
+        }
+        
+        buildings = {
+            pantry:0,
+            barn:0,
+            woodenhut:0,
+            stonehut:0
+        }
+        
+        equipment = {
+            coldblastfurnace: {
+                total:0,
+                running:0
+            }
+        }
+        
+        prices = {
+        
+            // building prices
+        
+            pantry: {
+                food:0,
+                wood:300,
+                ore:100,
+                iron:0,
+                knowledge:0
+            },
+            barn: {
+                food:0,
+                wood:400,
+                ore:250,
+                iron:0,
+                knowledge:0
+            },
+            woodenhut: {
+                food:0,
+                wood:150,
+                ore:50,
+                iron:0,
+                knowledge:0,
+            },
+            stonehut: {
+                food:0,
+                wood:200,
+                ore:300,
+                iron:0,
+                knowledge:0
+            },
+        
+            // upgrade prices
+        
+            stoneaxe: {
+                food:0,
+                wood:300,
+                ore:300,
+                iron:0,
+                knowledge:100
+            },
+        
+            ironaxe: {
+                food:0,
+                wood:400,
+                ore:0,
+                iron:200,
+                knowledge:150
+            },
+        
+            metallurgy: {
+                food:0,
+                wood:0,
+                ore:0,
+                iron:0,
+                knowledge:200
+            },
+        
+            // equipment prices
+        
+            coldblastfurnace: {
+                food:0,
+                wood:0,
+                ore:100,
+                iron:0,
+                knowledge:50
+            }
+        }
+        
+        hidden = {
+            tiles:{
+                equipment:false
+            },
+            upgrades: {
+                stoneaxe:false,
+                ironaxe:true
+            },
+            equipment: {
+                coldblastfurnace: true
+            }
+        }
+        
+        rates = {
+            hunterRate: 1,
+            woodcutterRate: 0.5,
+            minerRate: 0.3,
+            scientistRate: 0.2,
+        
+            // equipment net rates
+        
+            coldblastfurnace: {
+                wood:-1.5,
+                ore:-1,
+                iron:0.25
+            }
+        }
+        
         saveGame()
         location.reload()
     }           
