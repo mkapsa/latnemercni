@@ -119,7 +119,7 @@ prices = {
 
 hidden = {
     tiles:{
-        equipment:false
+        equipment:true
     },
     upgrades: {
         stoneaxe:false,
@@ -128,6 +128,20 @@ hidden = {
     },
     equipment: {
         coldblastfurnace: true
+    },
+    resourceRows: {
+        food: true,
+        wood:true,
+        ore:true,
+        iron:true,
+        knowledge:true
+    },
+    resourcesPerSec: {
+        food: true,
+        wood: true,
+        ore:true,
+        iron:true,
+        knowledge:true
     }
 }
 
@@ -632,27 +646,21 @@ function updateNumbers(){
 
 };
 
-function displayResources(){
-
-    let resourcesKeys = Object.keys(resources)
-    let resourcesValues = Object.values(resources)
-
-    for(i = 0; i < resourcesKeys.length; i++){
-        byId(resourcesKeys[i] + "Row").hidden = true;
-
-        if(resourcesValues[i] > 0){
-            byId(resourcesKeys[i] + "Row").hidden = false;
-        }
-    }
-}
-
 function displayResourcesPerSec(){
 
-    byId('foodPerSec').hidden = resourcesPerSec.food === 0;
-    byId('woodPerSec').hidden = resourcesPerSec.wood === 0;
-    byId('orePerSec').hidden = resourcesPerSec.ore === 0;
-    byId('ironPerSec').hidden = resourcesPerSec.iron === 0;
-    byId('knowledgePerSec').hidden = resourcesPerSec.knowledge === 0;
+    let resourcesPerSecKeys = Object.keys(resourcesPerSec)
+    let resourcesPerSecValues = Object.values(resourcesPerSec)
+
+    for(let i = 0; i < resourcesPerSecKeys.length; i++){
+
+        let resource = resourcesPerSecKeys[i]
+
+        byId(resource + "PerSec").hidden = hidden.resourcesPerSec[resource]
+
+        if(resourcesPerSec[resource] !== 0){
+            hidden.resourcesPerSec[resource] = false
+        }
+    }
 }
 
 function buttonDisabled(){
@@ -719,6 +727,22 @@ function buttonDisabled(){
 }
 
 function showContent(){
+
+    // resource Rows
+
+    let resourceRowsKeys = Object.keys(hidden.resourceRows)  
+    let resourceRowsValues = Object.values(hidden.resourceRows)
+
+    for(let i = 0; i < resourceRowsKeys.length; i++){
+        
+        let resource = resourceRowsKeys[i]
+
+        byId(resource + 'Row').hidden = hidden.resourceRows[resource]
+
+        if(resources[resourceRowsKeys[i]] > 0){
+            hidden.resourceRows[resource] = false;
+        }
+    }
 
     // game tiles
 
@@ -914,14 +938,29 @@ function resetGame(){
         
         hidden = {
             tiles:{
-                equipment:false
+                equipment:true
             },
             upgrades: {
                 stoneaxe:false,
-                ironaxe:true
+                ironaxe:true,
+                metallurgy: false 
             },
             equipment: {
                 coldblastfurnace: true
+            },
+            resourceRows: {
+                food: true,
+                wood:true,
+                ore:true,
+                iron:true,
+                knowledge:true
+            },
+            resourcesPerSec: {
+                food: true,
+                wood: true,
+                ore:true,
+                iron:true,
+                knowledge:true
             }
         }
         
@@ -954,8 +993,8 @@ window.setInterval(function(){
     updateKnowledge(resourcesPerSec.knowledge / 10)
 
     
-    displayResources()
-    // displayResourcesPerSec()
+  
+    displayResourcesPerSec()
     showContent()
     updateNumbers()
     buttonDisabled()
