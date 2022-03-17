@@ -146,6 +146,9 @@ hidden = {
 }
 
 rates = {
+
+    // worker rate coefficients
+
     hunterRate: 1,
     woodcutterRate: 0.5,
     minerRate: 0.3,
@@ -159,17 +162,6 @@ rates = {
         iron:0.25
     }
 }
-
-
-
-//worker rate coefficients
-
-hunterRate = 1
-woodcutterRate = 0.5
-minerRate = 0.3
-scientistRate = 0.2
-
-
 
 // price coefficients
 
@@ -495,8 +487,6 @@ function build(building, count){
     }
 }
 
-
-
 // UPGRADES AND EQUIPMENT FUNCTIONS
 
 function subtract(obj1, obj2) {
@@ -550,90 +540,56 @@ function buyEquipment(desiredEquipment){
     }
 }
 
-
-
 function updateNumbers(){
 
     byId("totalPopulation").innerHTML = Math.floor(population.total);
     byId("maxPopulation").innerHTML = "/" + Math.floor(population.max);
     byId("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
-    byId("food").innerHTML = Math.floor(resources.food);
-    byId('wood').innerHTML = Math.floor(resources.wood);
-    byId('ore').innerHTML = Math.floor(resources.ore);
-    byId('knowledge').innerHTML = Math.floor(resources.knowledge);
-    byId('iron').innerHTML = Math.floor(resources.iron)
 
-    byId("foodStorage").innerHTML = "/" + Math.floor(storage.food);
-    byId("woodStorage").innerHTML = "/" + Math.floor(storage.wood);
-    byId("oreStorage").innerHTML = "/" + Math.floor(storage.ore);
-    byId("knowledgeStorage").innerHTML = "/" + Math.floor(storage.knowledge); 
-    byId("ironStorage").innerHTML = "/" + Math.floor(storage.iron)
+    // resources numbers update
+
+    
+    let resourcesKeys = Object.keys(resources)
+
+    for(i = 0; i < resourcesKeys.length; i++){
+
+        byId(resourcesKeys[i]).innerHTML = Math.floor(resources[resourcesKeys[i]])
+    }
+
+    // storage numbers update
+
+    let storageKeys = Object.keys(storage)
+
+    for(i = 0; i < storageKeys.length; i++){
+        byId(storageKeys[i] + "Storage").innerHTML = "/" + Math.floor(storage[storageKeys[i]])
+    }
 
     // update resources per second (2 decimals)
 
-    if(resourcesPerSec.food >= 0){
-        document.getElementById("foodPerSec").innerHTML = "+" + resourcesPerSec.food.toFixed(2) + "/s";
-    }
-    else{
-        document.getElementById("foodPerSec").innerHTML = resourcesPerSec.food.toFixed(2) + "/s";
-    }
-    if(resourcesPerSec.wood >= 0){
-        document.getElementById("woodPerSec").innerHTML = "+" + resourcesPerSec.wood.toFixed(2) + "/s";    
-    }
-    else{
-        document.getElementById("woodPerSec").innerHTML = resourcesPerSec.wood.toFixed(2) + "/s";
-    }
-    if(resourcesPerSec.ore >= 0){
-        document.getElementById("orePerSec").innerHTML = "+" + resourcesPerSec.ore.toFixed(2) + "/s";    
-    }
-    else{
-        document.getElementById("orePerSec").innerHTML = resourcesPerSec.ore.toFixed(2) + "/s";
-    }
-    if(resources.iron >= 0){
-        byId("ironPerSec").innerHTML = "+" + resourcesPerSec.iron.toFixed(2) + "/s";
-    }
-    else{
-        byId("ironPerSec").innerHTML = resourcesPerSec.iron.toFixed(2) + "/s";
-    }
-    if(resources.knowledge >= 0){
-        document.getElementById("knowledgePerSec").innerHTML = "+" + resourcesPerSec.knowledge.toFixed(2) + "/s";
-    }
-    else{
-        document.getElementById("knowledgePerSec").innerHTML = resourcesPerSec.knowledge.toFixed(2) + "/s";
-    } 
+    let resourcesPerSecKeys = Object.keys(resourcesPerSec)
 
-
+    for(let i = 0; i < resourcesPerSecKeys.length; i++){
+        if(resourcesPerSec[resourcesPerSecKeys[i]] >= 0){
+            byId(resourcesPerSecKeys[i] + "PerSec").innerHTML = "+" + resourcesPerSec[resourcesPerSecKeys[i]].toFixed(2) + "/s"
+        }
+        else{
+            byId(resourcesPerSecKeys[i] + "PerSec").innerHTML = resourcesPerSec[resourcesPerSecKeys[i]].toFixed(2) + "/s"
+        }
+    }
 
     // update population numbers - singular and plural forms
 
-    if (population.hunters === 1){
-        document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunter";
-    }
-    else {
-        document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunters";
-    }
+    let workersSingular = ['hunter', 'woodcutter', 'miner', 'scientist']
+    let workersPlural = ['hunters', 'woodcutters', 'miners', 'scientists']
 
-    if (population.woodcutters === 1){
-        document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutter";
+    for(i = 0; i < workersPlural.length; i++){
+        if(population[workersPlural[i]] === 1){
+            byId(workersPlural[i]).innerHTML = Math.floor(population[workersPlural[i]]) + " " + workersSingular[i]
+        }
+        else{
+            byId(workersPlural[i]).innerHTML = Math.floor(population[workersPlural[i]]) + " " + workersPlural[i]
+        }
     }
-    else {
-        document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutters";
-    }
-
-    if (population.miners === 1){
-        document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miner";
-    }
-    else {
-        document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miners";
-    }
-
-    if (population.scientists === 1){
-        document.getElementById("scientists").innerHTML = Math.floor(population.scientists) + " scientist";
-    }
-    else {
-        document.getElementById("scientists").innerHTML = Math.floor(population.scientists) + " scientists";
-    } 
-
 
     // equipment - total and running
 
@@ -1009,6 +965,10 @@ window.setInterval(function(){
     checkFood();
     turnOffEquipment()
 }, 2000);
+
+
+
+
 
 
 
