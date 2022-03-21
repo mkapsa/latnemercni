@@ -100,7 +100,7 @@ button{
     margin: 5px;    
     background-color: gray;
     color: black;
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 .resourceButton:hover{
@@ -123,7 +123,7 @@ button{
     background-color: yellow;
     color: black;
     margin: 5px;
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 #birthButton:hover{
@@ -144,7 +144,7 @@ button{
     height: 30px;
     width: 50px;
     margin: 5px;
-    border: 2px solid black;
+    border: 1px solid black;
     background-color: gray;
 }
 
@@ -178,7 +178,7 @@ button .tooltip {
     
     color: darkslategray;
     background-color: rgb(211, 211, 211);
-    border: 2px solid black;
+    border: 1px solid black;
     font-size: 12px;
     text-align: center;
     line-height: 25px;
@@ -216,7 +216,7 @@ button:hover .tooltip {
     height: 30px;
     width: 130px;
     background-color: lightcoral;
-    border: 2px solid black;
+    border: 1px solid black;
     margin: 5px;
 }
 
@@ -232,7 +232,7 @@ button:hover .tooltip {
     height: 30px;
     width: 130px;
     background-color: lightsteelblue;
-    border: 2px solid black;
+    border: 1px solid black;
     margin: 5px;
 }
 
@@ -248,7 +248,7 @@ button:hover .tooltip {
     height: 30px;
     width: 130px;
     margin: 5px;
-    border: 2px solid black;
+    border: 1px solid black;
     background-color: lightyellow;
 }
 
@@ -349,7 +349,7 @@ table {
     height: 30px;
     width: 30px;
     margin: 5px;
-    border: 2px solid black;
+    border: 1px solid black;
     font-weight: bolder;
 }
 
