@@ -19,8 +19,6 @@ header h1{
     margin-bottom: 70px;
 }
 
-
-
 #gameContainer{
     display: flex;
     flex-direction: row;
@@ -324,10 +322,6 @@ table {
     width: 20em;
 }
 
-#knowledge{
-    color: purple;
-}
-
 #equipment-row-1{
     display: flex;
     flex-direction: row;
@@ -357,6 +351,19 @@ table {
 
 .offButton{
     margin-left: 10px;
+}
+
+#upgrades-column-2{
+    display: flex;
+    flex-direction: column;
+}
+
+#wood{
+    color: #9A6D49;
+}
+
+#knowledge{
+    color: purple ;
 }
 
 

@@ -57,6 +57,12 @@
                             <td class="storageCapacity" id="ironStorage"></td>
                             <td class="perSec" id="ironPerSec"></td>
                         </tr>
+                        <tr class="resource" id="coalRow">
+                            <td>coal</td>
+                            <td class="resourceCount" id="coal"></td>
+                            <td class="storageCapacity" id="coalStorage"></td>
+                            <td class="perSec" id="coalPerSec"></td>
+                        </tr>
                         <tr>
                             <td>
                                 <br>
@@ -287,6 +293,17 @@
                                             <div class="price" id="metallurgy-price-knowledge">200</div>
                                             <div>knowledge</div>
                                         </div>
+                                    </div>
+                                </div>
+                            </button>
+                            <button class="upgradesButton" id="coalextraction-button" onclick="upgrade('coalextraction')">coal extraction
+                                <div class="tooltip">
+                                    <div class="description">
+                                        Miners now also produce coal.
+                                    </div>
+                                    <div class="priceRow">
+                                        <div class="price" id="coalextraction-price-knowledge">400</div>
+                                        <div>knowledge</div>
                                     </div>
                                 </div>
                             </button>

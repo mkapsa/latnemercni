@@ -4,6 +4,7 @@ resources = {
     wood:0,
     ore:0,
     iron:0,
+    coal:0,
     knowledge:0
 }
 
@@ -12,6 +13,7 @@ resourcesPerSec = {
     wood:0,
     ore:0,
     iron:0,
+    coal:0,
     knowledge:0
 }
 
@@ -20,6 +22,7 @@ storage = {
     wood:600,
     ore:300,
     iron:200,
+    coal:400,
     knowledge:200
 }
 
@@ -56,6 +59,7 @@ prices = {
         wood:300,
         ore:100,
         iron:0,
+        coal:0,
         knowledge:0
     },
     barn: {
@@ -63,6 +67,7 @@ prices = {
         wood:400,
         ore:250,
         iron:0,
+        coal:0,
         knowledge:0
     },
     woodenhut: {
@@ -70,6 +75,7 @@ prices = {
         wood:150,
         ore:50,
         iron:0,
+        coal:0,
         knowledge:0,
     },
     stonehut: {
@@ -77,6 +83,7 @@ prices = {
         wood:200,
         ore:300,
         iron:0,
+        coal:0,
         knowledge:0
     },
 
@@ -87,6 +94,7 @@ prices = {
         wood:300,
         ore:300,
         iron:0,
+        coal:0,
         knowledge:100
     },
 
@@ -95,6 +103,7 @@ prices = {
         wood:400,
         ore:0,
         iron:200,
+        coal:0,
         knowledge:150
     },
 
@@ -103,7 +112,17 @@ prices = {
         wood:0,
         ore:0,
         iron:0,
+        coal:0,
         knowledge:200
+    },
+
+    coalextraction: {
+        food:0,
+        wood:0,
+        ore:0,
+        iron:0,
+        coal:0,
+        knowledge:400
     },
 
     // equipment prices
@@ -113,6 +132,7 @@ prices = {
         wood:0,
         ore:100,
         iron:0,
+        coal:0,
         knowledge:50
     }
 }
@@ -124,23 +144,26 @@ hidden = {
     upgrades: {
         stoneaxe:false,
         ironaxe:true,
-        metallurgy: false 
+        metallurgy: false, 
+        coalextraction:true
     },
     equipment: {
         coldblastfurnace: true
     },
     resourceRows: {
         food: true,
-        wood:true,
-        ore:true,
-        iron:true,
-        knowledge:true
+        wood: true,
+        ore: true,
+        iron: true,
+        coal: true,
+        knowledge: true
     },
     resourcesPerSec: {
         food: true,
         wood: true,
         ore:true,
         iron:true,
+        coal: true,
         knowledge:true
     }
 }
@@ -151,7 +174,8 @@ rates = {
 
     hunterRate: 1,
     woodcutterRate: 0.5,
-    minerRate: 0.3,
+    minerOreRate: 0.3,
+    minerCoalRate:0,
     scientistRate: 0.2,
 
     // equipment net rates
@@ -166,7 +190,6 @@ rates = {
 // price coefficients
 
 const buildingCoefficient = 1.09;
-
 
 // document.id & document.class shortcuts so i don't have to type it over and over
 
@@ -258,6 +281,15 @@ function updateIron(number){
     }
 }
 
+function updateCoal(number){
+    if(resources.coal < storage.coal){
+        resources.coal = Math.max(0, resources.coal + number)
+    }
+    if(resources.coal >= storage.coal){
+        resources.coal = Math.min(storage.coal, resources.coal + number)
+    }
+}
+
 function updateKnowledge(number){
     if(resources.knowledge < storage.knowledge){
         resources.knowledge = Math.max(0, resources.knowledge + number);
@@ -317,7 +349,7 @@ function hire(job, number){
     if (job === 'miner' && population.unemployed >= number){
         population.unemployed -= number;
         population.miners += number;
-        resourcesPerSec.ore += rates.minerRate * number;
+        resourcesPerSec.ore += rates.minerOreRate * number;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
 
@@ -344,6 +376,7 @@ function hire(job, number){
             }
         }
 }
+
 function fire(job, number){
 
     if (job == 'hunter' && population.hunters >= number){
@@ -379,7 +412,7 @@ function fire(job, number){
     if (job === 'miner' && population.miners >= number){
         population.miners -= number;
         population.unemployed += number;
-        resourcesPerSec.ore -= rates.minerRate * number;
+        resourcesPerSec.ore -= rates.minerOreRate * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
 
@@ -412,7 +445,8 @@ function canAffordUpgrade(upgrade){
     resources.wood >= prices[upgrade].wood &&
     resources.ore >= prices[upgrade].ore &&
     resources.knowledge >= prices[upgrade].knowledge &&
-    resources.iron >= prices[upgrade].iron
+    resources.iron >= prices[upgrade].iron &&
+    resources.coal >= prices[upgrade].coal
 }
 
 function canAffordEquipment(equipment){
@@ -420,7 +454,8 @@ function canAffordEquipment(equipment){
     resources.wood >= prices[equipment].wood &&
     resources.ore >= prices[equipment].ore &&
     resources.knowledge >= prices[equipment].knowledge &&
-    resources.iron >= prices[equipment].iron
+    resources.iron >= prices[equipment].iron &&
+    resources.coal >= prices[equipment].coal
 }
 
 function canAffordBuilding(building, count){
@@ -429,7 +464,8 @@ function canAffordBuilding(building, count){
     resources.wood * count >= prices[building].wood * count && 
     resources.ore * count >= prices[building].ore * count && 
     resources.knowledge * count >= prices[building].knowledge * count &&
-    resources.iron >= prices[building].iron * count
+    resources.iron >= prices[building].iron * count &&
+    resources.coal >= prices[building].coal * count
 }
 
 function updateBuildingPrice(building){
@@ -510,17 +546,22 @@ function upgrade(upgrade){
             // unlock next possible upgrade (iron axe in this case)
 
             hidden.upgrades.ironaxe = false;
-        }
+        } else if(upgrade === 'ironaxe'){
 
-        if(upgrade === 'ironaxe'){
             resourcesPerSec.wood -= population.woodcutters * rates.woodcutterRate
             rates.woodcutterRate *= 1.75
             resourcesPerSec.wood += population.woodcutters * rates.woodcutterRate
-        }
 
-        if(upgrade === 'metallurgy'){
+        }else if(upgrade === 'metallurgy'){
+
             hidden.tiles.equipment = false
             hidden.equipment.coldblastfurnace = false
+            hidden.upgrades.coalextraction = false
+
+        }else if(upgrade === 'coalextraction'){
+            
+            resourcesPerSec.coal += population.miners * rates.minerCoalRate
+            
         }
     }
 }
@@ -672,7 +713,7 @@ function buttonDisabled(){
     }   
     
     
-    // equipment - disbaled if you don't have enough resources
+    // equipment - disabled if you don't have enough resources
 
     if(canAffordEquipment('coldblastfurnace') === false){
         byId('coldblastfurnace-button').style.backgroundColor = "rgb(200, 200, 200)"
@@ -696,7 +737,7 @@ function showContent(){
         byId(resource + 'Row').hidden = hidden.resourceRows[resource]
 
         if(resources[resourceRowsKeys[i]] > 0){
-            hidden.resourceRows[resource] = false;
+                hidden.resourceRows[resource] = false;
         }
     }
 
@@ -785,10 +826,9 @@ window.setInterval(function(){
     updateWood(resourcesPerSec.wood / 10)
     updateOre(resourcesPerSec.ore / 10)
     updateIron(resourcesPerSec.iron / 10)
+    updateCoal(resourcesPerSec.coal / 10)
     updateKnowledge(resourcesPerSec.knowledge / 10)
 
-    
-  
     displayResourcesPerSec()
     showContent()
     updateNumbers()
