@@ -49,6 +49,10 @@ header h1{
 
 }
 
+button{
+    border-radius: 2px;
+}
+
 .resource .resourceCount{
     margin-left: auto;
 }
