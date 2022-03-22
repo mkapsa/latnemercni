@@ -145,7 +145,7 @@ hidden = {
         stoneaxe:false,
         ironaxe:true,
         metallurgy: false, 
-        coalextraction:true
+        coalextraction: true
     },
     equipment: {
         coldblastfurnace: true
@@ -441,31 +441,21 @@ function fire(job, number){
 }
 
 function canAffordUpgrade(upgrade){
-    return resources.food >= prices[upgrade].food &&
-    resources.wood >= prices[upgrade].wood &&
-    resources.ore >= prices[upgrade].ore &&
-    resources.knowledge >= prices[upgrade].knowledge &&
-    resources.iron >= prices[upgrade].iron &&
-    resources.coal >= prices[upgrade].coal
+
+    return Object.keys(resources).every(key => resources[key] >= prices[upgrade][key])
+
 }
 
 function canAffordEquipment(equipment){
-    return resources.food >= prices[equipment].food &&
-    resources.wood >= prices[equipment].wood &&
-    resources.ore >= prices[equipment].ore &&
-    resources.knowledge >= prices[equipment].knowledge &&
-    resources.iron >= prices[equipment].iron &&
-    resources.coal >= prices[equipment].coal
+    
+    return Object.keys(resources).every(key => resources[key] >= prices[equipment][key])
+
 }
 
 function canAffordBuilding(building, count){
-    
-    return resources.food * count >= prices[building].food * count && 
-    resources.wood * count >= prices[building].wood * count && 
-    resources.ore * count >= prices[building].ore * count && 
-    resources.knowledge * count >= prices[building].knowledge * count &&
-    resources.iron >= prices[building].iron * count &&
-    resources.coal >= prices[building].coal * count
+
+    return Object.keys(resources).every(key => resources[key] * count >= prices[building] * count)
+
 }
 
 function updateBuildingPrice(building){
@@ -488,13 +478,11 @@ function build(building, count){
     if(canAffordBuilding(building, count) === true){
         buildings[building] += count;
 
+        let resourcesKeys = Object.keys(resources)
 
-        resources.food -= Math.floor(prices[building].food) * count;
-        resources.wood -= Math.floor(prices[building].wood) * count;
-        resources.ore -= Math.floor(prices[building].ore) * count;
-        resources.knowledge -= Math.floor(prices[building].knowledge) * count;
-
-        // buildingPrices = Object.keys(prices[building]).map(key => prices[building][key]);
+        for(i = 0; i < resourcesKeys.length; i++){
+            resources[resourcesKeys[i]] -= Math.floor(prices[building][resourcesKeys[i]]) * count
+        }
 
         for(let i = 0; i < count; i++){
             Object.keys(prices[building]).map(function(key){
@@ -519,7 +507,6 @@ function build(building, count){
             storage.wood += 300 * count;
             storage.ore += 200 * count;
         }
-
     }
 }
 
@@ -704,12 +691,17 @@ function buttonDisabled(){
     let upgradesKeys = Object.keys(hidden.upgrades)
 
     for(i = 0; i < upgradesKeys.length; i++){
+
         if(canAffordUpgrade(upgradesKeys[i])){
-            byId(upgradesKeys[i] + '-button').style.backgroundColor = null
+            
+            byId(upgradesKeys[i] + '-button').style.background = null
         }
-        else{
-            byId(upgradesKeys[i] + '-button').style.backgroundColor = "rgb(200, 200, 200)"
+        else if(canAffordUpgrade(upgradesKeys[i]) === false){
+
+            byId(upgradesKeys[i] + '-button').style.background = "rgb(200, 200, 200)"
         }
+
+
     }   
     
     
@@ -750,13 +742,13 @@ function showContent(){
         byId(hiddenKeys[i]).hidden = hiddenValues[i]
     }
 
-    // upgrades
+    // upgrades 
 
-    let upgradeKeys = Object.keys(hidden.upgrades)
-    let upgradeValues = Object.values(hidden.upgrades)
+    let upgradesKeys = Object.keys(hidden.upgrades)
+    let upgradesValues = Object.values(hidden.upgrades)
 
-    for(let i = 0; i < upgradeKeys.length; i++){
-        byId(upgradeKeys[i] + "-button").hidden = upgradeValues[i]
+    for(let i = 0; i < upgradesKeys.length; i++){
+        byId(upgradesKeys[i] + "-button").hidden = upgradesValues[i]
     }
 
     // equipment

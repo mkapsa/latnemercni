@@ -85,7 +85,7 @@ button{
 
 #technicalSection{
     position: fixed;
-    bottom: 10px;
+    bottom: 0px;
     display: flex;
     width: 100%;
 }
