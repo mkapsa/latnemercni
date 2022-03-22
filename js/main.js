@@ -454,7 +454,7 @@ function canAffordEquipment(equipment){
 
 function canAffordBuilding(building, count){
 
-    return Object.keys(resources).every(key => resources[key] * count >= prices[building] * count)
+    return Object.keys(resources).every(key => resources[key] * count >= prices[building][key] * count)
 
 }
 
