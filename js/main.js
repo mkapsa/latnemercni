@@ -261,19 +261,20 @@ function checkFood(){
         }
         else if(population.scientists >= 1){
             population.scientists -= 1;
-            resourcesPerSec.knowledge -= 0.2;
+            resourcesPerSec.knowledge -= rates.scientistRate;
         }
         else if(population.miners >= 1){
-            population.miners -= 1;
-            resourcesPerSec.ore -= 0.3;
+            population.miners -= 1
+            resourcesPerSec.ore -= rates.minerOreRate
+            resourcesPerSec.coal -= rates.minerCoalRate
         }
         else if(population.woodcutters >= 1){
             population.woodcutters -= 1
-            resourcesPerSec.wood -= 0.5;
+            resourcesPerSec.wood -= rates.woodcutterRate
         }
         else if(population.hunters >= 1){
-            population.hunters -= 1;
-            resourcesPerSec.food -= 1;
+            population.hunters -= 1
+            resourcesPerSec.food -= rates.hunterRate
         }        
     }
 }
@@ -355,13 +356,6 @@ function hire(job, number){
         resourcesPerSec.food += number * rates.hunterRate;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
-
-            if (population.hunters === 1){
-                document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunter";
-            }
-            else {
-                document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunters";
-            }
     }
 
     if (job === 'woodcutter' && population.unemployed >= number){
@@ -370,13 +364,6 @@ function hire(job, number){
         resourcesPerSec.wood += rates.woodcutterRate * number;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
-
-            if (population.woodcutters === 1){
-                document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutter";
-            }
-            else {
-                document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutters";
-            }
         }
 
     if (job === 'miner' && population.unemployed >= number){
@@ -385,13 +372,6 @@ function hire(job, number){
         resourcesPerSec.ore += rates.minerOreRate * number;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
-
-            if (population.miners === 1){
-                document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miner";
-            }
-            else {
-                document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miners";
-            }
         }
 
     if (job === 'scientist' && population.unemployed >= number){
@@ -400,13 +380,6 @@ function hire(job, number){
         resourcesPerSec.knowledge += rates.scientistRate * number;
 
         document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
-
-            if (population.scientists === 1){
-                document.getElementById("scientists").innerHTML = Math.floor(population.scientists) + " scientist";
-            }
-            else {
-                document.getElementById("scientists").innerHTML = Math.floor(population.scientists) + " scientists";
-            }
         }
 }
 
@@ -418,13 +391,6 @@ function fire(job, number){
         resourcesPerSec.food -= rates.hunterRate * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
-
-        if (population.hunters === 1){
-            document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunter";
-        }
-        else {
-            document.getElementById("hunters").innerHTML = Math.floor(population.hunters) + " hunters";
-        }
     }
 
     if (job === 'woodcutter' && population.woodcutters >= number){
@@ -433,13 +399,6 @@ function fire(job, number){
         resourcesPerSec.wood -= rates.woodcutterRate * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
-
-        if (population.woodcutters === 1){
-            document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutter";
-        }
-        else {
-            document.getElementById("woodcutters").innerHTML = Math.floor(population.woodcutters) + " woodcutters";
-        }
     }
 
     if (job === 'miner' && population.miners >= number){
@@ -448,13 +407,6 @@ function fire(job, number){
         resourcesPerSec.ore -= rates.minerOreRate * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
-
-        if (population.miners === 1){
-            document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miner";
-        }
-        else {
-            document.getElementById("miners").innerHTML = Math.floor(population.miners) + " miners";
-        }
     }
 
     if (job === 'scientist' && population.scientists >= number){
@@ -463,13 +415,6 @@ function fire(job, number){
         resourcesPerSec.knowledge -= rates.scientistRate * number;
 
         document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
-
-        if (population.scientists === 1){
-            document.getElementById("scientists").innerHTML = Math.floor(population.scientists) + " scientist";
-        }
-        else {
-            document.getElementById("scientists").innerHTML = Math.floor(population.scientists) + " scientists";
-        }
     }
 }
 
