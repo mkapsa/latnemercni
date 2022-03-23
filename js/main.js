@@ -1,4 +1,3 @@
-
 resources = {
     food:0,
     wood:0,
@@ -354,33 +353,25 @@ function hire(job, number){
         population.unemployed -= number;
         population.hunters += number;
         resourcesPerSec.food += number * rates.hunterRate;
-
-        document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
     }
 
     if (job === 'woodcutter' && population.unemployed >= number){
         population.unemployed -= number;
         population.woodcutters += number;
         resourcesPerSec.wood += rates.woodcutterRate * number;
-
-        document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
-        }
+    }
 
     if (job === 'miner' && population.unemployed >= number){
         population.unemployed -= number;
         population.miners += number;
         resourcesPerSec.ore += rates.minerOreRate * number;
-
-        document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
-        }
+    }
 
     if (job === 'scientist' && population.unemployed >= number){
         population.unemployed -= number;
         population.scientists += number;
         resourcesPerSec.knowledge += rates.scientistRate * number;
-
-        document.getElementById("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
-        }
+    }
 }
 
 function fire(job, number){
@@ -388,33 +379,25 @@ function fire(job, number){
     if (job == 'hunter' && population.hunters >= number){
         population.hunters -= number;
         population.unemployed += number;
-        resourcesPerSec.food -= rates.hunterRate * number;
-
-        document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
+        resourcesPerSec.food -= rates.hunterRate * number
     }
 
     if (job === 'woodcutter' && population.woodcutters >= number){
         population.woodcutters -= number;
         population.unemployed += number;
         resourcesPerSec.wood -= rates.woodcutterRate * number;
-
-        document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
     }
 
     if (job === 'miner' && population.miners >= number){
         population.miners -= number;
         population.unemployed += number;
         resourcesPerSec.ore -= rates.minerOreRate * number;
-
-        document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
     }
 
     if (job === 'scientist' && population.scientists >= number){
         population.scientists -= number;
         population.unemployed += number;
         resourcesPerSec.knowledge -= rates.scientistRate * number;
-
-        document.getElementById('unemployedPopulation').innerHTML = Math.floor(population.unemployed);
     }
 }
 
@@ -597,6 +580,8 @@ function updateNumbers(){
             byId(workersPlural[i]).innerHTML = Math.floor(population[workersPlural[i]]) + " " + workersPlural[i]
         }
     }
+
+    byId("unemployedPopulation").innerHTML = Math.floor(population.unemployed);
 
     // equipment - total and running
 
