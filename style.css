@@ -331,8 +331,6 @@ table {
     flex-direction: row;
 }
 
-
-
 .running {
     height: 40px;
     line-height: 40px;
@@ -350,8 +348,18 @@ table {
     width: 30px;
     margin: 5px;
     border: 1px solid black;
-    font-weight: bolder;
+    font-weight: bold;
+    background: rgb(233, 233, 233);
 }
+
+.onButton:hover, .offButton:hover{
+    background-color: inherit;
+}
+
+.onButton:active, .offButton:active{
+    color: gray;
+}
+
 
 .offButton{
     margin-left: 10px;

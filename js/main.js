@@ -218,6 +218,39 @@ function turnOffEquipment(){
     }
 }
 
+function turnOff(equipment1){
+
+    const equipmentRates = Object.keys(rates[equipment1])
+
+    if(equipment[equipment1].running > 0){
+
+        equipment[equipment1].running -= 1
+
+        for(i = 0; i < equipmentRates.length; i++){
+
+            resourcesPerSec[equipmentRates[i]] -= rates[equipment1][equipmentRates[i]]
+
+        }
+    }
+}
+
+function turnOn(equipment1){
+    const equipmentRates = Object.keys(rates[equipment1])
+
+    if(equipment[equipment1].total > equipment[equipment1].running){
+
+        equipment[equipment1].running += 1
+
+        for(i = 0; i < equipmentRates.length; i++){
+
+            resourcesPerSec[equipmentRates[i]] += rates[equipment1][equipmentRates[i]]
+        }
+    }
+
+}
+
+
+
 function checkFood(){
     if(resourcesPerSec.food < 0 && resources.food === 0 && population.total >= 1){
         population.total -= 1;
