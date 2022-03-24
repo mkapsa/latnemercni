@@ -39,7 +39,8 @@ buildings = {
     pantry:0,
     barn:0,
     woodenhut:0,
-    stonehut:0
+    stonehut:0,
+    library:0
 }
 
 equipment = {
@@ -63,8 +64,8 @@ prices = {
     },
     barn: {
         food:0,
-        wood:400,
-        ore:250,
+        wood:300,
+        ore:150,
         iron:0,
         coal:0,
         knowledge:0
@@ -81,6 +82,14 @@ prices = {
         food:0,
         wood:200,
         ore:300,
+        iron:0,
+        coal:0,
+        knowledge:0
+    },
+    library: {
+        food:0,
+        wood:400,
+        ore:0,
         iron:0,
         coal:0,
         knowledge:0
