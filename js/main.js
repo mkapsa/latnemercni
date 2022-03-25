@@ -463,20 +463,18 @@ function build(building, count){
         
         if(building === 'pantry'){
             storage.food += 100 * count;
-        }
-        
-        if(building === 'woodenhut'){
+        } 
+        else if(building === 'woodenhut'){
             population.max += count;
         }
-
-        if(building === 'stonehut'){
+        else if(building === 'stonehut'){
             population.max += count * 3;
-        }
-        
-        if(building === 'barn'){
+        }        
+        else if(building === 'barn'){
             storage.wood += 300 * count;
             storage.ore += 200 * count;
         }
+        
     }
 }
 
