@@ -275,6 +275,10 @@ button:hover .tooltip {
     font-weight: bold;
 }
 
+.priceRow span{
+    font-weight: bold;
+}
+
 .netRow{
     display: flex;
     flex-direction: row;
