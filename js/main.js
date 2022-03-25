@@ -440,7 +440,10 @@ function updateBuildingPrice(building){
 }
 
 function updatePrices(){
-    updateBuildingPrice('pantry');
+    
+    for(let i = 0; i < Object.keys(buildings).length; i++){
+        updateBuildingPrice(Object.keys(buildings)[i])
+    }
 }
 
 function build(building, count){
