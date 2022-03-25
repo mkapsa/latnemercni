@@ -114,6 +114,14 @@ prices = {
         coal:0,
         knowledge:150
     },
+    ironpickaxe: {
+        food:0,
+        wood:0,
+        ore:0,
+        iron:350,
+        coal:0,
+        knowledge:800
+    },
 
     metallurgy: {
         food:0,
@@ -152,6 +160,7 @@ hidden = {
     upgrades: {
         stoneaxe:false,
         ironaxe:true,
+        ironpickaxe:true,
         metallurgy: false, 
         coalextraction: true
     },
@@ -504,24 +513,33 @@ function upgrade(upgrade){
             // unlock next possible upgrade (iron axe in this case)
 
             hidden.upgrades.ironaxe = false;
-        } else if(upgrade === 'ironaxe'){
+        } 
+        else if(upgrade === 'ironaxe'){
 
             resourcesPerSec.wood -= population.woodcutters * rates.woodcutterRate
             rates.woodcutterRate *= 1.75
             resourcesPerSec.wood += population.woodcutters * rates.woodcutterRate
 
-        }else if(upgrade === 'metallurgy'){
+        }
+        else if(upgrade === 'ironpickaxe'){
+
+            resourcesPerSec.ore -= population.miners * rates.minerOreRate
+            rates.minerOreRate *= 1.8
+            resourcesPerSec.ore += population.miners * rates.minerOreRate
+        }     
+        else if(upgrade === 'metallurgy'){
 
             hidden.tiles.equipment = false
             hidden.equipment.coldblastfurnace = false
             hidden.upgrades.coalextraction = false
+            hidden.upgrades.ironpickaxe = false
 
         }else if(upgrade === 'coalextraction'){
             
             rates.minerCoalRate = 0.3
             resourcesPerSec.coal += population.miners * rates.minerCoalRate
-            
         }
+        
     }
 }
 
