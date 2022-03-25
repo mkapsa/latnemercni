@@ -522,7 +522,7 @@ function upgrade(upgrade){
 
         }else if(upgrade === 'coalextraction'){
             
-            rates.minerCoalRate = 0.3
+            rates.minerCoalRate = 0.6
             resourcesPerSec.coal += population.miners * rates.minerCoalRate
             
         }
