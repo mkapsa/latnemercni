@@ -20,8 +20,8 @@ storage = {
     food:100,
     wood:600,
     ore:300,
-    iron:200,
-    coal:400,
+    iron:100,
+    coal:200,
     knowledge:200
 }
 
@@ -180,11 +180,11 @@ rates = {
 
     // worker rate coefficients
 
-    hunterRate: 1,
-    woodcutterRate: 0.5,
-    minerOreRate: 0.3,
+    hunterRate: 1 * 2,
+    woodcutterRate: 0.5 * 2,
+    minerOreRate: 0.3 * 2,
     minerCoalRate:0,
-    scientistRate: 0.2,
+    scientistRate: 0.2 * 2,
 
     // equipment net rates
 
@@ -466,17 +466,19 @@ function build(building, count){
         updateBuildingPrice(building);    
         
         if(building === 'pantry'){
-            storage.food += 100 * count;
+            storage.food += 100 * count
         } 
         else if(building === 'woodenhut'){
-            population.max += count;
+            population.max += count
         }
         else if(building === 'stonehut'){
-            population.max += count * 3;
+            population.max += count * 3
         }        
         else if(building === 'barn'){
-            storage.wood += 300 * count;
-            storage.ore += 200 * count;
+            storage.wood += 300 * count
+            storage.ore += 200 * count
+            storage.coal += 100 * count
+            storage.iron += 50 * count
         }
         else if(building === 'library')
             storage.knowledge += 300 * count        
