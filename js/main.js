@@ -429,15 +429,14 @@ function canAffordBuilding(building, count){
 }
 
 function updateBuildingPrice(building){
-    byId(building + "-price-food").innerHTML = prices[building].food;
-    byId(building + "-price-wood").innerHTML = prices[building].wood;    
-    byId(building + "-price-ore").innerHTML = prices[building].ore;
-    byId(building + "-price-knowledge").innerHTML = prices[building].knowledge;
 
-    byId(building + "-price-food").hidden = prices[building].food < 1 || prices[building].food === undefined; 
-    byId(building + "-price-wood").hidden = prices[building].wood < 1 || prices[building].wood === undefined; 
-    byId(building + "-price-ore").hidden = prices[building].ore < 1 || prices[building].ore === undefined;
-    byId(building + "-price-knowledge").hidden = prices[building].knowledge < 1 || prices[building].knowledge === undefined; 
+    const buildingmats = Object.entries(prices[building]).filter(([a, b]) => b !== 0).map(([a, b]) => a );
+
+    for(i = 0; i < buildingmats.length; i++){
+        byId(building + "-price-" + buildingmats[i]).innerHTML = prices[building][buildingmats[i]]
+
+        byId(building + "-price-" + buildingmats[i]).hidden = prices[building][buildingmats[i]] < 1 || prices[building][buildingmats[i]] === undefined
+    }
 }
 
 function updatePrices(){
@@ -445,7 +444,7 @@ function updatePrices(){
 }
 
 function build(building, count){
-    if(canAffordBuilding(building, count) === true){
+    if(canAffordBuilding(building, count)){
         buildings[building] += count;
 
         let resourcesKeys = Object.keys(resources)
@@ -474,7 +473,8 @@ function build(building, count){
             storage.wood += 300 * count;
             storage.ore += 200 * count;
         }
-        
+        else if(building === 'library')
+            storage.knowledge += 300 * count        
     }
 }
 
@@ -527,6 +527,8 @@ function buyEquipment(desiredEquipment){
         equipment[desiredEquipment].total += 1
         equipment[desiredEquipment].running += 1
        
+        
+
         resources = subtract(resources, prices[desiredEquipment])
 
         if(desiredEquipment === 'coldblastfurnace'){
