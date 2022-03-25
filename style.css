@@ -353,7 +353,7 @@ table {
     margin: 5px;
     border: 1px solid black;
     font-weight: bold;
-    background: rgb(233, 233, 233);
+    background: gray;
 }
 
 .onButton:hover, .offButton:hover{
