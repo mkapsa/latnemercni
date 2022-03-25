@@ -447,6 +447,8 @@ function build(building, count){
     if(canAffordBuilding(building, count)){
         buildings[building] += count;
 
+        byId(building + "-count").innerHTML = "(" + buildings[building] + ")"
+
         let resourcesKeys = Object.keys(resources)
 
         for(i = 0; i < resourcesKeys.length; i++){
@@ -601,6 +603,14 @@ function updateNumbers(){
         byId(equipmentKeys[i] + "-running").innerHTML = equipment[equipmentKeys[i]].running
     }
 
+    // building counters
+
+    let buildingsKeys = Object.keys(buildings)
+
+    for(let i = 0; i < buildingsKeys.length; i++){
+        byId(buildingsKeys[i] + "-count").innerHTML = "(" + buildings[buildingsKeys[i]] + ")"
+    }
+
 };
 
 function displayResourcesPerSec(){
@@ -675,8 +685,7 @@ function buttonDisabled(){
         }
 
 
-    }   
-    
+    }       
     
     // equipment - disabled if you don't have enough resources
 
@@ -732,6 +741,16 @@ function showContent(){
     for(let i = 0; i < equipmentKeys; i++){
         byId(equipmentKeys[i] + "-button").hidden = equipmentValues[i]
     }
+
+    // building counters
+
+    let buildingsKeys = Object.keys(buildings)
+
+    for(let i = 0; i < buildingsKeys.length; i++){
+        byId(buildingsKeys[i] + "-count").hidden = buildings[buildingsKeys[i]] === 0
+    }
+
+    
 }
 
 // saving function (localstorage), fires every minute + can be fired manually (button)

@@ -377,3 +377,22 @@ table {
 #knowledge{
     color: purple ;
 }
+
+.buildingCount{
+    background-color: inherit;
+}
+
+.buildingName{
+    background-color: inherit;
+}
+
+.buildingCount:active{
+    background-color: inherit;
+}
+
+.buildingName:active{
+    background-color: inherit;
+}
+
+
+
