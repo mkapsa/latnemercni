@@ -359,26 +359,24 @@ function giveBirth(number){
 function hire(job, number){
 
     if (job === 'hunter' && population.unemployed >= number){
-        population.unemployed -= number;
-        population.hunters += number;
-        resourcesPerSec.food += number * rates.hunterRate;
+        population.unemployed -= number
+        population.hunters += number
+        resourcesPerSec.food += number * rates.hunterRate
     }
-
-    if (job === 'woodcutter' && population.unemployed >= number){
-        population.unemployed -= number;
-        population.woodcutters += number;
-        resourcesPerSec.wood += rates.woodcutterRate * number;
+    else if (job === 'woodcutter' && population.unemployed >= number){
+        population.unemployed -= number
+        population.woodcutters += number
+        resourcesPerSec.wood += rates.woodcutterRate * number
     }
-
-    if (job === 'miner' && population.unemployed >= number){
-        population.unemployed -= number;
-        population.miners += number;
-        resourcesPerSec.ore += rates.minerOreRate * number;
+    else if (job === 'miner' && population.unemployed >= number){
+        population.unemployed -= number
+        population.miners += number
+        resourcesPerSec.ore += rates.minerOreRate * number
+        resourcesPerSec.coal += rates.minerCoalRate * number
     }
-
-    if (job === 'scientist' && population.unemployed >= number){
-        population.unemployed -= number;
-        population.scientists += number;
+    else if (job === 'scientist' && population.unemployed >= number){
+        population.unemployed -= number
+        population.scientists += number
         resourcesPerSec.knowledge += rates.scientistRate * number;
     }
 }
@@ -386,27 +384,25 @@ function hire(job, number){
 function fire(job, number){
 
     if (job == 'hunter' && population.hunters >= number){
-        population.hunters -= number;
-        population.unemployed += number;
+        population.hunters -= number
+        population.unemployed += number
         resourcesPerSec.food -= rates.hunterRate * number
     }
-
-    if (job === 'woodcutter' && population.woodcutters >= number){
-        population.woodcutters -= number;
-        population.unemployed += number;
-        resourcesPerSec.wood -= rates.woodcutterRate * number;
+    else if (job === 'woodcutter' && population.woodcutters >= number){
+        population.woodcutters -= number
+        population.unemployed += number
+        resourcesPerSec.wood -= rates.woodcutterRate * number
     }
-
-    if (job === 'miner' && population.miners >= number){
-        population.miners -= number;
-        population.unemployed += number;
-        resourcesPerSec.ore -= rates.minerOreRate * number;
+    else if (job === 'miner' && population.miners >= number){
+        population.miners -= number
+        population.unemployed += number
+        resourcesPerSec.ore -= rates.minerOreRate * number
+        resourcesPerSec.coal -= rates.minerCoalRate * number
     }
-
-    if (job === 'scientist' && population.scientists >= number){
-        population.scientists -= number;
-        population.unemployed += number;
-        resourcesPerSec.knowledge -= rates.scientistRate * number;
+    else if (job === 'scientist' && population.scientists >= number){
+        population.scientists -= number
+        population.unemployed += number
+        resourcesPerSec.knowledge -= rates.scientistRate * number
     }
 }
 
@@ -522,7 +518,7 @@ function upgrade(upgrade){
 
         }else if(upgrade === 'coalextraction'){
             
-            rates.minerCoalRate = 0.6
+            rates.minerCoalRate = 0.3
             resourcesPerSec.coal += population.miners * rates.minerCoalRate
             
         }
