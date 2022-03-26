@@ -708,12 +708,18 @@ function buttonDisabled(){
     
     // equipment - disabled if you don't have enough resources
 
-    if(canAffordEquipment('coldblastfurnace') === false){
-        byId('coldblastfurnace-button').style.backgroundColor = "rgb(200, 200, 200)"
+    let equipmentKeys = Object.keys(equipment)
+
+    for(i = 0; i < equipmentKeys.length; i++){
+        if(canAffordEquipment(equipmentKeys[i]) === false){
+            byId(equipmentKeys[i] + "-button").style.backgroundColor = "rgb(200, 200, 200)"
+        }
+        else{
+            byId(equipmentKeys[i] + "-button").style.backgroundColor = null;
+        }    
     }
-    else{
-        byId('coldblastfurnace-button').style.backgroundColor = null;
-    }
+
+    
 }
 
 function showContent(){
