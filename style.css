@@ -87,11 +87,8 @@ button{
     position: fixed;
     bottom: 0px;
     display: flex;
+    justify-content: flex-end;
     width: 100%;
-}
-
-#resetButton{
-    margin-left: auto;
 }
 
 .resourceButton{
@@ -401,4 +398,23 @@ table {
 
 .buildingName:active{
     background-color: inherit;
+}
+
+.technicalButton{
+    height: 20px;
+    width: 100px;
+    margin: 5px;
+    border: 1px solid black;
+}
+
+#saveButton:hover, #loadButton:hover{
+
+    background-color: white;
+
+}
+
+#saveButton:active, #loadButton:active{
+
+    background-color: inherit;
+
 }

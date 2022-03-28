@@ -717,9 +717,7 @@ function buttonDisabled(){
         else{
             byId(equipmentKeys[i] + "-button").style.backgroundColor = null;
         }    
-    }
-
-    
+    }    
 }
 
 function showContent(){
