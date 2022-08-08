@@ -91,6 +91,11 @@ button{
     width: 100%;
 }
 
+#progression-tree{
+    margin-right: auto;
+    margin-left: 30px;
+}
+
 .resourceButton{
     height: 30px;
     width: 130px;
@@ -377,11 +382,11 @@ table {
 }
 
 #food{
-    color: #F6BE00;
+    color: #f6bd00d2;
 }
 
 #iron{
-    color:#a19d94;
+    color:#b0b2b8;
 }
 
 #wood{
@@ -426,3 +431,4 @@ table {
     background-color: inherit;
 
 }
+
