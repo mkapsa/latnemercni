@@ -376,6 +376,14 @@ table {
     flex-direction: column;
 }
 
+#food{
+    color: #F6BE00;
+}
+
+#iron{
+    color:#a19d94;
+}
+
 #wood{
     color: #9A6D49;
 }
