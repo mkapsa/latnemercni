@@ -6,3 +6,19 @@ h1{
     padding: 1vmin;
 }
 
+.progressiontreeButton{
+    width: 130px;
+    height: 30px;
+    border-radius: 2px;
+    border: 1px solid black;
+}
+
+.buttonRow{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+
+
+
