@@ -6,6 +6,24 @@ h1{
     padding: 1vmin;
 }
 
+#workinprogress{
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    text-align: center;
+    font-size: 44px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: black;    
+}
+
 .progressiontreeButton{
     width: 130px;
     height: 30px;
