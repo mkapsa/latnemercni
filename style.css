@@ -238,11 +238,27 @@ button:hover .tooltip {
     margin: 5px;
 }
 
+.upgradesButtonBigger{
+    height: 40px;
+    width: 130px;
+    background-color: lightsteelblue;
+    border: 1px solid black;
+    margin: 5px;
+}
+
 .upgradesButton:hover{
     background-color: inherit;
 }
 
+.upgradesButtonBigger:hover{
+    background-color: inherit;
+}
+
 .upgradesButton:active{
+    color: gray;
+}
+
+.upgradesButtonBigger:active{
     color: gray;
 }
 
@@ -318,7 +334,7 @@ button:hover .tooltip {
 
 .columns{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 30px;
 }
 
