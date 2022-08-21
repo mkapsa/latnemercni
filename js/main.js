@@ -157,7 +157,7 @@ hidden = {
     tiles:{
         equipment:true,
         buildings:true,
-        upgrades:true
+        upgrades:false
     },
     upgrades: {
         stoneaxe:false,
