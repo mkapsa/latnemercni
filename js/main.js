@@ -164,7 +164,8 @@ hidden = {
         ironaxe:true,
         ironpickaxe:true,
         metallurgy: false, 
-        coalextraction: true
+        coalextraction: true,
+        destructivedistillation: true
     },
     equipment: {
         coldblastfurnace: true
@@ -540,6 +541,8 @@ function upgrade(upgrade){
             
             rates.minerCoalRate = 0.3
             resourcesPerSec.coal += population.miners * rates.minerCoalRate
+
+            hidden.upgrades.destructivedistillation = false
         }
         
     }
