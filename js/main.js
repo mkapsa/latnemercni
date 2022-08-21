@@ -155,7 +155,9 @@ prices = {
 
 hidden = {
     tiles:{
-        equipment:true
+        equipment:true,
+        buildings:true,
+        upgrades:true
     },
     upgrades: {
         stoneaxe:false,
