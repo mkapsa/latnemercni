@@ -141,6 +141,15 @@ prices = {
         knowledge:400
     },
 
+    destructivedistillation: {
+        food:0,
+        wood:0,
+        ore:0,
+        iron:0,
+        coal:0,
+        knowledge:800
+    },
+
     // equipment prices
 
     coldblastfurnace: {
@@ -420,9 +429,13 @@ function fire(job, number){
 
 function canAffordUpgrade(upgrade){
 
+
     return Object.keys(resources).every(key => resources[key] >= prices[upgrade][key])
 
 }
+
+
+
 
 function canAffordEquipment(equipment){
     
@@ -542,7 +555,7 @@ function upgrade(upgrade){
             rates.minerCoalRate = 0.3
             resourcesPerSec.coal += population.miners * rates.minerCoalRate
 
-            hidden.upgrades.destructivedistillation = false
+            // hidden.upgrades.destructivedistillation = false
         }
         
     }
