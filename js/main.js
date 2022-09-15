@@ -210,7 +210,7 @@ rates = {
     // equipment net rates
 
     coldblastfurnace: {
-        wood:-1.5,
+        coal:-1,
         ore:-1,
         iron:0.25
     }
@@ -239,9 +239,9 @@ window.onload = checkLocalStorage()
 window.onload = updateNumbers();
 
 function turnOffEquipment(){
-    if((resourcesPerSec.wood < 0 && resources.wood === 0 ) || (resourcesPerSec.ore < 0 && resources.ore === 0) && equipment.coldblastfurnace.running > 0){
+    if((resourcesPerSec.coal < 0 && resources.coal === 0 ) || (resourcesPerSec.ore < 0 && resources.ore === 0) && equipment.coldblastfurnace.running > 0){
         equipment.coldblastfurnace.running -= 1;
-        resourcesPerSec.wood -= rates.coldblastfurnace.wood
+        resourcesPerSec.coal -= rates.coldblastfurnace.coal
         resourcesPerSec.ore -= rates.coldblastfurnace.ore
         resourcesPerSec.iron -= rates.coldblastfurnace.iron
     }
@@ -572,7 +572,7 @@ function buyEquipment(desiredEquipment){
 
         if(desiredEquipment === 'coldblastfurnace'){
             resourcesPerSec.ore -= 1
-            resourcesPerSec.wood -= 1.5
+            resourcesPerSec.coal -= 1
             resourcesPerSec.iron += 0.25
         }
     }
