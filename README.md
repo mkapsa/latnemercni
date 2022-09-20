@@ -4,6 +4,6 @@
 
 https://mkapsa.github.io/latnemercni/
 
-*made to practice html, css and vanilla javascript
+* made to practice html, css and vanilla javascript
 
 
