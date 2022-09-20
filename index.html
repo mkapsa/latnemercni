@@ -275,7 +275,6 @@
                                             <div class="price" id="stoneaxe-price-knowledge">100</div>
                                             <div>knowledge</div>
                                         </div>
-
                                     </div>
                                 </div>
                             </button>
@@ -318,8 +317,13 @@
                                 </div>
                             </button>
                         </div>
-                        <div id="upgrades-column-2">
-                            <button class="upgradesButton" id="metallurgy-button" onclick="upgrade('metallurgy')">metallurgy
+                    </div>
+                </div>
+                <div id="science">
+                    <h2 class="sectionHeading">science</h2>
+                    <div class="columns">
+                        <div id="science-column-1">
+                            <button class="upgradesButton" id="metallurgy-button" onclick="science('metallurgy')">metallurgy
                                 <div class="tooltip">
                                     <div class="description">
                                         Enables basic metal processing.
@@ -332,7 +336,7 @@
                                     </div>
                                 </div>
                             </button>
-                            <button class="upgradesButton" id="coalextraction-button" onclick="upgrade('coalextraction')">coal extraction
+                            <button class="upgradesButton" id="coalextraction-button" onclick="science('coalextraction')">coal extraction
                                 <div class="tooltip">
                                     <div class="description">
                                         Miners now also produce coal.
@@ -343,7 +347,7 @@
                                     </div>
                                 </div>
                             </button>
-                            <button class="upgradesButtonBigger" id="destructivedistillation-button" onclick="upgrade('destructivedistillation')">destructive distillation
+                            <button class="upgradesButtonBigger" id="destructivedistillation-button" onclick="science('destructivedistillation')">destructive distillation
                                 <div class="tooltip">
                                     <div class="description">
                                         Process of heating coal to high temperatures to produce blast furnace fuel.

@@ -343,6 +343,11 @@ button:hover .tooltip {
     flex-direction: column;
 }
 
+#science-column-1{
+    display: flex;
+    flex-direction: column;
+}
+
 table {
     table-layout: auto;
     width: 20em;
@@ -447,4 +452,6 @@ table {
     background-color: inherit;
 
 }
+
+
 

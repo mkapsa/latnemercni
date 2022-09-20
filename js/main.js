@@ -172,6 +172,9 @@ hidden = {
         stoneaxe:false,
         ironaxe:true,
         ironpickaxe:true,
+        
+    },
+    science: {
         metallurgy: false, 
         coalextraction: true,
         destructivedistillation: true
@@ -443,6 +446,11 @@ function canAffordEquipment(equipment){
 
 }
 
+const canAffordScience = (science) => {
+    return Object.keys(resources).every(key => resources[key] >= prices[science][key])
+}
+
+
 function canAffordBuilding(building, count){
 
     return Object.keys(resources).every(key => resources[key] * count >= prices[building][key] * count)
@@ -464,7 +472,8 @@ function updatePrices(){
     
     for(let i = 0; i < Object.keys(buildings).length; i++){
         updateBuildingPrice(Object.keys(buildings)[i])
-    }
+    }   
+
 }
 
 function build(building, count){
@@ -542,23 +551,33 @@ function upgrade(upgrade){
             resourcesPerSec.ore -= population.miners * rates.minerOreRate
             rates.minerOreRate *= 1.8
             resourcesPerSec.ore += population.miners * rates.minerOreRate
-        }     
-        else if(upgrade === 'metallurgy'){
+        }             
+    }
+}
+
+const science = (science) => {
+
+    if(canAffordScience(science)){
+        hidden.science[science] = true;
+
+        resources = subtract(resources, prices[science])
+
+        if(science === 'metallurgy'){
 
             hidden.tiles.equipment = false
             hidden.equipment.coldblastfurnace = false
-            hidden.upgrades.coalextraction = false
             hidden.upgrades.ironpickaxe = false
+            hidden.science.coalextraction = false
 
-        }else if(upgrade === 'coalextraction'){
+        }else if(science === 'coalextraction'){
             
             rates.minerCoalRate = 0.3
             resourcesPerSec.coal += population.miners * rates.minerCoalRate
 
-            // hidden.upgrades.destructivedistillation = false
+            hidden.science.destructivedistillation = false
         }
-        
     }
+
 }
 
 function buyEquipment(desiredEquipment){
@@ -734,9 +753,23 @@ function buttonDisabled(){
         }
         else{
             byId(equipmentKeys[i] + "-button").style.backgroundColor = null;
+
         }    
-    }    
+    }   
+    
+    const scienceKeys = Object.keys(hidden.science)
+    
+    for(i = 0; i < scienceKeys.length; i++){
+        if(canAffordScience(scienceKeys[i]) === false){
+            byId(scienceKeys[i] + "-button").style.backgroundColor = "rgb(200, 200, 200)"
+        }
+        else{
+            byId(scienceKeys[i] + "-button").style.backgroundColor = null;
+        }
+        
+    }
 }
+
 
 function showContent(){
 
@@ -781,6 +814,15 @@ function showContent(){
 
     for(let i = 0; i < equipmentKeys; i++){
         byId(equipmentKeys[i] + "-button").hidden = equipmentValues[i]
+    }
+
+    // science
+
+    let scienceKeys = Object.keys(hidden.science)
+    let scienceValues = Object.values(hidden.science)
+
+    for(let i = 0; i < scienceKeys.length; i++){
+        byId(scienceKeys[i] + "-button").hidden = scienceValues[i]
     }
 
     // building counters
