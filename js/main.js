@@ -773,8 +773,14 @@ function buttonDisabled(){
 }
 
 const hideBasicButtons = () => {
-    hidden.tiles.basicButtons = !hidden.tiles.basicButtons
-
+    
+    if(hidden.tiles.basicButtons){
+        hidden.tiles.basicButtons = false
+    }
+    else if(hidden.tiles.basicButtons === false){
+        hidden.tiles.basicButtons = true
+    }
+    
     if(byId('hidebutton').textContent == 'hide basic buttons'){
         byId('hidebutton').innerHTML = 'show basic buttons' 
     }
