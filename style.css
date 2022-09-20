@@ -451,13 +451,9 @@ table {
 }
 
 #saveButton:hover, #loadButton:hover{
-
     color: white;
-
 }
 
 #saveButton:active, #loadButton:active{
-
     color: inherit;
-
 }
