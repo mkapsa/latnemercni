@@ -216,7 +216,7 @@ button:hover .tooltip {
 }
 
 #resetButton:hover{
-    background-color: red;
+    color: red;
 }
 
 .sectionHeading{
@@ -444,20 +444,20 @@ table {
 }
 
 .technicalButton{
-    height: 20px;
-    width: 100px;
-    margin: 5px;
-    border: 1px solid black;
+    margin-left: 8px;
+    margin-bottom: 10px;
+    text-decoration: underline;
+    margin-right: 8px;
 }
 
 #saveButton:hover, #loadButton:hover{
 
-    background-color: white;
+    color: white;
 
 }
 
 #saveButton:active, #loadButton:active{
 
-    background-color: inherit;
+    color: inherit;
 
 }
