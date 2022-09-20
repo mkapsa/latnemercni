@@ -92,8 +92,17 @@ button{
 }
 
 #progression-tree{
+    margin-left: 15px;
+}
+
+#hidebutton{
     margin-right: auto;
     margin-left: 15px;
+    text-decoration: underline;
+}
+
+#hidebutton:hover{
+    color: gray;
 }
 
 .resourceButton{
@@ -452,6 +461,3 @@ table {
     background-color: inherit;
 
 }
-
-
-

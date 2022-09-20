@@ -164,6 +164,8 @@ prices = {
 
 hidden = {
     tiles:{
+        basicButtons:false,
+        workers:false,
         equipment:true,
         buildings:false,
         upgrades:false
@@ -770,6 +772,17 @@ function buttonDisabled(){
     }
 }
 
+const hideBasicButtons = () => {
+    hidden.tiles.basicButtons = !hidden.tiles.basicButtons
+
+    if(byId('hidebutton').textContent == 'hide basic buttons'){
+        byId('hidebutton').innerHTML = 'show basic buttons' 
+    }
+    else if(byId('hidebutton').textContent == 'show basic buttons'){
+        byId('hidebutton').innerHTML = 'hide basic buttons'
+    }
+    
+}
 
 function showContent(){
 
@@ -884,3 +897,5 @@ function resetGame(){
         location.reload()
     }           
 }
+
+
