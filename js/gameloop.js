@@ -5,6 +5,7 @@ window.setInterval(function(){
     updateOre(resourcesPerSec.ore / 10)
     updateIron(resourcesPerSec.iron / 10)
     updateCoal(resourcesPerSec.coal / 10)
+    updateCoke(resourcesPerSec.coke / 10)
     updateKnowledge(resourcesPerSec.knowledge / 10)
 
     displayResourcesPerSec()
