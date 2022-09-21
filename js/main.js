@@ -210,6 +210,13 @@ hidden = {
         coalextraction: true,
         destructivedistillation: true
     },
+    buildings: {
+        pantry:false,
+        barn:false,
+        woodenhut:false,
+        stonehut:false,
+        library:false
+    },
     equipment: {
         coldblastfurnace: true,
         cokeoven:true,
@@ -878,6 +885,13 @@ function showContent(){
 
     for(let i = 0; i < upgradesKeys.length; i++){
         byId(upgradesKeys[i] + "-button").hidden = upgradesValues[i]
+    }
+
+    // buildings
+
+    for(let i = 0; i < Object.keys(hidden.buildings).length; i++){
+        byId(Object.keys(hidden.buildings)[i] + '-button').hidden = Object.values(hidden.buildings)[i]
+
     }
 
     // equipment
