@@ -126,6 +126,87 @@
                         <div class="numberOfWorkers" id="scientists">0 scientists</div>
                     </div>
                 </div>
+                <div id="science">
+                    <h2 class="sectionHeading">science</h2>
+                    <div class="columns">
+                        <div id="science-column-1">
+                            <button class="upgradesButton" id="upgrades-button" onclick="science('upgrades')">upgrades
+                                <div class="tooltip">
+                                    <div class="description">
+                                        Enables you to upgrade your tools and other equipment.
+                                    </div>
+                                    <div class="prices">
+                                        <div class="priceRow">
+                                            <div class="price" id="upgrades-price-knowledge">50</div>
+                                            <div>knowledge</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                            <button class="upgradesButton" id="buildings-button" onclick="science('buildings')">buildings
+                                <div class="tooltip">
+                                    <div class="description">
+                                        Ability to construct various buildings from acquired materials.
+                                    </div>
+                                    <div class="prices">
+                                        <div class="priceRow">
+                                            <div class="price" id="buildings-price-knowledge">25</div>
+                                            <div>knowledge</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                            <button class="upgradesButton" id="housing-button" onclick="science('housing')">housing
+                                <div class="tooltip">
+                                    <div class="description">
+                                        Special buildings increasing your maximum population.
+                                    </div>
+                                    <div class="prices">
+                                        <div class="priceRow">
+                                            <div class="price" id="housing-price-knowledge">40</div>
+                                            <div>knowledge</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                            <button class="upgradesButton" id="metallurgy-button" onclick="science('metallurgy')">metallurgy
+                                <div class="tooltip">
+                                    <div class="description">
+                                        Enables basic metal processing.
+                                    </div>
+                                    <div class="prices">
+                                        <div class="priceRow">
+                                            <div class="price" id="metallurgy-price-knowledge">200</div>
+                                            <div>knowledge</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                            <button class="upgradesButton" id="coalextraction-button" onclick="science('coalextraction')">coal extraction
+                                <div class="tooltip">
+                                    <div class="description">
+                                        Miners now also produce coal.
+                                    </div>
+                                    <div class="priceRow">
+                                        <div class="price" id="coalextraction-price-knowledge">400</div>
+                                        <div>knowledge</div>
+                                    </div>
+                                </div>
+                            </button>
+                            <button class="upgradesButtonBigger" id="destructivedistillation-button" onclick="science('destructivedistillation')">destructive distillation
+                                <div class="tooltip">
+                                    <div class="description">
+                                        Process of heating coal to high temperatures to produce blast furnace fuel.
+                                    </div>
+                                    <div class="priceRow">
+                                        <div class="price" id="destructivedistillation-price-knowledge">800</div>
+                                        <div>knowledge</div>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div id="buildings">
                     <h2 class="sectionHeading">buildings</h2>
                     <div class="columns">
@@ -313,87 +394,6 @@
                                             <div class="price" id="ironpickaxe-price-iron">350</div>
                                             <div>iron</div>
                                         </div>
-                                    </div>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div id="science">
-                    <h2 class="sectionHeading">science</h2>
-                    <div class="columns">
-                        <div id="science-column-1">
-                            <button class="upgradesButton" id="upgrades-button" onclick="science('upgrades')">upgrades
-                                <div class="tooltip">
-                                    <div class="description">
-                                        Enables you to upgrade your tools and other equipment.
-                                    </div>
-                                    <div class="prices">
-                                        <div class="priceRow">
-                                            <div class="price" id="upgrades-price-knowledge">50</div>
-                                            <div>knowledge</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </button>
-                            <button class="upgradesButton" id="buildings-button" onclick="science('buildings')">buildings
-                                <div class="tooltip">
-                                    <div class="description">
-                                        Ability to construct various buildings from acquired materials.
-                                    </div>
-                                    <div class="prices">
-                                        <div class="priceRow">
-                                            <div class="price" id="buildings-price-knowledge">25</div>
-                                            <div>knowledge</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </button>
-                            <button class="upgradesButton" id="housing-button" onclick="science('housing')">housing
-                                <div class="tooltip">
-                                    <div class="description">
-                                        Special buildings increasing your maximum population.
-                                    </div>
-                                    <div class="prices">
-                                        <div class="priceRow">
-                                            <div class="price" id="housing-price-knowledge">40</div>
-                                            <div>knowledge</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </button>
-                            <button class="upgradesButton" id="metallurgy-button" onclick="science('metallurgy')">metallurgy
-                                <div class="tooltip">
-                                    <div class="description">
-                                        Enables basic metal processing.
-                                    </div>
-                                    <div class="prices">
-                                        <div class="priceRow">
-                                            <div class="price" id="metallurgy-price-knowledge">200</div>
-                                            <div>knowledge</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </button>
-                            <button class="upgradesButton" id="coalextraction-button" onclick="science('coalextraction')">coal extraction
-                                <div class="tooltip">
-                                    <div class="description">
-                                        Miners now also produce coal.
-                                    </div>
-                                    <div class="priceRow">
-                                        <div class="price" id="coalextraction-price-knowledge">400</div>
-                                        <div>knowledge</div>
-                                    </div>
-                                </div>
-                            </button>
-                            <button class="upgradesButtonBigger" id="destructivedistillation-button" onclick="science('destructivedistillation')">destructive distillation
-                                <div class="tooltip">
-                                    <div class="description">
-                                        Process of heating coal to high temperatures to produce blast furnace fuel.
-                                    </div>
-                                    <div class="priceRow">
-                                        <div class="price" id="destructivedistillation-price-knowledge">800</div>
-                                        <div>knowledge</div>
                                     </div>
                                 </div>
                             </button>
