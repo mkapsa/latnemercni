@@ -139,6 +139,36 @@ prices = {
         knowledge:800
     },
 
+    buildings: {
+        food:0,
+        wood:0,
+        ore:0,
+        iron:0,
+        coal:0,
+        coke:0,
+        knowledge:25
+    },
+
+    upgrades: {
+        food:0,
+        wood:0,
+        ore:0,
+        iron:0,
+        coal:0,
+        coke:0,
+        knowledge:50
+    },
+
+    housing: {
+        food:0,
+        wood:0,
+        ore:0,
+        iron:0,
+        coal:0,
+        coke:0,
+        knowledge:40
+    },
+
     metallurgy: {
         food:0,
         wood:0,
@@ -197,8 +227,8 @@ hidden = {
         basicButtons:false,
         workers:false,
         equipment:true,
-        buildings:false,
-        upgrades:false
+        buildings:true,
+        upgrades:true
     },
     upgrades: {
         stoneaxe:false,
@@ -206,15 +236,18 @@ hidden = {
         ironpickaxe:true
     },
     science: {
-        metallurgy: false, 
+        buildings:false,
+        upgrades:true,
+        housing:true,
+        metallurgy: true, 
         coalextraction: true,
         destructivedistillation: true
     },
     buildings: {
         pantry:false,
         barn:false,
-        woodenhut:false,
-        stonehut:false,
+        woodenhut:true,
+        stonehut:true,
         library:false
     },
     equipment: {
@@ -617,13 +650,25 @@ const science = (science) => {
 
         resources = subtract(resources, prices[science])
 
-        if(science === 'metallurgy'){
 
+        if(science === 'buildings'){
+            hidden.tiles.buildings = false
+            hidden.science.metallurgy = false
+            hidden.science.upgrades = false
+            hidden.science.housing = false
+        }
+        else if(science === 'upgrades'){
+            hidden.tiles.upgrades = false
+        }
+        else if(science === 'housing'){
+            hidden.buildings.woodenhut = false
+            hidden.buildings.stonehut = false
+        }
+        else if(science === 'metallurgy'){
             hidden.tiles.equipment = false
             hidden.equipment.coldblastfurnace = false
             hidden.upgrades.ironpickaxe = false
             hidden.science.coalextraction = false
-
         }
         else if(science === 'coalextraction'){
             
