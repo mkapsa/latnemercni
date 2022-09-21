@@ -4,6 +4,7 @@ resources = {
     ore:0,
     iron:0,
     coal:0,
+    coke:0,
     knowledge:0
 }
 
@@ -13,6 +14,7 @@ resourcesPerSec = {
     ore:0,
     iron:0,
     coal:0,
+    coke:0,
     knowledge:0
 }
 
@@ -22,6 +24,7 @@ storage = {
     ore:300,
     iron:100,
     coal:200,
+    coke:100,
     knowledge:200
 }
 
@@ -47,6 +50,11 @@ equipment = {
     coldblastfurnace: {
         total:0,
         running:0
+    },
+
+    cokeoven: {
+        total:0, 
+        running:0
     }
 }
 
@@ -60,6 +68,7 @@ prices = {
         ore:100,
         iron:0,
         coal:0,
+        coke:0,
         knowledge:0
     },
     barn: {
@@ -68,6 +77,7 @@ prices = {
         ore:150,
         iron:0,
         coal:0,
+        coke:0,
         knowledge:0
     },
     woodenhut: {
@@ -76,6 +86,7 @@ prices = {
         ore:50,
         iron:0,
         coal:0,
+        coke:0,
         knowledge:0,
     },
     stonehut: {
@@ -84,6 +95,7 @@ prices = {
         ore:300,
         iron:0,
         coal:0,
+        coke:0,
         knowledge:0
     },
     library: {
@@ -92,6 +104,7 @@ prices = {
         ore:0,
         iron:0,
         coal:0,
+        coke:0,
         knowledge:0
     },
 
@@ -103,6 +116,7 @@ prices = {
         ore:300,
         iron:0,
         coal:0,
+        coke:0,
         knowledge:100
     },
 
@@ -112,6 +126,7 @@ prices = {
         ore:0,
         iron:200,
         coal:0,
+        coke:0,
         knowledge:150
     },
     ironpickaxe: {
@@ -120,6 +135,7 @@ prices = {
         ore:0,
         iron:350,
         coal:0,
+        coke:0,
         knowledge:800
     },
 
@@ -129,6 +145,7 @@ prices = {
         ore:0,
         iron:0,
         coal:0,
+        coke:0,
         knowledge:200
     },
 
@@ -138,6 +155,7 @@ prices = {
         ore:0,
         iron:0,
         coal:0,
+        coke:0,
         knowledge:400
     },
 
@@ -147,6 +165,7 @@ prices = {
         ore:0,
         iron:0,
         coal:0,
+        coke:0,
         knowledge:800
     },
 
@@ -158,8 +177,19 @@ prices = {
         ore:100,
         iron:0,
         coal:0,
+        coke:0,
         knowledge:50
-    }
+    },
+
+    cokeoven: {
+        food:0,
+        wood:0,
+        ore:200,
+        iron:100,
+        coal:0,
+        coke:0,
+        knowledge:200
+    },
 }
 
 hidden = {
@@ -173,8 +203,7 @@ hidden = {
     upgrades: {
         stoneaxe:false,
         ironaxe:true,
-        ironpickaxe:true,
-        
+        ironpickaxe:true
     },
     science: {
         metallurgy: false, 
@@ -182,7 +211,8 @@ hidden = {
         destructivedistillation: true
     },
     equipment: {
-        coldblastfurnace: true
+        coldblastfurnace: true,
+        cokeoven:true,
     },
     resourceRows: {
         food: true,
@@ -190,6 +220,7 @@ hidden = {
         ore: true,
         iron: true,
         coal: true,
+        coke:true,
         knowledge: true
     },
     resourcesPerSec: {
@@ -198,6 +229,7 @@ hidden = {
         ore:true,
         iron:true,
         coal: true,
+        coke:true,
         knowledge:true
     }
 }
@@ -218,6 +250,11 @@ rates = {
         coal:-1,
         ore:-1,
         iron:0.25
+    },
+
+    cokeoven: {
+        coal:-1,
+        coke:0.25
     }
 }
 
@@ -355,6 +392,15 @@ function updateCoal(number){
     }
     if(resources.coal >= storage.coal){
         resources.coal = Math.min(storage.coal, resources.coal + number)
+    }
+}
+
+const updateCoke = (number) => {
+    if(resources.coke < storage.coke){
+        resources.coke = Math.max(0, resources.coke + number)
+    }
+    if(resources.coke >= storage.coke){
+        resources.coke = Math.min(storage.coke, resources.coke + number)
     }
 }
 
@@ -571,12 +617,16 @@ const science = (science) => {
             hidden.upgrades.ironpickaxe = false
             hidden.science.coalextraction = false
 
-        }else if(science === 'coalextraction'){
+        }
+        else if(science === 'coalextraction'){
             
             rates.minerCoalRate = 0.3
             resourcesPerSec.coal += population.miners * rates.minerCoalRate
 
             hidden.science.destructivedistillation = false
+        }
+        else if(science === 'destructivedistillation'){
+            hidden.equipment.cokeoven = false
         }
     }
 
@@ -595,6 +645,10 @@ function buyEquipment(desiredEquipment){
             resourcesPerSec.ore -= 1
             resourcesPerSec.coal -= 1
             resourcesPerSec.iron += 0.25
+        }
+        else if(desiredEquipment === 'cokeoven'){
+            resourcesPerSec.coal -= 1
+            resourcesPerSec.coke += 0.25
         }
     }
 }
@@ -775,7 +829,7 @@ function buttonDisabled(){
 const hideBasicButtons = () => {
     
     if(hidden.tiles.basicButtons){
-        hidden.tiles.basicButtons = false
+    hidden.tiles.basicButtons = false
     }
     else if(hidden.tiles.basicButtons === false){
         hidden.tiles.basicButtons = true
@@ -831,8 +885,16 @@ function showContent(){
     let equipmentKeys = Object.keys(hidden.equipment)
     let equipmentValues = Object.values(hidden.equipment)
 
-    for(let i = 0; i < equipmentKeys; i++){
-        byId(equipmentKeys[i] + "-button").hidden = equipmentValues[i]
+    for(let i = 0; i < equipmentKeys.length; i++){
+        // byId(equipmentKeys[i] + '-row').hidden = equipmentValues[i]
+
+        if(equipmentValues[i]){
+            byId(equipmentKeys[i] + '-row').style.visibility = 'hidden'
+        }
+        else if(equipmentValues[i] === false){
+            byId(equipmentKeys[i] + '-row').style.visibility = 'visible'
+        }
+        
     }
 
     // science

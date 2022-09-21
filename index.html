@@ -61,11 +61,11 @@
                             <td class="storageCapacity" id="coalStorage"></td>
                             <td class="perSec" id="coalPerSec"></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <br>
-                                <br>
-                            </td>
+                        <tr class="resource" id="cokeRow">
+                            <td>coke</td>
+                            <td class="resourceCount" id="coke"></td>
+                            <td class="storageCapacity" id="cokeStorage"></td>
+                            <td class="perSec" id="cokePerSec"></td>
                         </tr>
                         <tr class="resource" id="knowledgeRow">
                             <td>knowledge</td>
@@ -364,7 +364,7 @@
                 <div id="equipment">
                     <h2 class="sectionHeading">equipment</h2>
                     <div class="columns">
-                        <div id="equipment-row-1">
+                        <div id="coldblastfurnace-row">
                             <button class="equipmentButton" id="coldblastfurnace-button" onclick="buyEquipment('coldblastfurnace')">cold blast furnace
                                 <div class="tooltip">
                                     <div class="description">
@@ -410,11 +410,51 @@
                                 <button class="onButton" id="coldblastfurnace-onbutton" onclick="turnOn('coldblastfurnace')">></button>
                             </div>
                         </div>
-                        <!-- <div id="equipment-row-2">
-                            <button class="equipmentButton" id="hotblastfurnace-button" onclick="buyEquipment('hotblastfurnace')">hot blast furnace
-                                <div class="tooltip"></div>
+                        <div id="cokeoven-row">
+                            <button class="equipmentButton" id="cokeoven-button" onclick="buyEquipment('cokeoven')">coke oven
+                                <div class="tooltip">
+                                    <div class="description">
+                                        Utilizes the destructive distillation process to create fuel for hot blast furnaces.
+                                    </div>
+                                    <div class="prices">
+                                        <div class="priceRow">
+                                            <div class="price" id="cokeoven-price-ore">200</div>
+                                            <div>ore</div>
+                                        </div>
+                                        <div class="priceRow">
+                                            <div class="price" id="cokeoven-price-iron">100</div>
+                                            <div>iron</div>
+                                        </div>
+                                        <div class="priceRow">
+                                            <div class="price" id="cokeoven-price-knowledge">200</div>
+                                            <div>knowledge</div>
+                                        </div>
+                                    </div>
+                                    <div class="netResources">
+                                        <div class="netRow netNegative">
+                                            <div class="netResourceName">coal:</div>
+                                            <div id="coldblastfurnace-net-ore">-1</div>
+                                            <div>/s</div>
+                                        </div>
+                                        <div class="netRow netNegative">
+                                            <div class="netResourceName">coke:</div>
+                                            <div id="coldblastfurnace-net-coal">0.25</div>
+                                            <div>/s</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </button>
-                        </div> -->
+                            <div class="runningRow">
+                                <span class="running">Running: </span>
+                                <span id="cokeoven-running">0</span>
+                                <span class="forwardSlash">/</span>
+                                <span id="cokeoven-total">0</span>
+                            </div>
+                            <div class="onoffButtons">
+                                <button class="offButton" id="cokeoven-offbutton" onclick="turnOff('cokeoven')"><</button>
+                                <button class="onButton" id="cokeoven-onbutton" onclick="turnOn('cokeoven')">></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>        

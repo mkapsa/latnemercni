@@ -215,6 +215,10 @@ button:hover .tooltip {
     gap: 40px;
 }
 
+#resetButton{
+margin-right: 30px;
+}
+
 #resetButton:hover{
     color: red;
 }
@@ -362,7 +366,7 @@ table {
     width: 20em;
 }
 
-#equipment-row-1{
+#coldblastfurnace-row, #cokeoven-row{
     display: flex;
     flex-direction: row;
 }
@@ -457,3 +461,4 @@ table {
 #saveButton:active, #loadButton:active{
     color: inherit;
 }
+
