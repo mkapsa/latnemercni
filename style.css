@@ -15,8 +15,9 @@ body{
 header h1{
     color: black;
     text-align: center;
-    margin-top: 30px;
-    margin-bottom: 70px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 20px;
 }
 
 #gameContainer{
@@ -205,7 +206,7 @@ button:hover .tooltip {
 
 #gameSection{
     display: flex;
-    gap: 50px;
+    gap: 20px;
     flex-wrap: wrap;
     margin-right: 10em;
 }
@@ -224,7 +225,9 @@ margin-right: 30px;
 }
 
 .sectionHeading{
-    margin-bottom: 25px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-align: center;
 }
 
 .buildingsButton{
@@ -362,6 +365,7 @@ margin-right: 30px;
 }
 
 table {
+    margin-top: 50px;
     table-layout: auto;
     width: 20em;
 }
