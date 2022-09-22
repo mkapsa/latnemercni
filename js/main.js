@@ -564,7 +564,7 @@ function updatePrices(){
 
 }
 
-function build(building, count){
+const build = (building, count) => {
     if(canAffordBuilding(building, count)){
         buildings[building] += count;
 
@@ -633,12 +633,18 @@ function upgrade(upgrade){
             rates.woodcutterRate *= 1.75
             resourcesPerSec.wood += population.woodcutters * rates.woodcutterRate
 
+
+
         }
         else if(upgrade === 'ironpickaxe'){
 
             resourcesPerSec.ore -= population.miners * rates.minerOreRate
             rates.minerOreRate *= 1.8
             resourcesPerSec.ore += population.miners * rates.minerOreRate
+
+            resourcesPerSec.coal -= population.miners * rates.minerCoalRate
+            rates.minerCoalRate *= 1.8
+            resourcesPerSec.coal += population.miners * rates.minerCoalRate
         }             
     }
 }
