@@ -246,6 +246,11 @@ margin-right: 30px;
     color: gray;
 }
 
+.basicButton{
+    
+    width: 100px;
+}
+
 .upgradesButton{
     height: 30px;
     width: 130px;
