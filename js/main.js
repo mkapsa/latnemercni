@@ -991,7 +991,7 @@ function showContent(){
 
            
 
-            document.querySelector("." + Object.keys(prices)[i] + "-current-" + getMaterials(prices[Object.keys(prices)[i]])[y]).innerHTML = Math.min(prices[Object.keys(prices)[i]][getMaterials(prices[Object.keys(prices)[i]])[y]], resources[getMaterials(prices[Object.keys(prices)[i]])[y]])
+            document.querySelector("." + Object.keys(prices)[i] + "-current-" + getMaterials(prices[Object.keys(prices)[i]])[y]).innerHTML = Math.floor(Math.min(prices[Object.keys(prices)[i]][getMaterials(prices[Object.keys(prices)[i]])[y]], resources[getMaterials(prices[Object.keys(prices)[i]])[y]]))
 
            
         }
