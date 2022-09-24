@@ -439,6 +439,10 @@ table {
     color: purple ;
 }
 
+#coke{
+    color: rgb(22, 86, 86);
+}
+
 .buildingCount{
     background-color: inherit;
 }
