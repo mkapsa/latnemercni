@@ -298,6 +298,20 @@ rates = {
     }
 }
 
+
+
+// returns an array of all the materials needed for the item
+
+function getMaterials(object) {
+
+    for(let i = 0; i < Object.keys(object).length; i++){
+
+        return Object.keys(object).filter(key => object[key] > 0);
+
+    }
+    
+}
+
 // price coefficients
 
 const buildingCoefficient = 1.09;
@@ -522,7 +536,6 @@ function canAffordUpgrade(upgrade){
 
 
     return Object.keys(resources).every(key => resources[key] >= prices[upgrade][key])
-
 }
 
 
@@ -531,7 +544,6 @@ function canAffordUpgrade(upgrade){
 function canAffordEquipment(equipment){
     
     return Object.keys(resources).every(key => resources[key] >= prices[equipment][key])
-
 }
 
 const canAffordScience = (science) => {
@@ -542,7 +554,6 @@ const canAffordScience = (science) => {
 function canAffordBuilding(building, count){
 
     return Object.keys(resources).every(key => resources[key] * count >= prices[building][key] * count)
-
 }
 
 function updateBuildingPrice(building){
@@ -550,7 +561,7 @@ function updateBuildingPrice(building){
     const buildingmats = Object.entries(prices[building]).filter(([a, b]) => b !== 0).map(([a, b]) => a );
 
     for(i = 0; i < buildingmats.length; i++){
-        byId(building + "-price-" + buildingmats[i]).innerHTML = prices[building][buildingmats[i]]
+        byId(building + "-price-" + buildingmats[i]).innerHTML = "/" + prices[building][buildingmats[i]]
 
         byId(building + "-price-" + buildingmats[i]).hidden = prices[building][buildingmats[i]] < 1 || prices[building][buildingmats[i]] === undefined
     }
@@ -561,7 +572,6 @@ function updatePrices(){
     for(let i = 0; i < Object.keys(buildings).length; i++){
         updateBuildingPrice(Object.keys(buildings)[i])
     }   
-
 }
 
 const build = (building, count) => {
@@ -687,7 +697,6 @@ const science = (science) => {
             hidden.equipment.cokeoven = false
         }
     }
-
 }
 
 function buyEquipment(desiredEquipment){
@@ -780,7 +789,6 @@ function updateNumbers(){
     for(let i = 0; i < buildingsKeys.length; i++){
         byId(buildingsKeys[i] + "-count").innerHTML = "(" + buildings[buildingsKeys[i]] + ")"
     }
-
 };
 
 function displayResourcesPerSec(){
@@ -853,8 +861,6 @@ function buttonDisabled(){
 
             byId(upgradesKeys[i] + '-button').style.background = "rgb(200, 200, 200)"
         }
-
-
     }       
     
     // equipment - disabled if you don't have enough resources
@@ -880,7 +886,6 @@ function buttonDisabled(){
         else{
             byId(scienceKeys[i] + "-button").style.backgroundColor = null;
         }
-        
     }
 }
 
@@ -979,8 +984,23 @@ function showContent(){
         byId(buildingsKeys[i] + "-count").hidden = buildings[buildingsKeys[i]] === 0
     }
 
-    
+    // current prices
+
+    for(i = 0; i < Object.keys(prices).length; i++){
+        for(y = 0; y < getMaterials(prices[Object.keys(prices)[i]]).length; y++){
+
+           
+
+            document.querySelector("." + Object.keys(prices)[i] + "-current-" + getMaterials(prices[Object.keys(prices)[i]])[y]).innerHTML = Math.min(prices[Object.keys(prices)[i]][getMaterials(prices[Object.keys(prices)[i]])[y]], resources[getMaterials(prices[Object.keys(prices)[i]])[y]])
+
+           
+        }
+    }   
 }
+
+
+
+
 
 // saving function (localstorage), fires every minute + can be fired manually (button)
 

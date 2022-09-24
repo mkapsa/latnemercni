@@ -9,7 +9,7 @@
     </head>
     <body>
         <header>
-            <h1>latnemercni</h1>
+            <h1 class="heading">latnemercni</h1>
         </header>
         <div id="gameContainer">
             <section id="resourceSection">
@@ -137,7 +137,8 @@
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
-                                            <div class="price" id="upgrades-price-knowledge">50</div>
+                                            <p class="upgrades-current-knowledge current"></p>
+                                            <div class="price" id="upgrades-price-knowledge">/50</div>
                                             <div>knowledge</div>
                                         </div>
                                     </div>
@@ -150,7 +151,8 @@
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
-                                            <div class="price" id="buildings-price-knowledge">25</div>
+                                            <p class="buildings-current-knowledge current"></p>
+                                            <div class="price" id="buildings-price-knowledge">/25</div>
                                             <div>knowledge</div>
                                         </div>
                                     </div>
@@ -163,7 +165,8 @@
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
-                                            <div class="price" id="housing-price-knowledge">40</div>
+                                            <p class="housing-current-knowledge current"></p>
+                                            <div class="price" id="housing-price-knowledge">/40</div>
                                             <div>knowledge</div>
                                         </div>
                                     </div>
@@ -176,7 +179,8 @@
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
-                                            <div class="price" id="metallurgy-price-knowledge">200</div>
+                                            <p class="metallurgy-current-knowledge current"></p>
+                                            <div class="price" id="metallurgy-price-knowledge">/200</div>
                                             <div>knowledge</div>
                                         </div>
                                     </div>
@@ -188,7 +192,8 @@
                                         Miners now also produce coal.
                                     </div>
                                     <div class="priceRow">
-                                        <div class="price" id="coalextraction-price-knowledge">400</div>
+                                        <p class="coalextraction-current-knowledge current"></p>
+                                        <div class="price" id="coalextraction-price-knowledge">/400</div>
                                         <div>knowledge</div>
                                     </div>
                                 </div>
@@ -199,7 +204,8 @@
                                         Process of heating coal to high temperatures to produce blast furnace fuel.
                                     </div>
                                     <div class="priceRow">
-                                        <div class="price" id="destructivedistillation-price-knowledge">800</div>
+                                        <p class="destructivedistillation-current-knowledge current"></p>
+                                        <div class="price" id="destructivedistillation-price-knowledge">/800</div>
                                         <div>knowledge</div>
                                     </div>
                                 </div>
@@ -220,19 +226,14 @@
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
-                                            <div class="price" id="barn-price-wood">300</div>
+                                            <p class="barn-current-wood current"></p>
+                                            <div class="price" id="barn-price-wood">/300</div>
                                             <div>wood</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="barn-price-ore">150</div>
+                                            <p class="barn-current-ore current"></p>
+                                            <div class="price" id="barn-price-ore">/150</div>
                                             <div>ore</div>
-                                        </div>
-                                        <div class="priceRow">
-                                            <div class="price" id="barn-price-knowledge"></div>
-                                            <div></div>
-                                        </div>
-                                        <div class="priceRow otherPrices">
-                                            <div id="barn-price-food"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -246,18 +247,14 @@
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
-                                            <div class="price" id="pantry-price-wood">300</div>
+                                            <p class="pantry-current-wood current"></p>
+                                            <div class="price" id="pantry-price-wood">/300</div>
                                             <div>wood</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="pantry-price-ore">100</div>
+                                            <p class="pantry-current-ore current"></p>
+                                            <div class="price" id="pantry-price-ore">/100</div>
                                             <div>ore</div>
-                                        </div>
-                                        <div class="priceRow">
-                                            <div class="price" id="pantry-price-knowledge"></div>
-                                        </div>
-                                        <div class="priceRow otherPrices">
-                                            <div class="price" id="pantry-price-food"></div>
                                         </div>
                                     </div>                              
                                 </div>
@@ -271,7 +268,8 @@
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
-                                            <div class="price" id="library-price-wood">400</div>
+                                            <p class="library-current-wood current"></p>
+                                            <div class="price" id="library-price-wood">/400</div>
                                             <div>wood</div>
                                         </div>
                                     </div>
@@ -288,19 +286,14 @@
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
-                                            <div class="price" id="woodenhut-price-wood">150</div>
+                                            <p class="woodenhut-current-wood current"></p>
+                                            <div class="price" id="woodenhut-price-wood">/150</div>
                                             <div>wood</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="woodenhut-price-ore">50</div>
+                                            <p class="woodenhut-current-ore current"></p>
+                                            <div class="price" id="woodenhut-price-ore">/50</div>
                                             <div>ore</div>
-                                        </div>
-                                        <div class="priceRow">
-                                            <div class="price" id="woodenhut-price-knowledge"></div>
-                                            <div></div>
-                                        </div>
-                                        <div class="priceRow otherPrices">
-                                            <div id="woodenhut-price-food"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -314,19 +307,14 @@
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
-                                            <div class="price" id="stonehut-price-wood">200</div>
+                                            <p class="stonehut-current-wood current"></p>
+                                            <div class="price" id="stonehut-price-wood">/200</div>
                                             <div>wood</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="stonehut-price-ore">300</div>
+                                            <p class="stonehut-current-ore current"></p>
+                                            <div class="price" id="stonehut-price-ore">/300</div>
                                             <div>ore</div>
-                                        </div>
-                                        <div class="priceRow">
-                                            <div class="price" id="stonehut-price-knowledge"></div>
-                                            <div></div>
-                                        </div>
-                                        <div class="priceRow otherPrices">
-                                            <div class="price" id="stonehut-price-food"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -345,15 +333,18 @@
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
-                                            <div class="price" id="stoneaxe-price-ore">300</div>
+                                            <p class="stoneaxe-current-ore current"></p>
+                                            <div class="price" id="stoneaxe-price-ore">/300</div>
                                             <div>ore</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="stoneaxe-price-wood">300</div>
+                                            <p class="stoneaxe-current-wood current"></p>
+                                            <div class="price" id="stoneaxe-price-wood">/300</div>
                                             <div>wood</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="stoneaxe-price-knowledge">100</div>
+                                            <p class="stoneaxe-current-knowledge current"></p>
+                                            <div class="price" id="stoneaxe-price-knowledge">/100</div>
                                             <div>knowledge</div>
                                         </div>
                                     </div>
@@ -366,15 +357,18 @@
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
-                                            <div class="price" id="ironaxe-price-wood">400</div>
+                                            <p class="ironaxe-current-wood current"></p>
+                                            <div class="price" id="ironaxe-price-wood">/400</div>
                                             <div>wood</div>                                            
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="ironaxe-price-iron">200</div>
+                                            <p class="ironaxe-current-iron current"></p>
+                                            <div class="price" id="ironaxe-price-iron">/200</div>
                                             <div>iron</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="ironaxe-price-knowledge">150</div>
+                                            <p class="ironaxe-current-knowledge current"></p>
+                                            <div class="price" id="ironaxe-price-knowledge">/150</div>
                                             <div>knowledge</div>
                                         </div>
                                     </div>
@@ -387,11 +381,13 @@
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
-                                            <div class="price" id="ironpickaxe-price-knowledge">800</div>
+                                            <p class="ironpickaxe-current-knowledge current"></p>
+                                            <div class="price" id="ironpickaxe-price-knowledge">/800</div>
                                             <div>knowledge</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="ironpickaxe-price-iron">350</div>
+                                            <p class="ironpickaxe-current-iron current"></p>
+                                            <div class="price" id="ironpickaxe-price-iron">/350</div>
                                             <div>iron</div>
                                         </div>
                                     </div>
@@ -411,11 +407,13 @@
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
-                                            <div class="price" id="coldblastfurnace-price-ore">100</div>
+                                            <p class="coldblastfurnace-current-ore current"></p>
+                                            <div class="price" id="coldblastfurnace-price-ore">/100</div>
                                             <div>ore</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="coldblastfurnace-price-knowledge">50</div>
+                                            <p class="coldblastfurnace-current-knowledge current"></p>
+                                            <div class="price" id="coldblastfurnace-price-knowledge">/50</div>
                                             <div>knowledge</div>
                                         </div>
                                     </div>
@@ -457,15 +455,18 @@
                                     </div>
                                     <div class="prices">
                                         <div class="priceRow">
-                                            <div class="price" id="cokeoven-price-ore">200</div>
+                                            <p class="cokeoven-current-ore current"></p>
+                                            <div class="price" id="cokeoven-price-ore">/200</div>
                                             <div>ore</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="cokeoven-price-iron">100</div>
+                                            <p class="cokeoven-current-iron current"></p>
+                                            <div class="price" id="cokeoven-price-iron">/100</div>
                                             <div>iron</div>
                                         </div>
                                         <div class="priceRow">
-                                            <div class="price" id="cokeoven-price-knowledge">200</div>
+                                            <p class="cokeoven-current-knowledge current"></p>
+                                            <div class="price" id="cokeoven-price-knowledge">/200</div>
                                             <div>knowledge</div>
                                         </div>
                                     </div>

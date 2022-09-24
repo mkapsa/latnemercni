@@ -470,3 +470,7 @@ table {
     color: inherit;
 }
 
+
+.current{
+    margin-left: 10px;
+}
