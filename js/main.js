@@ -893,7 +893,6 @@ function buttonDisabled(){
         }
         else{
             byId(equipmentKeys[i] + "-button").style.backgroundColor = null;
-
         }    
     }   
     
@@ -924,7 +923,6 @@ const hideBasicButtons = () => {
     else if(byId('hidebutton').textContent == 'show basic buttons'){
         byId('hidebutton').innerHTML = 'hide basic buttons'
     }
-    
 }
 
 function showContent(){
@@ -966,6 +964,7 @@ function showContent(){
     // buildings
 
     for(let i = 0; i < Object.keys(hidden.buildings).length; i++){
+
         byId(Object.keys(hidden.buildings)[i] + '-button').hidden = Object.values(hidden.buildings)[i]
 
     }
@@ -983,8 +982,7 @@ function showContent(){
         }
         else if(equipmentValues[i] === false){
             byId(equipmentKeys[i] + '-row').style.visibility = 'visible'
-        }
-        
+        }        
     }
 
     // science
@@ -1007,20 +1005,12 @@ function showContent(){
     // current prices
 
     for(i = 0; i < Object.keys(prices).length; i++){
-        for(y = 0; y < getMaterials(prices[Object.keys(prices)[i]]).length; y++){
-
-           
+        for(y = 0; y < getMaterials(prices[Object.keys(prices)[i]]).length; y++){      
 
             document.querySelector("." + Object.keys(prices)[i] + "-current-" + getMaterials(prices[Object.keys(prices)[i]])[y]).innerHTML = Math.floor(Math.min(prices[Object.keys(prices)[i]][getMaterials(prices[Object.keys(prices)[i]])[y]], resources[getMaterials(prices[Object.keys(prices)[i]])[y]]))
-
-           
         }
     }   
 }
-
-
-
-
 
 // saving function (localstorage), fires every minute + can be fired manually (button)
 

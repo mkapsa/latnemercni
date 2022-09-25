@@ -479,3 +479,7 @@ table {
 .current{
     margin-left: 10px;
 }
+
+#totalPopulation, #unemployedPopulation{
+    text-align: center;
+}
