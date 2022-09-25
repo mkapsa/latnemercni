@@ -930,7 +930,6 @@ function showContent(){
     // resource Rows
 
     let resourceRowsKeys = Object.keys(hidden.resourceRows)  
-    let resourceRowsValues = Object.values(hidden.resourceRows)
 
     for(let i = 0; i < resourceRowsKeys.length; i++){
         
@@ -1007,7 +1006,7 @@ function showContent(){
     for(i = 0; i < Object.keys(prices).length; i++){
         for(y = 0; y < getMaterials(prices[Object.keys(prices)[i]]).length; y++){      
 
-            document.querySelector("." + Object.keys(prices)[i] + "-current-" + getMaterials(prices[Object.keys(prices)[i]])[y]).innerHTML = Math.floor(Math.min(prices[Object.keys(prices)[i]][getMaterials(prices[Object.keys(prices)[i]])[y]], resources[getMaterials(prices[Object.keys(prices)[i]])[y]]))
+            document.querySelector("." + Object.keys(prices)[i] + "-current-" + getMaterials(prices[Object.keys(prices)[i]])[y]).innerHTML = Math.min(prices[Object.keys(prices)[i]][getMaterials(prices[Object.keys(prices)[i]])[y]], resources[getMaterials(prices[Object.keys(prices)[i]])[y]].toFixed(1))
         }
     }   
 }
