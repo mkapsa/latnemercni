@@ -625,7 +625,7 @@ const build = (building, count) => {
             storage.iron += 50 * count
         }
         else if(building === 'library')
-            storage.knowledge += 300 * count        
+            storage.knowledge += 200 * count        
     }
 }
 
