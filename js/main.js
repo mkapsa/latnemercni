@@ -138,6 +138,17 @@ prices = {
         coke:0,
         knowledge:800
     },
+    coalrefining: {
+        food:0,
+        wood:0,
+        ore:0,
+        iron:0,
+        coal:0,
+        coke:0,
+        knowledge:500
+    },
+
+    // science prices
 
     buildings: {
         food:0,
@@ -233,7 +244,8 @@ hidden = {
     upgrades: {
         stoneaxe:false,
         ironaxe:true,
-        ironpickaxe:true
+        ironpickaxe:true,
+        coalrefining:true
     },
     science: {
         buildings:false,
@@ -653,15 +665,14 @@ function upgrade(upgrade){
 
             hidden.upgrades.ironaxe = false;
         } 
+
         else if(upgrade === 'ironaxe'){
 
             resourcesPerSec.wood -= population.woodcutters * rates.woodcutterRate
             rates.woodcutterRate *= 1.75
             resourcesPerSec.wood += population.woodcutters * rates.woodcutterRate
-
-
-
         }
+
         else if(upgrade === 'ironpickaxe'){
 
             resourcesPerSec.ore -= population.miners * rates.minerOreRate
@@ -672,6 +683,13 @@ function upgrade(upgrade){
             rates.minerCoalRate *= 1.8
             resourcesPerSec.coal += population.miners * rates.minerCoalRate
         }             
+
+        else if(upgrade === 'coalrefining'){
+
+            resourcesPerSec.coal -= population.miners * rates.minerCoalRate
+            rates.minerCoalRate *= 2
+            resourcesPerSec.coal += population.miners * rates.minerCoalRate
+        }
     }
 }
 
@@ -711,6 +729,7 @@ const science = (science) => {
         }
         else if(science === 'destructivedistillation'){
             hidden.equipment.cokeoven = false
+            hidden.upgrades.coalrefining = false
         }
     }
 }
