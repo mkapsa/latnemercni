@@ -22,4 +22,4 @@ window.setInterval(function(){
 window.setInterval(function(){
     checkFood();
     turnOffEquipment()
-}, 2000);
+}, 1000);
