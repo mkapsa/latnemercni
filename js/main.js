@@ -278,8 +278,8 @@ rates = {
 
     // worker rate coefficients
 
-    hunterRate: 1 * 2,
-    woodcutterRate: 0.5 * 2,
+    hunterRate: 1.9,
+    woodcutterRate: 0.7,
     minerOreRate: 0.3 * 2,
     minerCoalRate:0,
     scientistRate: 0.2 * 2,
@@ -346,8 +346,6 @@ function checkLocalStorage(){
 window.onload = checkLocalStorage()
 window.onload = updateNumbers();
 
-// console.log(getNegative(rates[Object.keys(equipment)[i]]))
-
 function turnOffEquipment(){
 
     if(((resourcesPerSec.coal < 0 && resources.coal === 0 ) || (resourcesPerSec.ore < 0 && resources.ore === 0)) && equipment.coldblastfurnace.running >= 1){
@@ -393,8 +391,6 @@ function turnOn(equipment1){
     }
 
 }
-
-
 
 function checkFood(){
     if(resourcesPerSec.food < 0 && resources.food === 0 && population.total >= 1){
@@ -1007,8 +1003,21 @@ function showContent(){
         for(y = 0; y < getMaterials(prices[Object.keys(prices)[i]]).length; y++){      
 
             document.querySelector("." + Object.keys(prices)[i] + "-current-" + getMaterials(prices[Object.keys(prices)[i]])[y]).innerHTML = Math.min(prices[Object.keys(prices)[i]][getMaterials(prices[Object.keys(prices)[i]])[y]], resources[getMaterials(prices[Object.keys(prices)[i]])[y]].toFixed(1))
+
+            const currentstate = document.querySelector("." + Object.keys(prices)[i] + "-current-" + getMaterials(prices[Object.keys(prices)[i]])[y])
+
+            if(resources[getMaterials(prices[Object.keys(prices)[i]])[y]].toFixed(1) < prices[Object.keys(prices)[i]][getMaterials(prices[Object.keys(prices)[i]])[y]]){
+                currentstate.style.color = 'red'
+            }
+            else{
+                currentstate.style.color = null
+            }
         }
     }   
+
+    // => current prices styling (red when can't afford)
+
+
 }
 
 // saving function (localstorage), fires every minute + can be fired manually (button)

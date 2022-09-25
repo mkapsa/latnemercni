@@ -1,19 +1,19 @@
 window.setInterval(function(){
 
-    updateFood(resourcesPerSec.food / 50)
-    updateWood(resourcesPerSec.wood / 50)
-    updateOre(resourcesPerSec.ore / 50)
-    updateIron(resourcesPerSec.iron / 50)
-    updateCoal(resourcesPerSec.coal / 50)
-    updateCoke(resourcesPerSec.coke / 50)
-    updateKnowledge(resourcesPerSec.knowledge / 50)
+    updateFood(resourcesPerSec.food / 10)
+    updateWood(resourcesPerSec.wood / 10)
+    updateOre(resourcesPerSec.ore / 10)
+    updateIron(resourcesPerSec.iron / 10)
+    updateCoal(resourcesPerSec.coal / 10)
+    updateCoke(resourcesPerSec.coke / 10)
+    updateKnowledge(resourcesPerSec.knowledge / 10)
 
     displayResourcesPerSec()
     showContent()
     updateNumbers()
     buttonDisabled()
     
-}, 20);
+}, 100);
  
 window.setInterval(function(){
     saveGame();

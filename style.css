@@ -478,7 +478,12 @@ table {
 
 .current{
     margin-left: 10px;
-    width: 30px;
+    width: 40px;
+    text-align: left;
+}
+
+.destructivedistillation-current-knowledge{
+    text-align: left;
 }
 
 #totalPopulation, #unemployedPopulation{
