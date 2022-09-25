@@ -635,6 +635,7 @@ const build = (building, count) => {
             storage.ore += 200 * count
             storage.coal += 100 * count
             storage.iron += 50 * count
+            storage.coke += 20 * count
         }
         else if(building === 'library')
             storage.knowledge += 200 * count        
