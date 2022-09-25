@@ -55,7 +55,7 @@ button{
 }
 
 .resource .resourceCount{
-    margin-left: auto;
+    text-align: center;
 }
 
 
@@ -370,8 +370,9 @@ margin-right: 30px;
 
 table {
     margin-top: 50px;
-    table-layout: auto;
+    table-layout: fixed;
     width: 20em;
+
 }
 
 #coldblastfurnace-row, #cokeoven-row{
