@@ -298,6 +298,12 @@ rates = {
     }
 }
 
+const god = () => {
+
+    Object.keys(storage).forEach(key => storage[key] = 1000)
+    
+    Object.keys(resources).forEach(key => resources[key] = 1000)
+}
 
 
 // returns an array of all the materials needed for the item
@@ -307,9 +313,15 @@ function getMaterials(object) {
     for(let i = 0; i < Object.keys(object).length; i++){
 
         return Object.keys(object).filter(key => object[key] > 0);
-
     }
-    
+}
+
+function getNegative(object) {
+
+    for(let i = 0; i < Object.keys(object).length; i++){
+
+        return Object.keys(object).filter(key => object[key] < 0);
+    }
 }
 
 // price coefficients
@@ -334,12 +346,20 @@ function checkLocalStorage(){
 window.onload = checkLocalStorage()
 window.onload = updateNumbers();
 
+// console.log(getNegative(rates[Object.keys(equipment)[i]]))
+
 function turnOffEquipment(){
-    if((resourcesPerSec.coal < 0 && resources.coal === 0 ) || (resourcesPerSec.ore < 0 && resources.ore === 0) && equipment.coldblastfurnace.running > 0){
+
+    if(((resourcesPerSec.coal < 0 && resources.coal === 0 ) || (resourcesPerSec.ore < 0 && resources.ore === 0)) && equipment.coldblastfurnace.running >= 1){
         equipment.coldblastfurnace.running -= 1;
         resourcesPerSec.coal -= rates.coldblastfurnace.coal
         resourcesPerSec.ore -= rates.coldblastfurnace.ore
         resourcesPerSec.iron -= rates.coldblastfurnace.iron
+    }
+    else if(resourcesPerSec.coal < 0 && resources.coal === 0 && equipment.cokeoven.running >= 1){
+        equipment.cokeoven.running -=1
+        resourcesPerSec.coal -= rates.cokeoven.coal
+        resourcesPerSec.coke -= rates.cokeoven.coke
     }
 }
 
