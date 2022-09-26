@@ -490,12 +490,12 @@
                                     <div class="netResources">
                                         <div class="netRow netNegative">
                                             <div class="netResourceName">coal:</div>
-                                            <div id="coldblastfurnace-net-ore">-1</div>
+                                            <div id="cokeoven-net-coal">-1</div>
                                             <div>/s</div>
                                         </div>
                                         <div class="netRow netNegative">
                                             <div class="netResourceName">coke:</div>
-                                            <div id="coldblastfurnace-net-coal">0.25</div>
+                                            <div id="cokeoven-net-coke">0.25</div>
                                             <div>/s</div>
                                         </div>
                                     </div>
@@ -510,6 +510,49 @@
                             <div class="onoffButtons">
                                 <button class="offButton" id="cokeoven-offbutton" onclick="turnOff('cokeoven')"><</button>
                                 <button class="onButton" id="cokeoven-onbutton" onclick="turnOn('cokeoven')">></button>
+                            </div>
+                        </div>
+                        <div id="hotblastfurnace-row">
+                            <button class="equipmentButton" id="hotblastfurnace-button" onclick="buyEquipment('hotblastfurnace')">hot blast furnace
+                                <div class="tooltip">
+                                    <div class="description">
+                                        Furnaces able to achieve temperatures up to 1500 °C. Able to smelt ore into iron and other metals.
+                                    </div>
+                                    <div class="prices">
+                                        <div class="priceRow">
+                                            <p class="hotblastfurnace-current-iron current"></p>
+                                            <div class="price" id="hotblastfurnace-price-iron">/500</div>
+                                            <div>iron</div>
+                                        </div>
+                                    </div>
+                                    <div class="netResources">
+                                        <div class="netRow netNegative">
+                                            <div class="netResourceName">ore:</div>
+                                            <div id="hotblastfurnace-net-ore">-5</div>
+                                            <div>/s</div>
+                                        </div>
+                                        <div class="netRow netNegative">
+                                            <div class="netResourceName">coke</div>
+                                            <div id="hotblastfurnace-net-coke">1</div>
+                                            <div>/s</div>
+                                        </div>
+                                        <div class="netRow netNegative">
+                                            <div class="netResourceName">iron:</div>
+                                            <div id="hotblastfurnace-net-iron">3</div>
+                                            <div>/s</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                            <div class="runningRow">
+                                <span class="running">Running: </span>
+                                <span id="hotblastfurnace-running">0</span>
+                                <span class="forwardSlash">/</span>
+                                <span id="hotblastfurnace-total">0</span>
+                            </div>
+                            <div class="onoffButtons">
+                                <button class="offButton" id="hotblastfurnace-offbutton" onclick="turnOff('hotblastfurnace')"><</button>
+                                <button class="onButton" id="hotblastfurnace-onbutton" onclick="turnOn('hotblastfurnace')">></button>
                             </div>
                         </div>
                     </div>

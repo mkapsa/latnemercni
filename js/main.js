@@ -55,6 +55,11 @@ equipment = {
     cokeoven: {
         total:0, 
         running:0
+    },
+
+    hotblastfurnace: {
+        total:0,
+        running:0
     }
 }
 
@@ -231,6 +236,16 @@ prices = {
         coke:0,
         knowledge:200
     },
+
+    hotblastfurnace: {
+        food:0,
+        wood:0,
+        ore:0,
+        iron:500,
+        coal:0,
+        coke:0,
+        knowledge:0
+    }
 }
 
 hidden = {
@@ -265,6 +280,7 @@ hidden = {
     equipment: {
         coldblastfurnace: true,
         cokeoven:true,
+        hotblastfurnace:false
     },
     resourceRows: {
         food: true,
@@ -307,14 +323,20 @@ rates = {
     cokeoven: {
         coal:-1,
         coke:0.25
+    },
+
+    hotblastfurnace: {
+        ore: -5,
+        coke: -1,
+        iron: 3
     }
 }
 
 const god = () => {
 
-    Object.keys(storage).forEach(key => storage[key] = 1000)
+    Object.keys(storage).forEach(key => storage[key] = 100000)
     
-    Object.keys(resources).forEach(key => resources[key] = 1000)
+    Object.keys(resources).forEach(key => resources[key] = 100000)
 }
 
 
@@ -370,6 +392,12 @@ function turnOffEquipment(){
         equipment.cokeoven.running -=1
         resourcesPerSec.coal -= rates.cokeoven.coal
         resourcesPerSec.coke -= rates.cokeoven.coke
+    }
+    else if((resourcesPerSec.ore < 0 && resources.ore === 0) || (resourcesPerSec.coke < 0 && resources.coke === 0) && equipment.hotblastfurnace.running >= 1){
+        equipment.hotblastfurnace.running -= 1
+        resourcesPerSec.ore -= rates.hotblastfurnace.ore
+        resourcesPerSec.coke -= rates.hotblastfurnace.coke
+        resourcesPerSec.iron -= rates.hotblastfurnace.iron
     }
 }
 
@@ -752,6 +780,11 @@ function buyEquipment(desiredEquipment){
         else if(desiredEquipment === 'cokeoven'){
             resourcesPerSec.coal -= 1
             resourcesPerSec.coke += 0.25
+        }
+        else if(desiredEquipment === 'hotblastfurnace'){
+            resourcesPerSec.ore -= 5
+            resourcesPerSec.coke -= 1
+            resourcesPerSec.iron += 3
         }
     }
 }

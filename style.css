@@ -375,7 +375,7 @@ table {
 
 }
 
-#coldblastfurnace-row, #cokeoven-row{
+#coldblastfurnace-row, #cokeoven-row, #hotblastfurnace-row{
     display: flex;
     flex-direction: row;
 }
@@ -489,3 +489,4 @@ table {
 #totalPopulation, #unemployedPopulation{
     text-align: center;
 }
+
